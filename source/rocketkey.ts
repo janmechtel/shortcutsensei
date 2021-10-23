@@ -1,4 +1,4 @@
-document.body.style.border = "5px solid red";
+document.body.style.border = "5px solid yellow";
 
 document.onclick = function (event) {
     const innerText = event.explicitOriginalTarget.innerText;

@@ -30,7 +30,7 @@
 	"content_scripts": [
         {
             "matches": ["*://mail.google.com/*","*://*.mozilla.org/*"],
-            "js": ["rocketkey.js"]
+            "js": ["rocketkey.ts"]
         }
     ]
 }
