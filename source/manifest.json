@@ -26,5 +26,11 @@
 		"scripts": [
 			"background.js"
 		]
-	}
+	},
+	"content_scripts": [
+        {
+            "matches": ["*://mail.google.com/*","*://*.mozilla.org/*"],
+            "js": ["rocketkey.js"]
+        }
+    ]
 }
