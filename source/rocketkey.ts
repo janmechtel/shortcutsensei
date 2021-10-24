@@ -1,5 +1,7 @@
 require('styled-notifications');
 
+import {Shortcut} from './shortcut';
+
 document.body.style.border = '5px solid red';
 
 const successNotification = window.createNotification({
@@ -7,21 +9,14 @@ const successNotification = window.createNotification({
 	theme: 'warning',
 });
 
-class Shortcut {
-	key: string; // the shortcut key sequence, eg. 'Shift+C'
-	button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
-	description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
-
-	constructor(shortcut: string, description: string, button?: string) {
-		this.key = shortcut;
-		this.description = description;
-		this.button = button;
-	}
-}
-
 const gmailShortcuts: Shortcut[] =[
-	new Shortcut("C", "Compose a new message", "Compose"),
+	// new Shortcut(
+		// key: string; // the shortcut key sequence, eg. 'Shift+C'
+		// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
+		// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
+	// )
 	new Shortcut("X", "Innovate a lot! (Test for mozilla)", "Innovation"),
+	new Shortcut("C", "Compose a new message", "Compose"),
 ];
 
 const clickHandler = function (event: MouseEvent) {
