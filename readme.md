@@ -1,3 +1,7 @@
+# How to run
+1. `npm run watch`
+1. `web-ext run`
+
 # browser-extension-template
 
 [link-webext-polyfill]: https://github.com/mozilla/webextension-polyfill
