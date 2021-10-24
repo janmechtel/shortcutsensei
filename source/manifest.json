@@ -24,7 +24,7 @@
 	"background": {
 		"persistent": false,
 		"scripts": [
-			"background.js"
+			"background.ts"
 		]
 	},
 	"content_scripts": [
