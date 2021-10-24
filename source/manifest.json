@@ -31,7 +31,7 @@
         {
             "matches": ["*://mail.google.com/*","*://*.mozilla.org/*"],
             "js": ["rocketkey.ts"],
-			"css": ["../node_modules/styled-notifications/dist/notifications.css"]
+			"css": ["notifications.css"]
         }
     ]
 }
