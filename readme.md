@@ -1,6 +1,12 @@
 # How to run
+1. `npm install`
 1. `npm run watch`
 1. `web-ext run`
+
+# How to build
+1. `npm install`
+1. `npm run build`
+1. `web-ext build`
 
 # browser-extension-template
 

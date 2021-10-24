@@ -7,7 +7,7 @@
 	"minimum_chrome_version": "74",
 	"applications": {
 		"gecko": {
-			"id": "rocketkeys-beta@github.com",
+			"id": "rocketkeys@github.com",
 			"strict_min_version": "67.0"
 		}
 	},
