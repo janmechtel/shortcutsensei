@@ -1,1 +1,1 @@
-import './options-storage.ts';
+import './options/options-storage.ts';
