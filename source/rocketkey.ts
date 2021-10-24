@@ -10,7 +10,7 @@ const successNotification = window.createNotification({
 	// showDuration: 3500,
 	// theme: 'success'
 	positionClass: 'nfc-bottom-right',
-	theme: 'information'
+	theme: 'warning'
 });
 
 document.onclick = function (event) {
