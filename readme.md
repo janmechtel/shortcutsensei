@@ -1,7 +1,8 @@
 # How to run
 1. `npm install`
 1. `npm run watch`
-1. `web-ext run`
+1. `web-ext run` for Firefox and `web-ext run -t chromium` for Chrome
+
 
 # How to build
 1. `npm install`

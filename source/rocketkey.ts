@@ -2,7 +2,7 @@ require('styled-notifications');
 
 import {Shortcut} from './shortcut';
 
-document.body.style.border = '5px solid red';
+document.body.style.border = '5px solid green';
 
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
@@ -20,11 +20,11 @@ const gmailShortcuts: Shortcut[] =[
 ];
 
 const clickHandler = function (event: MouseEvent) {
-	const innerText: string = event.explicitOriginalTarget.textContent;
-	const outerHTML: string = event.explicitOriginalTarget.outerHTML;
+	console.debug('Click event:', event);
+	const innerText: string = event.target.innerText;
+	const outerHTML: string = event.target.outerHTML;
 	console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
-	console.debug('Click event:', event);
 
 	for (const shortcut of gmailShortcuts) {
 		if (innerText === shortcut.button || outerHTML.includes(shortcut.button)) {
