@@ -1,6 +1,6 @@
 require('styled-notifications');
 
-import { Shortcut } from './shortcut';
+import {Shortcut} from './shortcut';
 
 document.body.style.border = '5px solid green';
 
@@ -9,11 +9,11 @@ const successNotification = window.createNotification({
 	theme: 'warning',
 });
 
-const gmailShortcuts: Shortcut[] = [
+const gmailShortcuts: Shortcut[] =[
 	// new Shortcut(
-	// key: string; // the shortcut key sequence, eg. 'Shift+C'
-	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
-	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
+		// key: string; // the shortcut key sequence, eg. 'Shift+C'
+		// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
+		// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	// )
 	new Shortcut("X", "Innovate a lot! (Test for mozilla)", "Innovation"),
 	new Shortcut("C", "Compose a new message", "Compose"),
