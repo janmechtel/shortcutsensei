@@ -26,8 +26,8 @@ const gmailShortcuts: Shortcut[] = [
 
 	new Shortcut("CTRL-Enter", "Send", "Send email"), // doesn't work; not sure why. 'Send' is in innerText and outerHTML
 	new Shortcut("K", "Newer", "Jump to newer email"), // doesn't work; not sure why. 'Newer' is in outerHTML
-	new Shortcut("J", "Older", "Jump to older email") // doesn't work; not sure why. 'Older' is in outerHTML
-	new Shortcut("CTRL-K", "Link to", "Insert a Link"), // doesn't work; not sure why. 'Link to' is in outerHTML
+	new Shortcut("J", "Older", "Jump to older email"), // doesn't work; not sure why. 'Older' is in outerHTML
+	new Shortcut("CTRL-K", "Link to", "Insert a Link") // doesn't work; not sure why. 'Link to' is in outerHTML
 ];
 
 const clickHandler = function (event: MouseEvent) {
