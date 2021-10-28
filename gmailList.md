@@ -1,13 +1,14 @@
 ##DONE = Shortcut pop-up working
 ###WIP = Shortcut added to code but not working
+####NOT = Shortcut not working
 
 Shift + Esc :	Focus main window
 Esc :	Focus latest chat or compose
 Ctrl + . :	Advance to next chat or compose
 Ctrl + , :	Advance to previous chat or compose
 ###WIP Ctrl + Enter :	Send
-Ctrl + Shift + c :	Add Cc recipients
-Ctrl + Shift + b :	Add Bcc recipients
+###WIP Ctrl + Shift + c :	Add Cc recipients
+###WIP Ctrl + Shift + b :	Add Bcc recipients
 Ctrl + Shift + f :	Access custom from
 Ctrl + Shift + d :	Discard draft
 ##DONE Ctrl + k :	Insert a link
@@ -16,8 +17,8 @@ Ctrl + ' :	Go to next misspelled word
 Ctrl + m :	Open spelling suggestions
 Ctrl + Shift + . :	Copy selected chat messages as transcript
 Navigating within the sidebar in Google Chat
-Ctrl + o :	Browse spaces
-Ctrl + i :	Create a space
+####NOT Ctrl + o :	Browse spaces
+####NOT Ctrl + i :	Create a space
 ↑ :	Focus on previous space or direct message
 ↓ :	Focus on next space or direct message
 Shift + ↑ :	Focus on previous unread space or direct message
@@ -83,7 +84,7 @@ g then f :	Go to search filters
 * then s :	Select starred conversations
 * then t :	Select unstarred conversations
 u :	Back to threadlist
-k / j :	Newer/older conversation
+###WIP k / j :	Newer/older conversation
 o or Enter :	Open conversation; collapse/expand conversation
 p / n :	Read previous/next message
 g then n :	Go to next page
@@ -103,7 +104,7 @@ l :	Open "label as" menu
 x :	Select conversation
 s :	Toggle star/Rotate among superstars
 y :	Remove label
-e :	Archive
+###WIP e :	Archive
 m :	Mute conversation
 ! :	Report as spam
 \# :	Delete

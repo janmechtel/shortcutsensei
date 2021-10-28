@@ -17,9 +17,17 @@ const gmailShortcuts: Shortcut[] = [
 	// )
 	new Shortcut("X", "Innovate a lot! (Test for mozilla)", "Innovation"),
 	new Shortcut("C", "Compose a new message", "Compose"),
-	new Shortcut("CTRL-K", "Link to", "Insert a Link"),
 
-	new Shortcut("CTRL-Enter", "Send", "Send email") // idk why this one doesn't work; innerText = "Send"
+	new Shortcut("E", "Archive", "Archive selected messages"), // doesn't work because no descriptive innerText / outerHTML
+	new Shortcut("U", "Back to inbox", "Go back to inbox"), // doesn't work because no descriptive innerText / outerHTML
+
+	new Shortcut("CTRL+Shift+C", "Add Cc recipients", "Add Cc recipients"), // doesn't work because not registered as click. Is suggested when pressing "Link to"
+	new Shortcut("CTRL+Shift+B", "Add Bcc recipients", "Add Bcc recipients"), // doesn't work because not registered as click. Is suggested when pressing "Link to"
+
+	new Shortcut("CTRL-Enter", "Send", "Send email"), // doesn't work; not sure why. 'Send' is in innerText and outerHTML
+	new Shortcut("K", "Newer", "Jump to newer email"), // doesn't work; not sure why. 'Newer' is in outerHTML
+	new Shortcut("J", "Older", "Jump to older email") // doesn't work; not sure why. 'Older' is in outerHTML
+	new Shortcut("CTRL-K", "Link to", "Insert a Link"), // doesn't work; not sure why. 'Link to' is in outerHTML
 ];
 
 const clickHandler = function (event: MouseEvent) {
