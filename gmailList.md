@@ -1,12 +1,12 @@
 ##DONE = Shortcut pop-up working
 ###WIP = Shortcut added to code but not working
-####NOT = Shortcut not working
+####NOT = Shortcut itself not working
 
 Shift + Esc :	Focus main window
 Esc :	Focus latest chat or compose
 Ctrl + . :	Advance to next chat or compose
 Ctrl + , :	Advance to previous chat or compose
-###WIP Ctrl + Enter :	Send
+##DONE Ctrl + Enter :	Send
 ###WIP Ctrl + Shift + c :	Add Cc recipients
 ###WIP Ctrl + Shift + b :	Add Bcc recipients
 Ctrl + Shift + f :	Access custom from
@@ -104,7 +104,7 @@ l :	Open "label as" menu
 x :	Select conversation
 s :	Toggle star/Rotate among superstars
 y :	Remove label
-###WIP e :	Archive
+##WIP e :	Archive
 m :	Mute conversation
 ! :	Report as spam
 \# :	Delete
