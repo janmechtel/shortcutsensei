@@ -1,7 +1,7 @@
 require('styled-notifications');
 
 // skips contains part of the outerHTML properties of elements that should NOT display a shortcut when pressed (elements that are not buttons)
-skips = [
+const skips = [
 	"role=\"toolbar\"", // stop popup from appearing when pressing formatting toolbar
 	"aria-label=\"Add Cc recipients ‪(Ctrl-Shift-C)‬\"", // stop popup from appearing when pressing near Cc / Bcc
 	"aria-label=\"Add Bcc recipients ‪(Ctrl-Shift-B)‬\"", // stop popup from appearing when pressing near Cc / Bcc
@@ -25,6 +25,7 @@ const gmailShortcuts: Shortcut[] = [
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// )
+	new Shortcut("Ctrl+K", "Insert a link", "submit_as_link"), // difficult; extremely long outerHTML and innerText tags
 	new Shortcut("X", "Innovate a lot! (Test for mozilla)", "Innovation"),
 
 	new Shortcut("C", "Compose", "<div class=\"T-I T-I-KE L3\" style=\"user-select: none\" role=\"button\" tabindex=\"0\" jscontroller=\"eIu7Db\" jsaction=\"click:dlrqf; clickmod:dlrqf\" jslog=\"20510; u014N:cOuCgd,Kr2w4b\" gh=\"cm\">Compose</div>"),
@@ -41,7 +42,6 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut("Ctrl+B", "Bold", "<div class=\"eN  aaA aaB\"> </div>"),
 	new Shortcut("Ctrl+I", "Italics", "<div class=\"e3  aaA aaB\"> </div>"),
 	new Shortcut("Ctrl+U", "Underline", "<div class=\"fu  aaA aaB\"> </div>"),
-	new Shortcut("Ctrl+K", "Insert a link", "submit_as_link"), // difficult; extremely long outerHTML and innerText tags
 	new Shortcut("Ctrl+Shift+7", "Numbered list", "<div class=\"e6  aaA aaB\"> </div>"),
 	new Shortcut("Ctrl+Shift+8", "Bulleted list", "<div class=\"eO  aaA aaB\"> </div>"),
 	new Shortcut("Ctrl+Shift+9", "Quote", '<div class="fa  aaA aaB"> </div>'),
@@ -92,4 +92,4 @@ const clickHandler = function (event: MouseEvent) {
 	}
 };
 
-document.addEventListener('click', clickHandler)
+document.addEventListener('click', clickHandler, true);
