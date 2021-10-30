@@ -2,7 +2,7 @@ require('styled-notifications');
 
 import { Shortcut } from './shortcut';
 
-document.body.style.border = '5px solid green';
+document.body.style.border = '5px solid yellow';
 
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
@@ -48,4 +48,4 @@ const clickHandler = function (event: MouseEvent) {
 	}
 };
 
-document.addEventListener('click', clickHandler);
+document.addEventListener('click', clickHandler, true);
