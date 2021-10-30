@@ -39,16 +39,18 @@ Navigating messages in Google Chat
 ↑ :	Focus previous message
 ↓ :	Focus next message
 r :	Focus on reply box
+
 Reply box in Google Chat
 ↑ :	Edit previously posted message
 Shift + Enter :	New line
 : :	Show emoji picker
+
 ##DONE Ctrl + z :	Undo
 ##DONE Ctrl + y :	Redo
 Ctrl + Shift + 5 :	Previous font
 Ctrl + Shift + 6 :	Next font
-Ctrl + Shift + - :	Decrease text size
-Ctrl + Shift + + :	Increase text size
+Ctrl + Shift + - :	Decrease text size --> need to know current text size
+Ctrl + Shift + + :	Increase text size --> need to know current text size
 ##DONE Ctrl + b :	Bold
 ##DONE Ctrl + i :	Italics
 ##DONE Ctrl + u :	Underline
@@ -57,14 +59,14 @@ Ctrl + Shift + + :	Increase text size
 ##DONE Ctrl + Shift + 9 :	Quote
 ##DONE Ctrl + [ :	Indent less
 ##DONE Ctrl + ] :	Indent more
-Ctrl + Shift + l :	Align left
-Ctrl + Shift + e :	Align center
-Ctrl + Shift + r :	Align right
+##DONE Ctrl + Shift + l :	Align left
+##DONE Ctrl + Shift + e :	Align center
+##DONE Ctrl + Shift + r :	Align right
 Ctrl + Shift + , :	Set right-to-left
 Ctrl + Shift + . :	Set left-to-right
 ##DONE Alt + Shift + 5 :	Strikethrough
 ##DONE Ctrl + \ :	Remove formatting
-The following keyboard shortcuts are currently enabled. Disable
+
 Jumping
 g then i :	Go to Inbox
 g then s :	Go to Starred conversations
@@ -74,7 +76,7 @@ g then d :	Go to Drafts
 g then a :	Go to All mail
 g then c :	Go to Contacts
 g then l :	Go to Label
-g then k :	Go to Tasks
+##DONE g then k :	Go to Tasks
 g then f :	Go to search filters
 * then a :	Select all conversations
 * then n :	Deselect all conversations
@@ -106,7 +108,7 @@ y :	Remove label
 ##DONE e :	Archive
 m :	Mute conversation
 ! :	Report as spam
-\# :	Delete
+##DONE # :	Delete
 r :	Reply
 Shift + r :	Reply in a new window
 a :	Reply all

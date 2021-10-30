@@ -29,6 +29,7 @@ const gmailShortcuts: Shortcut[] = [
 
 	new Shortcut("C", "Compose", "<div class=\"T-I T-I-KE L3\" style=\"user-select: none\" role=\"button\" tabindex=\"0\" jscontroller=\"eIu7Db\" jsaction=\"click:dlrqf; clickmod:dlrqf\" jslog=\"20510; u014N:cOuCgd,Kr2w4b\" gh=\"cm\">Compose</div>"),
 	new Shortcut("E", "Archive", "<div class=\"asa\"><div class=\"ar8 T-I-J3 J-J5-Ji\"></div></div>"),
+	new Shortcut("#", "Delete", '<div class="asa"><div class="ar9 T-I-J3 J-J5-Ji"></div></div>'),
 	new Shortcut("U", "Go back to inbox", "<div class=\"asa\"><div class=\"ar6 T-I-J3 J-J5-Ji\"></div></div>"),
 	new Shortcut("Ctrl+Enter", "Send", "<div id=\":14h\" class=\"T-I J-J5-Ji aoO v7 T-I-atl L3\" role=\"button\" tabindex=\"1\" style=\"user-select: none;\" data-tooltip=\"Send ‪(Ctrl-Enter)‬\" aria-label=\"Send ‪(Ctrl-Enter)‬\" data-tooltip-delay=\"800\" jslog=\"32601; u014N:cOuCgd,Kr2w4b; dYFj7e:true; 11:WyIjbXNnLWE6cjEwNTcyMzg2Mzg1Nzc3NjgxMjQiLG51bGwsbnVsbCxudWxsLDEsbnVsbCxbIiN0aHJlYWQtYTpyLTYxMTY2NjY1NzMzMDY1MDU4NTAiLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLFtdXSxmYWxzZSxudWxsLGZhbHNlLGZhbHNlXQ..\">Send</div>"),
 	new Shortcut("K", "Jump to newer email", "data-tooltip=\"Newer\">"),
@@ -53,6 +54,8 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut("Ctrl+Shift+R", "Align right", '<div class="fc aaA aaB"> </div>'),
 
 	new Shortcut("Ctrl+Shift+D", "Discard draft", "<div class=\"og T-I-J3\" style=\"user-select: none;\"></div>"),
+
+	new Shortcut("G+K", "Go to tasks", '<div class="aT5-aOt-I-JX-Jw" style="background-image: url(https://www.gstatic.com/companion/icon_assets/tasks_2021_2x.png)"></div>'),
 
 	new Shortcut("Ctrl+Shift+C", "Add Cc recipients", "Add Cc recipients"), // doesn't work because not registered as click. Is suggested when pressing "Link to"
 	new Shortcut("Ctrl+Shift+B", "Add Bcc recipients", "Add Bcc recipients"), // doesn't work because not registered as click. Is suggested when pressing "Link to"
