@@ -1,5 +1,5 @@
 # Gmail settings
-1. In Gmail, click the Settings icon towards the top right corner of the screen. 
+1. In Gmail, click the Settings icon towards the top right corner of the screen. ![Step 1](onboardingmedia/Gmail Onboarding Step 1.png)
 2. Click "All Settings". 
 ![Step 2](onboardingMedia/Gmail Onboarding Step 2.png)
 3. Set "Gmail display language" to "English (US)". 
