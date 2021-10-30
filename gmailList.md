@@ -10,8 +10,8 @@ Ctrl + , :	Advance to previous chat or compose
 ###WIP Ctrl + Shift + c :	Add Cc recipients
 ###WIP Ctrl + Shift + b :	Add Bcc recipients
 Ctrl + Shift + f :	Access custom from
-Ctrl + Shift + d :	Discard draft
-##DONE Ctrl + k :	Insert a link
+##DONE Ctrl + Shift + d :	Discard draft
+###WIP Ctrl + k :	Insert a link
 Ctrl + ; :	Go to previous misspelled word
 Ctrl + ' :	Go to next misspelled word
 Ctrl + m :	Open spelling suggestions
@@ -43,28 +43,27 @@ Reply box in Google Chat
 ↑ :	Edit previously posted message
 Shift + Enter :	New line
 : :	Show emoji picker
-Formatting
-Ctrl + z :	Undo
-Ctrl + y :	Redo
+##DONE Ctrl + z :	Undo
+##DONE Ctrl + y :	Redo
 Ctrl + Shift + 5 :	Previous font
 Ctrl + Shift + 6 :	Next font
 Ctrl + Shift + - :	Decrease text size
 Ctrl + Shift + + :	Increase text size
-Ctrl + b :	Bold
-Ctrl + i :	Italics
-Ctrl + u :	Underline
-Ctrl + Shift + 7 :	Numbered list
-Ctrl + Shift + 8 :	Bulleted list
-Ctrl + Shift + 9 :	Quote
-Ctrl + [ :	Indent less
-Ctrl + ] :	Indent more
+##DONE Ctrl + b :	Bold
+##DONE Ctrl + i :	Italics
+##DONE Ctrl + u :	Underline
+##DONE Ctrl + Shift + 7 :	Numbered list
+##DONE Ctrl + Shift + 8 :	Bulleted list
+##DONE Ctrl + Shift + 9 :	Quote
+##DONE Ctrl + [ :	Indent less
+##DONE Ctrl + ] :	Indent more
 Ctrl + Shift + l :	Align left
 Ctrl + Shift + e :	Align center
 Ctrl + Shift + r :	Align right
 Ctrl + Shift + , :	Set right-to-left
 Ctrl + Shift + . :	Set left-to-right
-Alt + Shift + 5 :	Strikethrough
-Ctrl + \ :	Remove formatting
+##DONE Alt + Shift + 5 :	Strikethrough
+##DONE Ctrl + \ :	Remove formatting
 The following keyboard shortcuts are currently enabled. Disable
 Jumping
 g then i :	Go to Inbox
@@ -84,7 +83,7 @@ g then f :	Go to search filters
 * then s :	Select starred conversations
 * then t :	Select unstarred conversations
 u :	Back to threadlist
-###WIP k / j :	Newer/older conversation
+##DONE k / j :	Newer/older conversation
 o or Enter :	Open conversation; collapse/expand conversation
 p / n :	Read previous/next message
 g then n :	Go to next page
@@ -104,7 +103,7 @@ l :	Open "label as" menu
 x :	Select conversation
 s :	Toggle star/Rotate among superstars
 y :	Remove label
-##WIP e :	Archive
+##DONE e :	Archive
 m :	Mute conversation
 ! :	Report as spam
 \# :	Delete
