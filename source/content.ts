@@ -12,10 +12,11 @@ const successNotification = window.createNotification({
 const gmailShortcuts: Shortcut[] = [
 	// new Shortcut(
 	// key: string; // the shortcut key sequence, eg. 'Shift+C'
-	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
+	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// )
 	new Shortcut("X", "Innovate a lot! (Test for mozilla)", "Innovation"),
+	new Shortcut("CTRL-K", "Insert a link", "submit_as_link"), // doesn't work; not sure why. 'Link to' is in outerHTML
 	new Shortcut("C", "Compose a new message", "Compose"),
 
 	new Shortcut("E", "Archive", "Archive selected messages"), // doesn't work because no descriptive innerText / outerHTML
@@ -27,7 +28,6 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut("CTRL-Enter", "Send", "Send email"), // doesn't work; not sure why. 'Send' is in innerText and outerHTML
 	new Shortcut("K", "Newer", "Jump to newer email"), // doesn't work; not sure why. 'Newer' is in outerHTML
 	new Shortcut("J", "Older", "Jump to older email"), // doesn't work; not sure why. 'Older' is in outerHTML
-	new Shortcut("CTRL-K", "Link to", "Insert a Link") // doesn't work; not sure why. 'Link to' is in outerHTML
 ];
 
 const clickHandler = function (event: MouseEvent) {
