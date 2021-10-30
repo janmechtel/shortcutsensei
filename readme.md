@@ -1,14 +1,14 @@
 # Gmail settings
 1. In Gmail, click the Settings icon towards the top right corner of the screen. 
-![Step 1](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%201.png)
+![Step1](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%201.png)
 2. Click "All Settings". 
-![Step 2](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%202.png)
+![Step2](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%202.png)
 3. Set "Gmail display language" to "English (US)". 
-![Step 3](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%203.png)
+![Step3](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%203.png)
 4. Scroll down until you arrive at "Keyboard shortcuts". Set this to "Keyboard shortcuts on". 
-![Step 4](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%204.png)
+![Step4](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%204.png)
 5. Scroll down all the way to the bottom of the page and click "Save changes". 
-![Step 5](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%205.png)
+![Step5](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%205.png)
 
 # How to run
 1. `npm install`
