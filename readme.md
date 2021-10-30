@@ -1,7 +1,7 @@
 # Gmail settings
-1. In Gmail, click the Settings icon towards the top right corner of the screen. ![Step 1](onboardingmedia/Gmail Onboarding Step 1.png)
+1. In Gmail, click the Settings icon towards the top right corner of the screen. ![Step 1](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%201.png)
 2. Click "All Settings". 
-![Step 2](onboardingMedia/Gmail Onboarding Step 2.png)
+![Step 2](https://github.com/janmechtel/shortcutsensei/blob/complete-gmail/onboardingmedia/Gmail%20Onboarding%20Step%202.png)
 3. Set "Gmail display language" to "English (US)". 
 ![Step 3](onboardingmedia/Gmail Onboarding Step 3.png)
 4. Scroll down until you arrive at "Keyboard shortcuts". Set this to "Keyboard shortcuts on". 
