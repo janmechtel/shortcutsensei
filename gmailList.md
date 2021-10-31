@@ -94,7 +94,7 @@ g then p :	Go to previous page
 ~ :	Go to previous inbox section
 Ctrl + Alt + v :	Reset sidebar sections to default height
 / :	Search mail
-? :	Open keyboard shortcut help
+Shift + ? :	Open keyboard shortcut help
 q :	Search chat contacts
 ##DONE c :	Compose
 d :	Compose in a tab
