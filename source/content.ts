@@ -7,7 +7,8 @@ const skips = [
 	"aria-label=\"Add Bcc recipients ‪(Ctrl-Shift-B)‬\"", // stop popup from appearing when pressing near Cc / Bcc
 	"<div class=\"z0\"><div class=\"T-I T-I-KE L3\" style=\"user-select: none\" role=\"button\" tabindex=\"0\" jscontroller=\"eIu7Db\" jsaction=\"click:dlrqf; clickmod:dlrqf\" jslog=\"20510; u014N:cOuCgd,Kr2w4b\" gh=\"cm\">Compose</div></div>", // stop popup from appearing when pressing near Compose
 	"class=\"D E G-atb\"", // stop popup from appearing when pressing above inbox
-	'role="menu"', // stop popup from appearing when pressing menu with indent, quote, etc.
+	"class=\"J-Z-I J-J5-Ji\" command=\"+justifyRight\" data-tooltip=\"Align right ‪(Ctrl-Shift-R)‬\" aria-label=\"Align right ‪(Ctrl-Shift-R)‬\"><div class=\"J-J5-Ji J-Z-I-Kv-H\"><div class=\"J-J5-Ji J-Z-I-J6-H\"><div class=\"fc aaA aaB\"> </div></div></div></div></td></tr></tbody></table></div>", // stop popup from appearing when pressing menu with indent, quote, etc.
+	"data-tooltip=\"Bulleted list ‪(Ctrl-Shift-8)‬\" aria-label=\"Bulleted list ‪(Ctrl-Shift-8)‬\" aria-pressed=\"false\" role=\"button\" style=\"user-select: none;\"><div class=\"J-J5-Ji J-Z-I-Kv-H\"><div class=\"J-J5-Ji J-Z-I-J6-H\"><div class=\"eO  aaA aaB\"> </div></div></div></div></td></tr></tbody></table></div>" // stop popup from appearing when pressing menu with bulleted list, etc.
 ]
 
 import { Shortcut } from './shortcut';
@@ -67,18 +68,18 @@ const clickHandler = function (event: MouseEvent) {
 	const outerHTML: string = event.target.outerHTML;
 	console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
-	if (skips.some(r => outerHTML.includes(r))) {
+
+	if (outerHTML.includes("submit_as_link")) {
+		successNotification({
+			title: `Press CTRL+K`,
+			message: `For "Link to" try pressing "CTRL+K" instead ;-)`,
+		});
 		return;
 	} else {
-		// exceptions. if there are too many of these we need to find a better solution
-		if (outerHTML.includes("submit_as_link")) {
-			successNotification({
-				title: `Press CTRL+K`,
-				message: `For "Link to" try pressing "CTRL+K" instead ;-)`,
-			});
+		if (skips.some(r => outerHTML.includes(r))) {
 			return;
-		}
-		else {
+		} else {
+			// exceptions. if there are too many of these we need to find a better solution
 			for (const shortcut of gmailShortcuts) {
 				if (innerText === shortcut.description || outerHTML.includes(shortcut.button)) {
 					successNotification({
