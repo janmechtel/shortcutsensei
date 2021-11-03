@@ -94,37 +94,37 @@ g then p :	Go to previous page
 ~ :	Go to previous inbox section
 Ctrl + Alt + v :	Reset sidebar sections to default height
 / :	Search mail
-Shift + ? :	Open keyboard shortcut help
+? :	Open keyboard shortcut help
 q :	Search chat contacts
 ##DONE c :	Compose
 d :	Compose in a tab
 . :	Open "more actions" menu
 v :	Open "move to" menu
-l :	Open "label as" menu
+##DONE l :	Open "label as" menu
 , :	Move focus to toolbar
 x :	Select conversation
 s :	Toggle star/Rotate among superstars
 y :	Remove label
 ##DONE e :	Archive
-m :	Mute conversation
-! :	Report as spam
+##DONE m :	Mute conversation
+##DONE ! :	Report as spam
 ##DONE # :	Delete
-r :	Reply
+##DONE r :	Reply
 Shift + r :	Reply in a new window
-a :	Reply all
+##DONE a :	Reply all
 Shift + a :	Reply all in a new window
-f :	Forward
+##DONE f :	Forward
 Shift + f :	Forward in a new window
 Shift + n :	Update conversation
 ] / [ :	Remove conversation from current view and go newer/older
 } / { :	Archive conversation and go newer/older
-z :	Undo last action
-Shift + i :	Mark as read
-Shift + u :	Mark as unread
+##DONE z :	Undo last action
+##DONE Shift + i :	Mark as read
+##DONE Shift + u :	Mark as unread
 _ :	Mark unread from the selected message
-+ or = :	Mark as important
-- :	Mark as not important
+##DONE + or = :	Mark as important
+##DONE - :	Mark as not important
 ; :	Expand entire conversation
 : :	Collapse entire conversation
 b :	Snooze
-Shift + t :	Add conversation to Tasks
+##DONE Shift + t :	Add conversation to Tasks
