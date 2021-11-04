@@ -32,8 +32,6 @@ const gmailShortcuts: Shortcut[] = [
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// )
-	new Shortcut("X", "Innovate a lot! (Test for mozilla)", "Innovation"),
-
 	new Shortcut("C", "Compose", "<div class=\"T-I T-I-KE L3\" style=\"user-select: none\" role=\"button\" tabindex=\"0\" jscontroller=\"eIu7Db\" jsaction=\"click:dlrqf; clickmod:dlrqf\" jslog=\"20510; u014N:cOuCgd,Kr2w4b\" gh=\"cm\">Compose</div>"),
 
 	new Shortcut("E", "Archive", "<div class=\"asa\"><div class=\"ar8 T-I-J3 J-J5-Ji\"></div></div>"),
