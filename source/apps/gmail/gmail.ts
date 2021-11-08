@@ -140,8 +140,19 @@ function openUrl(url: string) {
 
 document.addEventListener('click', clickHandler, true);
 
-settingsNotification({
-	title: `Enable keyboard shorcuts!`,
-	message: `Go to 'Settings' > 'Advanced' > 'Keyboard shortcuts' > Enable`,
-	showDuration: 10000,
-});
+// check if the url of the current page is settings
+if (window.location.href.includes("settings/general")) {
+	successNotification({
+		title: `Change your Language to English US`,
+		message: `1. Change your Language to English US & 2. Enable Keyboard Shortcuts`,
+		showDuration: 30000,
+	});
+} else {
+	settingsNotification({
+		title: `Enable keyboard shorcuts!`,
+		message: `Click here  to go to 'Settings'`,
+		showDuration: 10000,
+	});
+}
+
+
