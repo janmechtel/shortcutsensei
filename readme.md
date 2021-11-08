@@ -1,23 +1,23 @@
 # Gmail settings
 1. In Gmail, click the Settings icon towards the top right corner of the screen.
 
-![Step1](onboardingmedia/GmailOnboardingStep1.png)
+![Step1](source/apps/gmail/onboardingmedia/GmailOnboardingStep1.png)
 
 2. Click "See all Settings".
 
-![Step2](onboardingmedia/GmailOnboardingStep2.png)
+![Step2](source/apps/gmail/onboardingmedia/GmailOnboardingStep2.png)
 
 3. Set "Gmail display language" to "English (US)".
 
-![Step3](onboardingmedia/GmailOnboardingStep3.png)
+![Step3](source/apps/gmail/onboardingmedia/GmailOnboardingStep3.png)
 
 4. Scroll down until you arrive at "Keyboard shortcuts". Set this to "Keyboard shortcuts on".
 
-![Step4](onboardingmedia/GmailOnboardingStep4.png)
+![Step4](source/apps/gmail/onboardingmedia/GmailOnboardingStep4.png)
 
 5. Scroll down all the way to the bottom of the page and click "Save changes".
 
-![Step5](onboardingmedia/GmailOnboardingStep5.png)
+![Step5](source/apps/gmail/onboardingmedia/GmailOnboardingStep5.png)
 
 # How to run
 1. `npm install`
