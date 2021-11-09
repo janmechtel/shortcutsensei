@@ -48,6 +48,7 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut("K", "Jump to newer email", "data-tooltip=\"Newer\">"),
 	new Shortcut("J", "Jump to older email", "data-tooltip=\"Older\">"),
 	new Shortcut("R", "Reply", "role=\"link\" tabindex=\"0\" class=\"ams bkH\" jslog=\"21576; u014N:cOuCgd,Kr2w4b;\">Reply</span>"),
+	new Shortcut("S", "Star/unstar", "class=\"f T-KT-JX\" src=\"images/cleardot.gif"),
 	new Shortcut("A", "Reply all", ">Reply all</span>"),
 	new Shortcut("F", "Forward", "role=\"link\" tabindex=\"0\" class=\"ams bkG\" jslog=\"21578; u014N:cOuCgd,Kr2w4b;\">Forward</span>"),
 	new Shortcut("U", "Go back to inbox", "<div class=\"asa\"><div class=\"ar6 T-I-J3 J-J5-Ji\"></div></div>"),
