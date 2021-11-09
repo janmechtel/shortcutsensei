@@ -17,14 +17,30 @@ const skips = [
 	"target=\"keyboard_shortcuts_help_window\"", // stop popups from appearing when pressing inside keyboard shortcut help menu
 ]
 
-import { Shortcut } from './shortcut';
+import { Shortcut } from '../../shortcut';
 
 document.body.style.border = '5px solid green';
+
+
+const openSettings = function(event) {
+	console.log("settings");
+	openUrl("https://mail.google.com/mail/#settings/general");
+}
 
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
+	closeOnClick: true,
 });
+
+const settingsNotification = window.createNotification({
+	positionClass: 'nfc-bottom-right',
+	theme: 'warning',
+	onclick: openSettings,
+	closeOnClick: true,
+});
+
+
 
 const gmailShortcuts: Shortcut[] = [
 	// new Shortcut(
@@ -117,3 +133,27 @@ const clickHandler = function (event: MouseEvent) {
 };
 
 document.addEventListener('click', clickHandler, true);
+
+// open a new url in the current window
+function openUrl(url: string) {
+	window.open(url, '_self');
+}
+
+document.addEventListener('click', clickHandler, true);
+
+// check if the url of the current page is settings
+if (window.location.href.includes("settings/general")) {
+	successNotification({
+		title: `Change your Language to English US`,
+		message: `1. Change your Language to English US & 2. Enable Keyboard Shortcuts`,
+		showDuration: 30000,
+	});
+} else {
+	settingsNotification({
+		title: `Enable keyboard shorcuts!`,
+		message: `Click here  to go to 'Settings'`,
+		showDuration: 10000,
+	});
+}
+
+
