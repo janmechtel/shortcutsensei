@@ -205,9 +205,35 @@ function continueOnboardingAfterSettingsLoaded() {
 						saveButton.closest("tr").style.backgroundColor = "yellow";
 					} else {
 						console.debug("Language is already set to English (US)");
-						showSettingsInstructionsPopUp(`Enable Keyboard shortcuts`, `Enable Keyboard Shortcuts`, 0);
-					}
+						//find labels element that contains certain text
+						const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label")).find(label => label.innerText == 'Keyboard shortcuts on');
+						if (keyboardShortcutsOnLabel === null) {
+							console.error("Could not find the keyboard shortcuts on label");
+						} else {
+							const keyboardShortcutsOnInput = keyboardShortcutsOnLabel.closest("tr").querySelector("input");
+							if (keyboardShortcutsOnInput === null) {
+								console.error("Could not find the keyboard shortcuts on input");
+							} else {
+								console.debug(keyboardShortcutsOnInput.checked);
+								if (keyboardShortcutsOnInput.checked) {
+									if (!saveButton.disabled) {
+										console.debug("Save button is enabled, scrolling into view");
+										saveButton.scrollIntoView();
+										showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+										saveButton.closest("tr").style.backgroundColor = "yellow";
+									} else {
+										console.debug("Save button is disabled. onboarding completed!");
+									}
+								} else {
+									keyboardShortcutsOnLabel.scrollIntoView();
+									keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
+									showSettingsInstructionsPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
+									setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+								}
+							}
+						}
 
+					}
 				}
 			}
 		}
