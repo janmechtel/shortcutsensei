@@ -21,17 +21,22 @@ import { Shortcut } from '../../shortcut';
 
 document.body.style.border = '5px solid yellow';
 
-
-const openSettings = function (event) {
-	console.log("settings");
-	openUrl("https://mail.google.com/mail/#settings/general");
-}
-
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	closeOnClick: true,
 });
+
+
+// open a new url in the current window
+function openUrl(url: string) {
+	window.open(url, '_self');
+}
+
+const openSettings = function (event) {
+	console.log("settings");
+	openUrl("https://mail.google.com/mail/#settings/general");
+}
 
 const settingsNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
@@ -39,8 +44,6 @@ const settingsNotification = window.createNotification({
 	onclick: openSettings,
 	closeOnClick: true,
 });
-
-
 
 const gmailShortcuts: Shortcut[] = [
 	// new Shortcut(
@@ -143,13 +146,6 @@ const clickHandler = function (event: MouseEvent) {
 		}
 	}
 };
-
-document.addEventListener('click', clickHandler, true);
-
-// open a new url in the current window
-function openUrl(url: string) {
-	window.open(url, '_self');
-}
 
 document.addEventListener('click', clickHandler, true);
 
