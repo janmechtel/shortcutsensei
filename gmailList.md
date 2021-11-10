@@ -1,17 +1,17 @@
 ##DONE = Shortcut pop-up working
 ###WIP = Shortcut added to code but not working
-####NOT = Shortcut not working
+####NOT = Shortcut itself not working
 
 Shift + Esc :	Focus main window
 Esc :	Focus latest chat or compose
 Ctrl + . :	Advance to next chat or compose
 Ctrl + , :	Advance to previous chat or compose
-###WIP Ctrl + Enter :	Send
+##DONE Ctrl + Enter :	Send
 ###WIP Ctrl + Shift + c :	Add Cc recipients
 ###WIP Ctrl + Shift + b :	Add Bcc recipients
 Ctrl + Shift + f :	Access custom from
-Ctrl + Shift + d :	Discard draft
-##DONE Ctrl + k :	Insert a link
+##DONE Ctrl + Shift + d :	Discard draft
+###WIP Ctrl + k :	Insert a link
 Ctrl + ; :	Go to previous misspelled word
 Ctrl + ' :	Go to next misspelled word
 Ctrl + m :	Open spelling suggestions
@@ -39,33 +39,34 @@ Navigating messages in Google Chat
 ↑ :	Focus previous message
 ↓ :	Focus next message
 r :	Focus on reply box
+
 Reply box in Google Chat
 ↑ :	Edit previously posted message
 Shift + Enter :	New line
 : :	Show emoji picker
-Formatting
-Ctrl + z :	Undo
-Ctrl + y :	Redo
+
+##DONE Ctrl + z :	Undo
+##DONE Ctrl + y :	Redo
 Ctrl + Shift + 5 :	Previous font
 Ctrl + Shift + 6 :	Next font
-Ctrl + Shift + - :	Decrease text size
-Ctrl + Shift + + :	Increase text size
-Ctrl + b :	Bold
-Ctrl + i :	Italics
-Ctrl + u :	Underline
-Ctrl + Shift + 7 :	Numbered list
-Ctrl + Shift + 8 :	Bulleted list
-Ctrl + Shift + 9 :	Quote
-Ctrl + [ :	Indent less
-Ctrl + ] :	Indent more
-Ctrl + Shift + l :	Align left
-Ctrl + Shift + e :	Align center
-Ctrl + Shift + r :	Align right
+Ctrl + Shift + - :	Decrease text size --> need to know current text size
+Ctrl + Shift + + :	Increase text size --> need to know current text size
+##DONE Ctrl + b :	Bold
+##DONE Ctrl + i :	Italics
+##DONE Ctrl + u :	Underline
+##DONE Ctrl + Shift + 7 :	Numbered list
+##DONE Ctrl + Shift + 8 :	Bulleted list
+##DONE Ctrl + Shift + 9 :	Quote
+##DONE Ctrl + [ :	Indent less
+##DONE Ctrl + ] :	Indent more
+##DONE Ctrl + Shift + l :	Align left
+##DONE Ctrl + Shift + e :	Align center
+##DONE Ctrl + Shift + r :	Align right
 Ctrl + Shift + , :	Set right-to-left
 Ctrl + Shift + . :	Set left-to-right
-Alt + Shift + 5 :	Strikethrough
-Ctrl + \ :	Remove formatting
-The following keyboard shortcuts are currently enabled. Disable
+##DONE Alt + Shift + 5 :	Strikethrough
+##DONE Ctrl + \ :	Remove formatting
+
 Jumping
 g then i :	Go to Inbox
 g then s :	Go to Starred conversations
@@ -75,7 +76,7 @@ g then d :	Go to Drafts
 g then a :	Go to All mail
 g then c :	Go to Contacts
 g then l :	Go to Label
-g then k :	Go to Tasks
+##DONE g then k :	Go to Tasks
 g then f :	Go to search filters
 * then a :	Select all conversations
 * then n :	Deselect all conversations
@@ -84,7 +85,7 @@ g then f :	Go to search filters
 * then s :	Select starred conversations
 * then t :	Select unstarred conversations
 u :	Back to threadlist
-###WIP k / j :	Newer/older conversation
+##DONE k / j :	Newer/older conversation
 o or Enter :	Open conversation; collapse/expand conversation
 p / n :	Read previous/next message
 g then n :	Go to next page
@@ -99,31 +100,31 @@ q :	Search chat contacts
 d :	Compose in a tab
 . :	Open "more actions" menu
 v :	Open "move to" menu
-l :	Open "label as" menu
+##DONE l :	Open "label as" menu
 , :	Move focus to toolbar
 x :	Select conversation
 s :	Toggle star/Rotate among superstars
 y :	Remove label
-###WIP e :	Archive
-m :	Mute conversation
-! :	Report as spam
-\# :	Delete
-r :	Reply
+##DONE e :	Archive
+##DONE m :	Mute conversation
+##DONE ! :	Report as spam
+##DONE # :	Delete
+##DONE r :	Reply
 Shift + r :	Reply in a new window
-a :	Reply all
+##DONE a :	Reply all
 Shift + a :	Reply all in a new window
-f :	Forward
+##DONE f :	Forward
 Shift + f :	Forward in a new window
 Shift + n :	Update conversation
 ] / [ :	Remove conversation from current view and go newer/older
 } / { :	Archive conversation and go newer/older
-z :	Undo last action
-Shift + i :	Mark as read
-Shift + u :	Mark as unread
+##DONE z :	Undo last action
+##DONE Shift + i :	Mark as read
+##DONE Shift + u :	Mark as unread
 _ :	Mark unread from the selected message
-+ or = :	Mark as important
-- :	Mark as not important
+##DONE + or = :	Mark as important
+##DONE - :	Mark as not important
 ; :	Expand entire conversation
 : :	Collapse entire conversation
 b :	Snooze
-Shift + t :	Add conversation to Tasks
+##DONE Shift + t :	Add conversation to Tasks

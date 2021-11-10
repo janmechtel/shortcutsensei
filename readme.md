@@ -1,13 +1,34 @@
+# Gmail settings
+1. In Gmail, click the Settings icon towards the top right corner of the screen.
+
+![Step1](source/apps/gmail/onboardingmedia/GmailOnboardingStep1.png)
+
+2. Click "See all Settings".
+
+![Step2](source/apps/gmail/onboardingmedia/GmailOnboardingStep2.png)
+
+3. Set "Gmail display language" to "English (US)".
+
+![Step3](source/apps/gmail/onboardingmedia/GmailOnboardingStep3.png)
+
+4. Scroll down until you arrive at "Keyboard shortcuts". Set this to "Keyboard shortcuts on".
+
+![Step4](source/apps/gmail/onboardingmedia/GmailOnboardingStep4.png)
+
+5. Scroll down all the way to the bottom of the page and click "Save changes".
+
+![Step5](source/apps/gmail/onboardingmedia/GmailOnboardingStep5.png)
+
 # How to run
 1. `npm install`
-1. `npm run watch`
-1. `web-ext run` for Firefox and `web-ext run -t chromium` for Chrome
+2. `npm run watch`
+3. `web-ext run` for Firefox and `web-ext run -t chromium` for Chrome
 
 
 # How to build
 1. `npm install`
-1. `npm run build`
-1. `web-ext build`
+2. `npm run build`
+3. `web-ext build`
 
 # browser-extension-template
 

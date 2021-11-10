@@ -1,11 +1,13 @@
 export class Shortcut {
 	key: string; // the shortcut key sequence, eg. 'Shift+C'
-	button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
+	innerText: string; // the text content, eg. 'Compose'
+	outerHTML: string; // a word that will be matched with the OuterHTML, eg. 'xy' will be matched within "<div class='xy'>Compose</div>"
 
-	constructor(shortcut: string, description: string, button?: string) {
+	constructor(shortcut: string, description: string, innerText?: string, outerHTML?: string) {
 		this.key = shortcut;
 		this.description = description;
-		this.button = button;
+		this.innerText = innerText;
+		this.outerHTML = outerHTML;
 	}
 }
