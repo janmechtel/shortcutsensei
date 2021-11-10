@@ -158,10 +158,14 @@ function showSettingsPopUp() {
 	});
 }
 
-function showSettingsInstructionsPopUp(title: string, message: string, duration: number) {
+function showSettingsInstructionsPopUp(title: string, message: string, duration: number, theme?: string) {
+	if (theme === undefined) {
+		theme = "warning";
+	}
+	console.debug(theme);
 	window.createNotification({
 		positionClass: 'nfc-bottom-right',
-		theme: 'warning',
+		theme: theme,
 		closeOnClick: true,
 		showDuration: duration,
 	})({
@@ -223,6 +227,8 @@ function continueOnboardingAfterSettingsLoaded() {
 										saveButton.closest("tr").style.backgroundColor = "yellow";
 									} else {
 										console.debug("Save button is disabled. onboarding completed!");
+										showSettingsInstructionsPopUp(`Onboarding completed`, `Onboarding completed`, 0, `success`);
+
 									}
 								} else {
 									keyboardShortcutsOnLabel.scrollIntoView();
