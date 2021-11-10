@@ -19,12 +19,13 @@ const elementsToSkip = [
 
 import { Shortcut } from '../../shortcut';
 
-document.body.style.border = '5px solid yellow';
+document.body.style.border = '5px solid red';
 
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	closeOnClick: true,
+	showDuration: 3000,
 });
 
 
@@ -33,7 +34,7 @@ function openUrl(url: string) {
 	window.open(url, '_self');
 }
 
-const openSettings = function (event) {
+const openSettings = function () {
 	console.log("settings");
 	openUrl("https://mail.google.com/mail/#settings/general");
 }
@@ -42,7 +43,7 @@ const settingsNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	onclick: openSettings,
-	closeOnClick: true,
+	showDuration: 10000,
 });
 
 const gmailShortcuts: Shortcut[] = [
@@ -149,19 +150,84 @@ const clickHandler = function (event: MouseEvent) {
 
 document.addEventListener('click', clickHandler, true);
 
-// check if the url of the current page is settings
-if (window.location.href.includes("settings/general")) {
-	successNotification({
-		title: `Change your Language to English US`,
-		message: `1. Change your Language to English US & 2. Enable Keyboard Shortcuts`,
-		showDuration: 30000,
-	});
-} else {
+function showSettingsPopUp() {
 	settingsNotification({
 		title: `Enable keyboard shorcuts!`,
-		message: `Click here  to go to 'Settings'`,
-		showDuration: 10000,
+		message: `Click here to go to 'Settings'`,
+		showDuration: 0,
 	});
 }
 
+function showSettingsInstructionsPopUp(title: string, message: string, duration: number) {
+	window.createNotification({
+		positionClass: 'nfc-bottom-right',
+		theme: 'warning',
+		closeOnClick: true,
+		showDuration: duration,
+	})({
+		title: title,
+		message: message,
+	});
+}
+
+//delay execution of function until gmail is fully loaded
+function continueOnboardingAfterSettingsLoaded() {
+	const dropdowns = Array.from(document.querySelectorAll("select"));
+	if (dropdowns.length === 0) {
+		console.debug("Gmail is not loaded yet, waiting ...");
+		setTimeout(continueOnboardingAfterSettingsLoaded, 100);
+	} else {
+		console.debug("Gmail is loaded");
+		//find the dropdowns that have a certain display text option
+		const languageDropdown = dropdowns.find(dropdown => dropdown.innerText.includes("English (US)"));
+		if (languageDropdown === undefined) {
+			console.error("Could not find the language dropdown", dropdowns);
+		} else {
+			const language = languageDropdown.options[languageDropdown.selectedIndex].text;
+			console.debug(language);
+			//select a button element with a certain HTML property
+			const saveButton = document.querySelector("button[guidedhelpid='save_changes_button']");
+			//check if the saveButton is enabled
+			if (saveButton === null) {
+				console.error("Could not find the save button");
+			} else {
+				if (language !== "English (US)" && saveButton.disabled) {
+						showSettingsInstructionsPopUp(`English (US) Language`, `Choose "English (US)" then hit "Save Changes"`, 500)
+						//highlight the dropdown
+						languageDropdown.style.backgroundColor = "yellow";
+						console.debug("Save button is disabled, waiting for user to make the choice");
+						setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+				} else {
+					if (!saveButton.disabled) {
+						console.debug("Save button is enabled, scrolling into view");
+						saveButton.scrollIntoView();
+						showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+						saveButton.closest("tr").style.backgroundColor = "yellow";
+					} else {
+						console.debug("Language is already set to English (US)");
+						showSettingsInstructionsPopUp(`Enable Keyboard shortcuts`, `Enable Keyboard Shortcuts`, 0);
+					}
+
+				}
+			}
+		}
+	}
+}
+
+const onBoardingCompleted = false;
+if (!onBoardingCompleted) {
+	if (!window.location.href.includes("settings/general")) {
+		showSettingsPopUp();
+	} else {
+		continueOnboardingAfterSettingsLoaded();
+	}
+}
+
+// new + non-settings page >> go to settings
+
+// if page == settings
+// language set to english
+// keyboard shortcuts enabled
+
+// finished
 
