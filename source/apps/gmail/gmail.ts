@@ -36,18 +36,6 @@ function openUrl(url: string) {
 	window.open(url, '_self');
 }
 
-const openSettings = function () {
-	console.log("settings");
-	openUrl("https://mail.google.com/mail/#settings/general");
-}
-
-const settingsNotification = window.createNotification({
-	positionClass: 'nfc-bottom-right',
-	theme: 'warning',
-	onclick: openSettings,
-	showDuration: 0,
-});
-
 const gmailShortcuts: Shortcut[] = [
 	// new Shortcut(
 	// key: string; // the shortcut key sequence, eg. 'Shift+C'
@@ -152,13 +140,6 @@ const clickHandler = function (event: MouseEvent) {
 
 document.addEventListener('click', clickHandler, true);
 
-function showSettingsPopUp() {
-	settingsNotification({
-		title: `Enable keyboard shorcuts!`,
-		message: `Click here to go to 'Settings'`,
-	});
-}
-
 function showSettingsInstructionsPopUp(title: string, message: string, duration: number, theme?: string) {
 	if (theme === undefined) {
 		theme = "warning";
@@ -232,7 +213,8 @@ function continueOnboardingAfterSettingsLoaded() {
 		saveButton.scrollIntoView();
 	} else {
 		optionsStorage.set({gmailOnboardingCompleted: true});
-		showSettingsInstructionsPopUp(`Onboarding completed`, `Onboarding completed`, 0, `success`);
+		showSettingsInstructionsPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
+		setTimeout(function() {openUrl("https://mail.google.com/mail")},5000);
 	}
 }
 
@@ -247,7 +229,7 @@ async function main() {
 		return;
 	} else {
 		if (!window.location.href.includes("settings/general")) {
-			showSettingsPopUp();
+			openUrl("https://mail.google.com/mail/#settings/general");
 		} else {
 			continueOnboardingAfterSettingsLoaded();
 		}
@@ -255,3 +237,8 @@ async function main() {
 }
 
 main();
+
+//call function when url is changing without page reload
+window.addEventListener('popstate', function () {
+	main();
+})
