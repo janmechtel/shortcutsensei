@@ -43,7 +43,7 @@ const settingsNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	onclick: openSettings,
-	showDuration: 10000,
+	showDuration: 0,
 });
 
 const gmailShortcuts: Shortcut[] = [
@@ -154,7 +154,6 @@ function showSettingsPopUp() {
 	settingsNotification({
 		title: `Enable keyboard shorcuts!`,
 		message: `Click here to go to 'Settings'`,
-		showDuration: 0,
 	});
 }
 
@@ -162,7 +161,6 @@ function showSettingsInstructionsPopUp(title: string, message: string, duration:
 	if (theme === undefined) {
 		theme = "warning";
 	}
-	console.debug(theme);
 	window.createNotification({
 		positionClass: 'nfc-bottom-right',
 		theme: theme,
@@ -174,75 +172,64 @@ function showSettingsInstructionsPopUp(title: string, message: string, duration:
 	});
 }
 
-//delay execution of function until gmail is fully loaded
 function continueOnboardingAfterSettingsLoaded() {
+
+	//delay execution of function until gmail is fully loaded
 	const dropdowns = Array.from(document.querySelectorAll("select"));
 	if (dropdowns.length === 0) {
 		console.debug("Gmail is not loaded yet, waiting ...");
 		setTimeout(continueOnboardingAfterSettingsLoaded, 100);
+		return;
+	}
+
+	console.debug("Gmail is loaded, continuing with onboarding ...");
+
+	//find the dropdowns that have a certain display text option
+	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
+	if (languageDropdown === undefined) {
+		console.warn("Could not find the language dropdown", dropdowns);
+	}
+	const language = languageDropdown?.options[languageDropdown?.selectedIndex].text;
+	console.debug(language);
+
+	//select a button element with a certain HTML property
+	const saveButton = document.querySelector("button[guidedhelpid='save_changes_button']");
+	//check if the saveButton is enabled
+	if (saveButton === undefined) {
+		console.debug("Could not find the save button");
+	}
+
+	//find labels element that contains certain text
+	const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label"))?.find(label => label.innerText == 'Keyboard shortcuts on');
+	if (keyboardShortcutsOnLabel === undefined) {
+		console.debug("Could not find the keyboard shortcuts on label");
+	}
+
+	const keyboardShortcutsOnInput = keyboardShortcutsOnLabel?.closest("tr")?.querySelector("input");
+	if (keyboardShortcutsOnInput === undefined) {
+		console.debug("Could not find the keyboard shortcuts on input");
+	}
+
+	if (language !== "English (US)") {
+		showSettingsInstructionsPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 500)
+		languageDropdown.style.backgroundColor = "yellow";
+		languageDropdown.scrollIntoView();
+		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
+		showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		saveButton.closest("tr").style.backgroundColor = "yellow";
+		saveButton.scrollIntoView();
+	} else if (!keyboardShortcutsOnInput?.checked) {
+		showSettingsInstructionsPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
+		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
+		keyboardShortcutsOnLabel.scrollIntoView();
+		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
+		showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		saveButton.closest("tr").style.backgroundColor = "yellow";
+		saveButton.scrollIntoView();
 	} else {
-		console.debug("Gmail is loaded");
-		//find the dropdowns that have a certain display text option
-		const languageDropdown = dropdowns.find(dropdown => dropdown.innerText.includes("English (US)"));
-		if (languageDropdown === undefined) {
-			console.error("Could not find the language dropdown", dropdowns);
-		} else {
-			const language = languageDropdown.options[languageDropdown.selectedIndex].text;
-			console.debug(language);
-			//select a button element with a certain HTML property
-			const saveButton = document.querySelector("button[guidedhelpid='save_changes_button']");
-			//check if the saveButton is enabled
-			if (saveButton === null) {
-				console.error("Could not find the save button");
-			} else {
-				if (language !== "English (US)" && saveButton.disabled) {
-						showSettingsInstructionsPopUp(`English (US) Language`, `Choose "English (US)" then hit "Save Changes"`, 500)
-						//highlight the dropdown
-						languageDropdown.style.backgroundColor = "yellow";
-						console.debug("Save button is disabled, waiting for user to make the choice");
-						setTimeout(continueOnboardingAfterSettingsLoaded, 500);
-				} else {
-					if (!saveButton.disabled) {
-						console.debug("Save button is enabled, scrolling into view");
-						saveButton.scrollIntoView();
-						showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
-						saveButton.closest("tr").style.backgroundColor = "yellow";
-					} else {
-						console.debug("Language is already set to English (US)");
-						//find labels element that contains certain text
-						const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label")).find(label => label.innerText == 'Keyboard shortcuts on');
-						if (keyboardShortcutsOnLabel === null) {
-							console.error("Could not find the keyboard shortcuts on label");
-						} else {
-							const keyboardShortcutsOnInput = keyboardShortcutsOnLabel.closest("tr").querySelector("input");
-							if (keyboardShortcutsOnInput === null) {
-								console.error("Could not find the keyboard shortcuts on input");
-							} else {
-								console.debug(keyboardShortcutsOnInput.checked);
-								if (keyboardShortcutsOnInput.checked) {
-									if (!saveButton.disabled) {
-										console.debug("Save button is enabled, scrolling into view");
-										saveButton.scrollIntoView();
-										showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
-										saveButton.closest("tr").style.backgroundColor = "yellow";
-									} else {
-										console.debug("Save button is disabled. onboarding completed!");
-										showSettingsInstructionsPopUp(`Onboarding completed`, `Onboarding completed`, 0, `success`);
-
-									}
-								} else {
-									keyboardShortcutsOnLabel.scrollIntoView();
-									keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
-									showSettingsInstructionsPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
-									setTimeout(continueOnboardingAfterSettingsLoaded, 500);
-								}
-							}
-						}
-
-					}
-				}
-			}
-		}
+		showSettingsInstructionsPopUp(`Onboarding completed`, `Onboarding completed`, 0, `success`);
 	}
 }
 
@@ -254,12 +241,3 @@ if (!onBoardingCompleted) {
 		continueOnboardingAfterSettingsLoaded();
 	}
 }
-
-// new + non-settings page >> go to settings
-
-// if page == settings
-// language set to english
-// keyboard shortcuts enabled
-
-// finished
-
