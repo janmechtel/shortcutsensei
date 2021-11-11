@@ -5,6 +5,7 @@ export default new OptionsSync({
 		colorRed: 244,
 		colorGreen: 67,
 		colorBlue: 54,
+		gmailOnboardingCompleted: false,
 	},
 	migrations: [
 		OptionsSync.migrations.removeUnused,
