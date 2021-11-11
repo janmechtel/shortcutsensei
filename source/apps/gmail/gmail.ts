@@ -1,4 +1,6 @@
 require('styled-notifications');
+import optionsStorage from '../../options/options-storage';
+
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -229,15 +231,27 @@ function continueOnboardingAfterSettingsLoaded() {
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else {
+		optionsStorage.set({gmailOnboardingCompleted: true});
 		showSettingsInstructionsPopUp(`Onboarding completed`, `Onboarding completed`, 0, `success`);
 	}
 }
 
-const onBoardingCompleted = false;
-if (!onBoardingCompleted) {
-	if (!window.location.href.includes("settings/general")) {
-		showSettingsPopUp();
+async function main() {
+
+	const options = await optionsStorage.getAll();
+	console.debug(options);
+
+	const onBoardingCompleted = options.gmailOnboardingCompleted;
+	if (onBoardingCompleted) {
+		console.debug("Onboarding completed, skipping Onboarding");
+		return;
 	} else {
-		continueOnboardingAfterSettingsLoaded();
+		if (!window.location.href.includes("settings/general")) {
+			showSettingsPopUp();
+		} else {
+			continueOnboardingAfterSettingsLoaded();
+		}
 	}
 }
+
+main();
