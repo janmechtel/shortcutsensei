@@ -161,7 +161,7 @@ function continueOnboardingAfterSettingsLoaded() {
 	const dropdowns = Array.from(document.querySelectorAll("select"));
 	if (dropdowns.length === 0) {
 		console.debug("Gmail is not loaded yet, waiting ...");
-		setTimeout(continueOnboardingAfterSettingsLoaded, 100);
+		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
 		return;
 	}
 
