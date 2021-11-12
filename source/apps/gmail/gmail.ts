@@ -1,4 +1,6 @@
 require('styled-notifications');
+import optionsStorage from '../../options/options-storage';
+
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -19,28 +21,20 @@ const elementsToSkip = [
 
 import { Shortcut } from '../../shortcut';
 
-document.body.style.border = '5px solid yellow';
-
-
-const openSettings = function (event) {
-	console.log("settings");
-	openUrl("https://mail.google.com/mail/#settings/general");
-}
+document.body.style.border = '5px solid red';
 
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	closeOnClick: true,
-});
-
-const settingsNotification = window.createNotification({
-	positionClass: 'nfc-bottom-right',
-	theme: 'warning',
-	onclick: openSettings,
-	closeOnClick: true,
+	showDuration: 3000,
 });
 
 
+// open a new url in the current window
+function openUrl(url: string) {
+	window.open(url, '_self');
+}
 
 const gmailShortcuts: Shortcut[] = [
 	// new Shortcut(
@@ -146,26 +140,105 @@ const clickHandler = function (event: MouseEvent) {
 
 document.addEventListener('click', clickHandler, true);
 
-// open a new url in the current window
-function openUrl(url: string) {
-	window.open(url, '_self');
-}
-
-document.addEventListener('click', clickHandler, true);
-
-// check if the url of the current page is settings
-if (window.location.href.includes("settings/general")) {
-	successNotification({
-		title: `Change your Language to English US`,
-		message: `1. Change your Language to English US & 2. Enable Keyboard Shortcuts`,
-		showDuration: 30000,
-	});
-} else {
-	settingsNotification({
-		title: `Enable keyboard shorcuts!`,
-		message: `Click here  to go to 'Settings'`,
-		showDuration: 10000,
+function showSettingsInstructionsPopUp(title: string, message: string, duration: number, theme?: string) {
+	if (theme === undefined) {
+		theme = "warning";
+	}
+	window.createNotification({
+		positionClass: 'nfc-bottom-right',
+		theme: theme,
+		closeOnClick: true,
+		showDuration: duration,
+	})({
+		title: title,
+		message: message,
 	});
 }
 
+function continueOnboardingAfterSettingsLoaded() {
 
+	//delay execution of function until gmail is fully loaded
+	const dropdowns = Array.from(document.querySelectorAll("select"));
+	if (dropdowns.length === 0) {
+		console.debug("Gmail is not loaded yet, waiting ...");
+		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+		return;
+	}
+
+	console.debug("Gmail is loaded, continuing with onboarding ...");
+
+	//find the dropdowns that have a certain display text option
+	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
+	if (languageDropdown === undefined) {
+		console.warn("Could not find the language dropdown", dropdowns);
+	}
+	const language = languageDropdown?.options[languageDropdown?.selectedIndex].text;
+	console.debug(language);
+
+	//select a button element with a certain HTML property
+	const saveButton = document.querySelector("button[guidedhelpid='save_changes_button']");
+	//check if the saveButton is enabled
+	if (saveButton === undefined) {
+		console.debug("Could not find the save button");
+	}
+
+	//find labels element that contains certain text
+	const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label"))?.find(label => label.innerText == 'Keyboard shortcuts on');
+	if (keyboardShortcutsOnLabel === undefined) {
+		console.debug("Could not find the keyboard shortcuts on label");
+	}
+
+	const keyboardShortcutsOnInput = keyboardShortcutsOnLabel?.closest("tr")?.querySelector("input");
+	if (keyboardShortcutsOnInput === undefined) {
+		console.debug("Could not find the keyboard shortcuts on input");
+	}
+
+	if (language !== "English (US)") {
+		showSettingsInstructionsPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 500)
+		languageDropdown.style.backgroundColor = "yellow";
+		languageDropdown.scrollIntoView();
+		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
+		showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		saveButton.closest("tr").style.backgroundColor = "yellow";
+		saveButton.scrollIntoView();
+	} else if (!keyboardShortcutsOnInput?.checked) {
+		showSettingsInstructionsPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
+		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
+		keyboardShortcutsOnLabel.scrollIntoView();
+		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
+		showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		saveButton.closest("tr").style.backgroundColor = "yellow";
+		saveButton.scrollIntoView();
+	} else {
+		optionsStorage.set({gmailOnboardingCompleted: true});
+		showSettingsInstructionsPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
+		setTimeout(function() {openUrl("https://mail.google.com/mail")},5000);
+	}
+}
+
+async function main() {
+
+	const options = await optionsStorage.getAll();
+	console.debug(options);
+
+	const onBoardingCompleted = options.gmailOnboardingCompleted;
+	if (onBoardingCompleted) {
+		console.debug("Onboarding completed, skipping Onboarding");
+		return;
+	} else {
+		if (!window.location.href.includes("settings/general")) {
+			openUrl("https://mail.google.com/mail/#settings/general");
+		} else {
+			continueOnboardingAfterSettingsLoaded();
+		}
+	}
+}
+
+main();
+
+//call function when url is changing without page reload
+window.addEventListener('popstate', function () {
+	main();
+})
