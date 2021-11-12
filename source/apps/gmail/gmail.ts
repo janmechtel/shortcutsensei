@@ -125,7 +125,7 @@ const clickHandler = function (event: MouseEvent) {
 			}
 			for (const shortcut of gmailShortcuts) {
 				//console.debug(shortcut);
-				if (outerHTML.includes(shortcut.outerHTML) && outerHTML !== "") {
+				if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
 					console.debug("match found in outerHTML");
 					successNotification({
 						title: `Press ${shortcut.key}`,
