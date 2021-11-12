@@ -2,3 +2,4 @@ node_modules
 distribution
 .parcel-cache
 .idea
+web-ext-artifacts
