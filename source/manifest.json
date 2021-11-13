@@ -38,5 +38,6 @@
             "js": ["apps/gmail/gmail.ts"],
 			"css": ["styled-notifications.css"]
         }
-    ]
+    ],
+	"web_accessible_resources": ["onboarding/*"]
 }
