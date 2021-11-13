@@ -29,7 +29,7 @@
 	},
 	"content_scripts": [
         {
-            "matches": ["*://mail.google.com/*","*://*.mozilla.org/*"],
+            "matches": ["*://mail.google.com/*"],
             "js": ["apps/gmail/gmail.ts"],
 			"css": ["styled-notifications.css"]
         }
