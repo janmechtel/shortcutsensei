@@ -1,3 +1,5 @@
+Download Shortcut Sensei from the [Chrome Web Store](https://chrome.google.com/webstore/detail/shortcut-sensei/ahhliekflgdfbgofmgamanngngnbaibh/related) or the [Firefox Add-Ons Store](https://addons.mozilla.org/en-US/firefox/addon/shortcutsensei/)
+
 # Gmail settings
 1. In Gmail, click the Settings icon towards the top right corner of the screen.
 
