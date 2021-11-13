@@ -3,11 +3,13 @@
 <html>
 	<head>
 	  <meta charset="utf-8">
+	  <link rel="stylesheet" href="../styled-notifications.css"/>
+	  <script type="module" src="onboarding.ts"></script>
 	</head>
 
   <body>
 	  <h1>
-		  Welcome young pandawan.
+		  Welcome young novice.
 	  </h1>
 		<p>
 			I'm Kei, your Shortcut Sensei.
@@ -17,13 +19,13 @@
 			Whenever you use your mouse, I'll guide you with a notification.
 		</p>
 
-		<button onclick="alert('Haha, you used the mouse! Try to press &quot;Alt+Shift+X&quot; instead!');">
+		<button name="trapButton">
 			Click me!
 		</button>
 
 		<button
+			name="hiddenButton"
 			accesskey="x"
-			onclick="alert('Well done! Now we configure Gmail'); location.href='https://mail.google.com/mail/#settings/general'"
 			style="display:none;">
 			This is a invisible button, but it's accessible via Alt+Shift+X
 		</button>
