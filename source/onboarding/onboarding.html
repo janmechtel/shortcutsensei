@@ -9,31 +9,24 @@
 	  <h1>
 		  Welcome young pandawan.
 	  </h1>
+		<p>
+			I'm Kei, your Shortcut Sensei.
+		</p>
 
-	<p>
-		I'm Kei, your Shortcut Sensei.
-	</p>
+		<p>
+			Whenever you use your mouse, I'll guide you with a notification.
+		</p>
 
-	<p>
-		Whenever you use your mouse, I'll guide you with a notification.
-	</p>
+		<button onclick="alert('Haha, you used the mouse! Try to press &quot;Alt+Shift+X&quot; instead!');">
+			Click me!
+		</button>
 
-	<button>
-		Continue Onboarding
-	</button>
-
-	<p>
-		"Haha, you used the mouse didn't ya? Try to press "X" instead"
-	</p>
-
-	<p>
-		"X"
-	</p>
-
-	<p>
-		"Well done. Off we go now to check your Gmail settings"
-	<p>
-	<img src="shortcutsensei.png" alt="an illustration of the wise keyboard ninja in grey and green" >
-
-  </body>
+		<button
+			accesskey="x"
+			onclick="alert('Well done! Now we configure Gmail'); location.href='https://mail.google.com/mail/#settings/general'"
+			style="display:none;">
+			This is a invisible button, but it's accessible via Alt+Shift+X
+		</button>
+		<img src="shortcutsensei.png" alt="an illustration of the wise keyboard ninja in grey and green" >
+	</body>
 </html>
