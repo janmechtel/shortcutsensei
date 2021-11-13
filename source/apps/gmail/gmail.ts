@@ -21,7 +21,8 @@ const elementsToSkip = [
 
 import { Shortcut } from '../../shortcut';
 
-document.body.style.border = '5px solid red';
+//helpful for debugging, change the color to check if you most recent code is loaded
+//document.body.style.border = '5px solid red';
 
 const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
