@@ -1,4 +1,4 @@
-import {showPopUp} from "../styled-notifications";
+import { showPopUp } from "../styled-notifications";
 
 function redirectToGmail() {
 	const url = 'https://mail.google.com/mail/#settings/general';
@@ -18,3 +18,12 @@ function listenForClicks() {
 }
 
 listenForClicks();
+
+//wait until the #typeit element is loaded
+document.addEventListener("DOMContentLoaded", function (event) {
+	new TypeIt("#typeit", {
+		strings: "Ahh ... the new apprentice",
+		speed: 75,
+		loop: true,
+	}).go();
+});
