@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
 	width: 250px;
 }
 
@@ -11,9 +12,9 @@ html, body {
 	padding: 4px;
 	text-align: center;
 	cursor: pointer;
-	background-color: #E5F2F2;
+	background-color: #e5f2f2;
 }
 
 .button:hover {
-	background-color: #CFF2F2;
+	background-color: #cff2f2;
 }
