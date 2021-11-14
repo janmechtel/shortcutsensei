@@ -11,3 +11,6 @@
 .btn-blue:hover {
 	@apply bg-green-700;
 }
+h1 {
+	font-family: 'Samurai', sans-serif;
+}
