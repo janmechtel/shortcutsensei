@@ -21,17 +21,15 @@ listenForClicks();
 
 new TypeIt("#typeit", {
 	waitUntilVisible: true,
-	speed: 50,
+	speed: 35,
 })
-	.type("Ahh ").pause(250).type("... ").pause(750).type("the new apprentice").break()
-	.break().pause(750)
-	.type("I am Ki.").pause(500).type(" Your Shortcut Sensei").break()
-	.break().pause(750)
-	.type("	When you use the mouse ").pause(250).type("... ").break()
-	.pause(750).type("instead of the mighty keyboard").pause(250).type("... ").break()
-	.break().pause(750)
+	.type("Greetings, my new apprentice... ").pause(500).type("I've been expecting you.").break()
+	.break().pause(500)
+	.type("I am Kei, your Shortcut Sensei.").break()
+	.break().pause(500)
+	.type("	When you use the mouse instead of the mighty keyboard...").pause(500).break()
 	.type("I shall guide you with a notification.")
-	.break().pause(750)
+	.break().pause(500)
 	.exec(async () => {
 		document.getElementById('trapButton').style.display = 'block';
 	})
