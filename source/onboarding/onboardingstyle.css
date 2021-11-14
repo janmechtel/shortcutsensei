@@ -1,0 +1,11 @@
+ h1 {
+     font-family: 'Samurai', sans-serif;
+ }
+
+ *:not(h1) {
+    font-family: Arial;
+   }
+
+*{
+    text-align: center;
+}
