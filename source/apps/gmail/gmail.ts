@@ -1,5 +1,6 @@
 require('styled-notifications');
 import optionsStorage from '../../options/options-storage';
+import { closeAllNotifications } from '../../styled-notifications';
 
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
@@ -24,7 +25,7 @@ import { Shortcut } from '../../shortcut';
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
-const successNotification = window.createNotification({
+const warningNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	closeOnClick: true,
@@ -103,7 +104,8 @@ const clickHandler = function (event: MouseEvent) {
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
 
 	if (outerHTML.includes("hidden;\">Invalid email address") && outerHTML.length > 10000) {
-		successNotification({
+		closeAllNotifications();
+		warningNotification({
 			title: `Press CTRL+K`,
 			message: `For "Link to" try pressing "CTRL+K" instead ;-)`,
 		});
@@ -118,7 +120,8 @@ const clickHandler = function (event: MouseEvent) {
 				// console.debug(shortcut);
 				if (innerText === shortcut.innerText && innerText !== "") {
 					console.debug("match found in InnerText");
-					successNotification({
+					closeAllNotifications();
+					warningNotification({
 						title: `Press ${shortcut.key}`,
 						message: `For "${shortcut.description}" try pressing "${shortcut.key}" instead ;-)`,
 					});
@@ -129,7 +132,8 @@ const clickHandler = function (event: MouseEvent) {
 				//console.debug(shortcut);
 				if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
 					console.debug("match found in outerHTML");
-					successNotification({
+					closeAllNotifications();
+					warningNotification({
 						title: `Press ${shortcut.key}`,
 						message: `For "${shortcut.description}" try pressing "${shortcut.key}" instead ;-)`,
 					});
