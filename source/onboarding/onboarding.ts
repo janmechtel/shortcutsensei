@@ -4,11 +4,13 @@ const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'success',
 	closeOnClick: true,
+	displayCloseButton: true,
 	showDuration: 0,
 });
 
 const warningNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
+	displayCloseButton: true,
 	theme: 'warning',
 	showDuration: 0,
 });
@@ -20,6 +22,7 @@ function redirectToGmail() {
 
 function listenForClicks() {
 	document.addEventListener("click", (e) => {
+		closeAllNotifications();
 		console.debug(e.target);
 		if (e.target.name === 'trapButton') {
 			warningNotification({
@@ -34,6 +37,14 @@ function listenForClicks() {
 			setInterval(redirectToGmail, 3000);
 		}
 	});
+}
+
+function closeAllNotifications() {
+	// find all elements with class "nfc" and remove them
+	const elements = document.getElementsByClassName('ncf');
+	while (elements.length > 0) {
+		elements[0].remove();
+	}
 }
 
 listenForClicks();

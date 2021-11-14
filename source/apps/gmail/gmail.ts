@@ -28,6 +28,7 @@ const successNotification = window.createNotification({
 	positionClass: 'nfc-bottom-right',
 	theme: 'warning',
 	closeOnClick: true,
+	displayCloseButton: true,
 	showDuration: 3000,
 });
 
@@ -149,6 +150,7 @@ function showSettingsInstructionsPopUp(title: string, message: string, duration:
 		positionClass: 'nfc-bottom-right',
 		theme: theme,
 		closeOnClick: true,
+		displayCloseButton: true,
 		showDuration: duration,
 	})({
 		title: title,
