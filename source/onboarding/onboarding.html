@@ -16,27 +16,18 @@
 		<div class="relative py-3 sm:max-w-4xl sm:mx-auto">
 			<div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-10">
 				<div class="flex">
-					<div class="flex-1 ">
+					<div class="flex-initial h-96">
 						<div class="flex h-full flex-wrap content-center sm:p-10">
 							<div class="flex flex-col space-y-5">
 								<h1 class="flex-1 text-xl">
 									Shortcut Sensei.
 								</h1>
-								<p class="flex-1" id="typeit"></p>
-								<p class="flex-1">
-									I am Ki, your SHortcut Sensei.
-								</p>
-								<p class="flex-1">
-									When you use the mouse instead of the mighty keyboard, ...
-								</p>
-								<p class="flex-1">
-									... I shall guide you with a notification.
-								</p>
+								<p class="flex-initial h-52" id="typeit"></p>
 								<div class="flex-1 justify-center">
-									<button name="trapButton" class="btn btn-blue sm:mx-auto">
+									<button id="trapButton" class="btn btn-blue sm:mx-auto" style="display:none;">
 										Click me!
 									</button>
-									<button name="hiddenButton" accesskey="x" style="display:none;">
+									<button id="hiddenButton" accesskey="x" style="display:none;">
 										This is a invisible button, but it's accessible via Alt+Shift+X
 									</button>
 								</div>
