@@ -2,5 +2,8 @@
 	"typeRoots": [
 		"./typings",
 		"../node_modules/@types"
-	]
+	],
+	"compilerOptions": {
+		"allowJs": true
+	}
 }
