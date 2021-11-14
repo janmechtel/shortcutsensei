@@ -2,14 +2,13 @@
 	"private": true,
 	"scripts": {
 		"build": "parcel build source/manifest.json --no-content-hash --no-source-maps --dist-dir distribution --no-cache --detailed-report 0",
+		"watch": "parcel watch source/manifest.json --dist-dir distribution --no-cache --no-hmr",
 		"watch-css": "parcel watch source/styles.css --dist-dir distribution --public-url /",
 		"build-css": "parcel build source/styles.css --dist-dir distribution --public-url /",
 		"lint": "run-p lint:*",
 		"lint:css": "stylelint source/**/*.css --fix",
 		"lint:ts": "eslint . --ext ts",
-		"test": "run-p lint:* build",
-		"copy-onboarding": "xcopy source\\onboarding\\ distribution\\onboarding\\ /y",
-		"watch": "parcel watch source/manifest.json --dist-dir distribution --no-cache --no-hmr"
+		"test": "run-p lint:* build"
 	},
 	"browserslist": [
 		"last 1 Chrome version",
