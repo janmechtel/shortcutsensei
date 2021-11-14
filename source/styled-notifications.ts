@@ -33,12 +33,12 @@ export function showPopUp(title: string, message: string, duration: number, them
 	});
 }
 
-export function showKeyPopup(key: string, description:string, duration?: number) {
+export function showKeyPopup(key: string, description: string, duration?: number) {
 	if (duration === undefined) {
 		duration = 3000;
 	}
 	const title = `${key}`;
-	const message = `For "${description}" try pressing "${key}" instead ;-)`;
+	const message = `For "${description}" try pressing "${key}" instead`;
 
 	return showPopUp(title, message, duration, 'warning')
 }

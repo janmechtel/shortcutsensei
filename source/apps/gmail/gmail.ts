@@ -96,7 +96,7 @@ const clickHandler = function (event: MouseEvent) {
 
 	//TODO: this should go elsewhere into the normal list from above!
 	if (outerHTML.includes("hidden;\">Invalid email address") && outerHTML.length > 10000) {
-		showKeyPopup(`CTRL+K`,`Link to`);
+		showKeyPopup(`CTRL+K`, `Link to`);
 		return;
 	} else {
 		if (elementsToSkip.some(skip => outerHTML.includes(skip))) {
@@ -139,11 +139,11 @@ function continueOnboardingAfterSettingsLoaded() {
 	console.debug("Gmail is loaded, continuing with onboarding ...");
 
 	//find the dropdowns that have a certain display text option
-	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
+	const languageDropdown = dropdowns ?.find(dropdown => dropdown.innerText.includes("English (US)"));
 	if (languageDropdown === undefined) {
 		console.warn("Could not find the language dropdown", dropdowns);
 	}
-	const language = languageDropdown?.options[languageDropdown?.selectedIndex].text;
+	const language = languageDropdown ?.options[languageDropdown ?.selectedIndex].text;
 	console.debug(language);
 
 	//select a button element with a certain HTML property
@@ -154,12 +154,12 @@ function continueOnboardingAfterSettingsLoaded() {
 	}
 
 	//find labels element that contains certain text
-	const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label"))?.find(label => label.innerText == 'Keyboard shortcuts on');
+	const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label")) ?.find(label => label.innerText == 'Keyboard shortcuts on');
 	if (keyboardShortcutsOnLabel === undefined) {
 		console.debug("Could not find the keyboard shortcuts on label");
 	}
 
-	const keyboardShortcutsOnInput = keyboardShortcutsOnLabel?.closest("tr")?.querySelector("input");
+	const keyboardShortcutsOnInput = keyboardShortcutsOnLabel ?.closest("tr") ?.querySelector("input");
 	if (keyboardShortcutsOnInput === undefined) {
 		console.debug("Could not find the keyboard shortcuts on input");
 	}
@@ -169,23 +169,23 @@ function continueOnboardingAfterSettingsLoaded() {
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
-	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
+	} else if (!saveButton.disabled && !keyboardShortcutsOnInput ?.checked) {
 		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
-	} else if (!keyboardShortcutsOnInput?.checked) {
+	} else if (!keyboardShortcutsOnInput ?.checked) {
 		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
-	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+	} else if (!saveButton.disabled && keyboardShortcutsOnInput ?.checked) {
+		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else {
-		optionsStorage.set({gmailOnboardingCompleted: true});
+		optionsStorage.set({ gmailOnboardingCompleted: true });
 		showPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
-		setTimeout(function() {openUrl("https://mail.google.com/mail")},5000);
+		setTimeout(function () { openUrl("https://mail.google.com/mail") }, 5000);
 	}
 }
 
