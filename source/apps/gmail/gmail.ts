@@ -1,6 +1,6 @@
 require('styled-notifications');
 import optionsStorage from '../../options/options-storage';
-import { closeAllNotifications } from '../../styled-notifications';
+import { showPopUp, showKeyPopup } from '../../styled-notifications';
 
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
@@ -24,15 +24,6 @@ import { Shortcut } from '../../shortcut';
 
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
-
-const warningNotification = window.createNotification({
-	positionClass: 'nfc-bottom-right',
-	theme: 'warning',
-	closeOnClick: true,
-	displayCloseButton: true,
-	showDuration: 3000,
-});
-
 
 // open a new url in the current window
 function openUrl(url: string) {
@@ -103,12 +94,9 @@ const clickHandler = function (event: MouseEvent) {
 	console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
 
+	//TODO: this should go elsewhere into the normal list from above!
 	if (outerHTML.includes("hidden;\">Invalid email address") && outerHTML.length > 10000) {
-		closeAllNotifications();
-		warningNotification({
-			title: `Press CTRL+K`,
-			message: `For "Link to" try pressing "CTRL+K" instead ;-)`,
-		});
+		showKeyPopup(`CTRL+K`,`Link to`);
 		return;
 	} else {
 		if (elementsToSkip.some(skip => outerHTML.includes(skip))) {
@@ -120,11 +108,7 @@ const clickHandler = function (event: MouseEvent) {
 				// console.debug(shortcut);
 				if (innerText === shortcut.innerText && innerText !== "") {
 					console.debug("match found in InnerText");
-					closeAllNotifications();
-					warningNotification({
-						title: `Press ${shortcut.key}`,
-						message: `For "${shortcut.description}" try pressing "${shortcut.key}" instead ;-)`,
-					});
+					showKeyPopup(shortcut.key, shortcut.description);
 					return;
 				}
 			}
@@ -132,11 +116,7 @@ const clickHandler = function (event: MouseEvent) {
 				//console.debug(shortcut);
 				if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
 					console.debug("match found in outerHTML");
-					closeAllNotifications();
-					warningNotification({
-						title: `Press ${shortcut.key}`,
-						message: `For "${shortcut.description}" try pressing "${shortcut.key}" instead ;-)`,
-					});
+					showKeyPopup(shortcut.key, shortcut.description);
 					return;
 				}
 			}
@@ -145,22 +125,6 @@ const clickHandler = function (event: MouseEvent) {
 };
 
 document.addEventListener('click', clickHandler, true);
-
-function showSettingsInstructionsPopUp(title: string, message: string, duration: number, theme?: string) {
-	if (theme === undefined) {
-		theme = "warning";
-	}
-	window.createNotification({
-		positionClass: 'nfc-bottom-right',
-		theme: theme,
-		closeOnClick: true,
-		displayCloseButton: true,
-		showDuration: duration,
-	})({
-		title: title,
-		message: message,
-	});
-}
 
 function continueOnboardingAfterSettingsLoaded() {
 
@@ -201,26 +165,26 @@ function continueOnboardingAfterSettingsLoaded() {
 	}
 
 	if (language !== "English (US)") {
-		showSettingsInstructionsPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 500)
+		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 500)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
-		showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput?.checked) {
-		showSettingsInstructionsPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
+		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
 	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
-		showSettingsInstructionsPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else {
 		optionsStorage.set({gmailOnboardingCompleted: true});
-		showSettingsInstructionsPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
+		showPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
 		setTimeout(function() {openUrl("https://mail.google.com/mail")},5000);
 	}
 }
