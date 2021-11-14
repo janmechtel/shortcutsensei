@@ -23,11 +23,17 @@ new TypeIt("#typeit", {
 	waitUntilVisible: true,
 	speed: 30,
 })
-	.type("Greetings, my new apprentice... ").pause(500).type("I've been expecting you.").pause(500).break()
+
+	.type("Greetings, my new apprentice... ").pause(500)
+	.break().type("I've been expecting you.").break()
+	.break().pause(500)
 	.type("I am Kei, your Shortcut Sensei.").break()
 	.break().pause(500)
-	.type("	When you use the mouse instead of the mighty keyboard...").pause(500).break()
-	.type("I shall guide you with a notification.").pause(500)
+	.type("When you use the mouse instead").break()
+	.type("of the mighty keyboard...").break()
+	.pause(500).break()
+	.type("I shall guide you with a notification.")
+
 	.exec(async () => {
 		document.getElementById('trapButton').style.display = 'block';
 	})
