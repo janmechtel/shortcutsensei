@@ -164,17 +164,17 @@ function continueOnboardingAfterSettingsLoaded() {
 		console.debug("Could not find the keyboard shortcuts on input");
 	}
 
-	if (language !== "English (US)") {
-		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 500)
+	if (language !== "English (US)" && language !== "English (UK)") {
+		showPopUp(`Set Display Language to English`, `Kei doesn't speak this language; please set your display language to English.`, 500)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput ?.checked) {
-		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput ?.checked) {
-		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
+		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 500)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);

@@ -29,8 +29,8 @@ new TypeIt("#typeit", {
 	.break().pause(500)
 	.type("I am Kei, your Shortcut Sensei.").break()
 	.break().pause(500)
-	.type("When you use the mouse instead").break()
-	.type("of the mighty keyboard...").break()
+	.type("When you use the mouse instead of the mighty keyboard...")
+	.type(" of the mighty keyboard...").break()
 	.pause(500).break()
 	.type("I shall guide you with a notification.")
 

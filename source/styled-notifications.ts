@@ -2,7 +2,7 @@ require('styled-notifications');
 
 export function closeAllNotifications() {
 	// find all elements with class "nfc" and remove them
-	const elements = document.getElementsByClassName('ncf');
+	const elements = document.getElementsByClassName('nfc');
 	while (elements.length > 0) {
 		elements[0].remove();
 	}
@@ -35,7 +35,7 @@ export function showPopUp(title: string, message: string, duration: number, them
 
 export function showKeyPopup(key: string, description: string, duration?: number) {
 	if (duration === undefined) {
-		duration = 3000;
+		duration = 4500;
 	}
 	const title = `${key}`;
 	const message = `For "${description}" try pressing "${key}" instead`;
