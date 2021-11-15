@@ -23,7 +23,7 @@ export function closeAllNotificationsExceptSelf(skipTitle?: string) {
 }
 
 export const warningNotification = window.createNotification({
-	positionClass: 'nfc-bottom-right',
+	positionClass: 'nfc-top-right',
 	theme: 'warning',
 	closeOnClick: true,
 	displayCloseButton: true,
@@ -47,14 +47,24 @@ export function showPopUp(title: string, message: string, duration: number, them
 			message: message,
 		});
 	}
+	window.createNotification({
+		positionClass: 'nfc-top-right',
+		theme: theme,
+		closeOnClick: true,
+		displayCloseButton: true,
+		showDuration: duration,
+	})({
+		title: title,
+		message: message,
+	});
 }
 
 export function showKeyPopup(key: string, description: string, duration?: number) {
 	if (duration === undefined) {
-		duration = 3000;
+		duration = 4500;
 	}
 	const title = `${key}`;
-	const message = `For "${description}" try pressing "${key}" instead`;
+	const message = `For "${description}", try pressing "${key}" instead.`;
 
 	return showPopUp(title, message, duration, 'warning')
 }
