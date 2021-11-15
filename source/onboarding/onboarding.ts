@@ -9,7 +9,7 @@ function listenForClicks() {
 	document.addEventListener("click", (e) => {
 		console.debug(e.target);
 		if (e.target.id === 'trapButton') {
-			showPopUp(`Haha, you used the mouse!`, `Press "Shift+?" instead!`, 0, 'warning');
+			showPopUp(`Haha, you used the mouse!`, `Press "?" instead!`, 0, 'warning');
 		}
 	});
 }
