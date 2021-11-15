@@ -19,7 +19,10 @@ Add Shortcut Sensei from:
 
 Please contribute to the development of Shortcut Sensei.
 
-Report bugs & give feedback via [feedback@shortcutsensei.com](mailto:feedback@shortcutsensei.com) or [report a github issue](https://github.com/janmechtel/shortcutsensei/issues/new).
+Report bugs & give feedback:
+- via [feedback@shortcutsensei.com](mailto:feedback@shortcutsensei.com)
+- [report a github issue](https://github.com/janmechtel/shortcutsensei/issues/new)
+- visit us on discord](https://discord.gg/K28Bnpts53)
 
 The GNU GPLv3 license offers you permission to copy, modify and distribute the code, provided that your modifications and additions are also open-source.
 
