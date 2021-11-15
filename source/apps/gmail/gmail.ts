@@ -109,6 +109,7 @@ const clickHandler = function (event: MouseEvent) {
 				// console.debug(shortcut);
 				if (innerText === shortcut.innerText && innerText !== "") {
 					console.debug("match found in InnerText");
+					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 					showKeyPopup(shortcut.key, shortcut.description);
 					return;
 				}
@@ -117,6 +118,7 @@ const clickHandler = function (event: MouseEvent) {
 				//console.debug(shortcut);
 				if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
 					console.debug("match found in outerHTML");
+					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 					showKeyPopup(shortcut.key, shortcut.description);
 					return;
 				}
@@ -231,8 +233,7 @@ async function main() {
 			return;
 		case GmailOnboardingState.SettingsCompleted:
 			console.debug(`Settings completed, showing 'what now' notification`);
-			showPopUp(`Click 'Compose'`, `Try the extension, click 'Compose' to create a new message and see a notification.`, 0, `warning`);
-			await optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
+			showPopUp(`Click 'Compose'`, `Try the extension, click 'Compose' to create a new message and see a notification.`, 15000, `warning`);
 			return;
 		case GmailOnboardingState.Completed:
 			console.debug("Onboarding completed, skipping Onboarding");
