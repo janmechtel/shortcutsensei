@@ -2,7 +2,8 @@ import OptionsSync from 'webext-options-sync';
 
 export default new OptionsSync({
 	defaults: {
-		gmailOnboardingCompleted: false,
+		gmailOnboardingState: "",
+		gmailOnboardingAttempts: 0,
 	},
 	migrations: [
 		OptionsSync.migrations.removeUnused,

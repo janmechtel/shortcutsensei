@@ -21,13 +21,14 @@ const elementsToSkip = [
 ]
 
 import { Shortcut } from '../../shortcut';
+import { Options } from 'webext-options-sync';
 
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
 // open a new url in the current window
 function openUrl(url: string) {
-	window.open(url, '_self');
+	document.location.href = url;
 }
 
 const gmailShortcuts: Shortcut[] = [
@@ -108,6 +109,7 @@ const clickHandler = function (event: MouseEvent) {
 				// console.debug(shortcut);
 				if (innerText === shortcut.innerText && innerText !== "") {
 					console.debug("match found in InnerText");
+					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 					showKeyPopup(shortcut.key, shortcut.description);
 					return;
 				}
@@ -116,6 +118,7 @@ const clickHandler = function (event: MouseEvent) {
 				//console.debug(shortcut);
 				if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
 					console.debug("match found in outerHTML");
+					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 					showKeyPopup(shortcut.key, shortcut.description);
 					return;
 				}
@@ -126,24 +129,30 @@ const clickHandler = function (event: MouseEvent) {
 
 document.addEventListener('click', clickHandler, true);
 
-function continueOnboardingAfterSettingsLoaded() {
+async function continueOnboardingAfterSettingsLoaded(options: Options) {
+	const onboardingAttempts = options.gmailOnboardingAttempts as number;
 
-	//delay execution of function until gmail is fully loaded
-	const dropdowns = Array.from(document.querySelectorAll("select"));
-	if (dropdowns.length === 0) {
-		console.debug("Gmail is not loaded yet, waiting ...");
-		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
+	//redirect to settings if not there already
+	if (!window.location.href.includes("settings/general")) {
+		await optionsStorage.set({ gmailOnboardingAttempts: (+onboardingAttempts + 1) as number });
+		openUrl("https://mail.google.com/mail/#settings/general");
 		return;
 	}
 
-	console.debug("Gmail is loaded, continuing with onboarding ...");
+	//delay execution of function until gmail is fully loaded
+	const dropdowns = Array.from(document.querySelectorAll("select"));
+
 
 	//find the dropdowns that have a certain display text option
-	const languageDropdown = dropdowns ?.find(dropdown => dropdown.innerText.includes("English (US)"));
+	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
 	if (languageDropdown === undefined) {
-		console.warn("Could not find the language dropdown", dropdowns);
+		console.warn("Could not find the language dropdown, probably Gmail is not done loading yet, waiting 500ms", dropdowns);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		return;
 	}
-	const language = languageDropdown ?.options[languageDropdown ?.selectedIndex].text;
+	console.debug("Gmail is loaded, continuing with onboarding ...");
+
+	const language = languageDropdown?.options[languageDropdown?.selectedIndex].text;
 	console.debug(language);
 
 	//select a button element with a certain HTML property
@@ -154,39 +163,48 @@ function continueOnboardingAfterSettingsLoaded() {
 	}
 
 	//find labels element that contains certain text
-	const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label")) ?.find(label => label.innerText == 'Keyboard shortcuts on');
+	const keyboardShortcutsOnLabel = Array.from(document.querySelectorAll("label"))?.find(label => label.innerText == 'Keyboard shortcuts on');
 	if (keyboardShortcutsOnLabel === undefined) {
 		console.debug("Could not find the keyboard shortcuts on label");
 	}
 
-	const keyboardShortcutsOnInput = keyboardShortcutsOnLabel ?.closest("tr") ?.querySelector("input");
+	const keyboardShortcutsOnInput = keyboardShortcutsOnLabel?.closest("tr")?.querySelector("input");
 	if (keyboardShortcutsOnInput === undefined) {
 		console.debug("Could not find the keyboard shortcuts on input");
 	}
 
-	if (language !== "English (US)" && language !== "English (UK)") {
-		showPopUp(`Set Display Language to English`, `Kei doesn't speak this language; please set your display language to English.`, 500)
+	if (language !== "English (US)") {
+		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
-		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
-	} else if (!saveButton.disabled && !keyboardShortcutsOnInput ?.checked) {
-		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
+		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
-	} else if (!keyboardShortcutsOnInput ?.checked) {
-		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 500)
+	} else if (!keyboardShortcutsOnInput?.checked) {
+		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
-		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
-	} else if (!saveButton.disabled && keyboardShortcutsOnInput ?.checked) {
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else {
 		optionsStorage.set({ gmailOnboardingCompleted: true });
+		optionsStorage.set({ gmailOnboardingState: "SettingsCompleted" });
 		showPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
 		setTimeout(function () { openUrl("https://mail.google.com/mail") }, 5000);
 	}
+}
+
+enum GmailOnboardingState {
+	NotStarted = "",
+	SettingsStarted = "SettingsStarted",
+	SettingsCompleted = "SettingsCompleted",
+	Completed = "Completed",
+	Disabled = "Disabled",
 }
 
 async function main() {
@@ -194,16 +212,39 @@ async function main() {
 	const options = await optionsStorage.getAll();
 	console.debug(options);
 
-	const onBoardingCompleted = options.gmailOnboardingCompleted;
-	if (onBoardingCompleted) {
-		console.debug("Onboarding completed, skipping Onboarding");
-		return;
-	} else {
-		if (!window.location.href.includes("settings/general")) {
-			openUrl("https://mail.google.com/mail/#settings/general");
-		} else {
-			continueOnboardingAfterSettingsLoaded();
-		}
+	const onboardingState = options.gmailOnboardingState as GmailOnboardingState
+	const onboardingAttempts = options.gmailOnboardingAttempts as number;
+	const maxAttempts = 3;
+
+	switch(onboardingState) {
+		case GmailOnboardingState.SettingsStarted:
+			if (+onboardingAttempts <= +maxAttempts) {
+				continueOnboardingAfterSettingsLoaded(options);
+			} else {
+				console.debug(`Onboarding disabled, showing 'what now' notification`);
+				showPopUp(`Onboarding failed`, `We forwarded you ${maxAttempts} times to settings already. We are stopping now.`, 0, `warning`);
+				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Disabled });
+			}
+			return;
+		case GmailOnboardingState.NotStarted:
+			await optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.SettingsStarted });
+			await optionsStorage.set({ gmailOnboardingAttempts: 1});
+			continueOnboardingAfterSettingsLoaded(options);
+			return;
+		case GmailOnboardingState.SettingsCompleted:
+			console.debug(`Settings completed, showing 'what now' notification`);
+			showPopUp(`Click 'Compose'`, `Try the extension, click 'Compose' to create a new message and see a notification.`, 15000, `warning`);
+			return;
+		case GmailOnboardingState.Completed:
+			console.debug("Onboarding completed, skipping Onboarding");
+			return;
+		case GmailOnboardingState.Disabled:
+			console.debug("Onboarding is disabled, skipping Onboarding");
+			return;
+		default:
+			console.error(onboardingState);
+			console.error("Unknown gmail onboarding state. This should not happen ;)");
+			return;
 	}
 }
 

@@ -1,11 +1,25 @@
 require('styled-notifications');
 
-export function closeAllNotifications() {
-	// find all elements with class "nfc" and remove them
-	const elements = document.getElementsByClassName('nfc');
-	while (elements.length > 0) {
-		elements[0].remove();
+export function closeAllNotificationsExceptSelf(skipTitle?: string) {
+	let foundSelf = false;
+	// find all elements with class "nfc" and remove them, except if the title is similar to the skipTitle
+	const elements = document.getElementsByClassName('ncf');
+	//loop through all elements
+	for (let i = 0; i < elements.length; i++) {
+		//remove the element
+		const element = elements[i];
+		console.debug(element);
+		const title = element.getElementsByClassName('ncf-title')[0].innerHTML;
+		console.debug(title);
+		if (skipTitle !== undefined && title === skipTitle) {
+			foundSelf = true;
+			console.debug(`Found similar notification on screen`);
+			continue;
+		} else {
+			elements[i].remove();
+		}
 	}
+	return foundSelf;
 }
 
 export const warningNotification = window.createNotification({
@@ -17,9 +31,21 @@ export const warningNotification = window.createNotification({
 });
 
 export function showPopUp(title: string, message: string, duration: number, theme?: string) {
-	closeAllNotifications();
-	if (theme === undefined) {
-		theme = "warning";
+	const foundSelf = closeAllNotificationsExceptSelf(title);
+	if (!foundSelf) {
+		if (theme === undefined) {
+			theme = "warning";
+		}
+		window.createNotification({
+			positionClass: 'nfc-bottom-right',
+			theme: theme,
+			closeOnClick: true,
+			displayCloseButton: true,
+			showDuration: duration,
+		})({
+			title: title,
+			message: message,
+		});
 	}
 	window.createNotification({
 		positionClass: 'nfc-top-right',

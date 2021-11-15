@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-	  <meta charset="utf-8">
-	  <link rel="stylesheet" href="popup.css"/>
-	</head>
 
-  <body>
-	<div id="popup-content">
-		<h3>Please contribute ideas:</h3>
-		<div class="button"><a href="mailto:shortcutsensei@googlegroups.com">Send a feedback email</a></div>
-		<div class="button"><a href="https://github.com/janmechtel/shortcutsensei/issues/new" target="_blank">Open a github issue</a></div>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../styles.css" />
+
+</head>
+
+<body>
+
+	<div id="popup-content" class="w-80 space-y-5 p-5">
+		<div class="btn btn-blue mx-5">
+			<a id="options" class="flex flex-wrap space-x-2">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style="height: 24px;"
+					class="flex-initial" stroke="currentColor">
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+						d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+						d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+				</svg>
+				<span class="flex-1">Options</span>
+			</a>
+		</div>
+		<div class="btn btn-blue mx-5">
+			<a class="flex flex-wrap space-x-2" href="mailto:ki@shortcutsensei.com">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+					style="height: 24px;" stroke="currentColor">
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+						d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+				</svg>
+				<span class="flex-1">Send a feedback email</span>
+			</a>
+		</div>
+		<div class="btn btn-blue mx-5">
+			<a class="flex flex-wrap space-x-2" href="https://github.com/janmechtel/shortcutsensei/issues/new">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+					style="height: 24px;" stroke="currentColor">
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+						d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+				</svg>
+				<span class="flex-1">Open a github issue</span>
+			</a>
+		</div>
 	</div>
-  </body>
+	<script src="popup.ts"></script>
+</body>
+
 </html>

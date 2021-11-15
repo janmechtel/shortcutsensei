@@ -9,10 +9,7 @@ function listenForClicks() {
 	document.addEventListener("click", (e) => {
 		console.debug(e.target);
 		if (e.target.id === 'trapButton') {
-			showPopUp(`Haha, you used the mouse!`, `Press "Alt+Shift+X" instead!`, 0, 'warning');
-		} else if (e.target.id === 'hiddenButton') {
-			showPopUp(`Well done!`, `Now let's configure Gmail`, 0, 'success');
-			setInterval(redirectToGmail, 3000);
+			showPopUp(`Haha, you used the mouse!`, `Press "?" instead!`, 0, 'warning');
 		}
 	});
 }
@@ -38,3 +35,11 @@ new TypeIt("#typeit", {
 		document.getElementById('trapButton').style.display = 'block';
 	})
 	.go();
+
+//listen for keyboard shortcut `?`
+document.addEventListener('keydown', (e) => {
+	if (e.key === '?') {
+		showPopUp(`Well done!`, `Now let's configure Gmail`, 0, 'success');
+		setInterval(redirectToGmail, 3000);
+	}
+});
