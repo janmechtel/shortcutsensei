@@ -27,7 +27,7 @@ import { Shortcut } from '../../shortcut';
 
 // open a new url in the current window
 function openUrl(url: string) {
-	window.open(url, '_self');
+	document.location.href = url;
 }
 
 const gmailShortcuts: Shortcut[] = [
