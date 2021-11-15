@@ -10,6 +10,7 @@ module.exports = {
         senseiGreen: "#14c949",
         lightGreen: "#bcffd1",
         darkGreen: "#139539",
+        senseiGrey: "#dadada",
       }
     },
   },

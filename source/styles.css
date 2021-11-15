@@ -7,7 +7,7 @@
 }
 
 .btn-primary {
-	@apply bg-senseiGreen text-white;
+	@apply bg-senseiGreen text-white font-bold py-2 px-4 rounded;
 }
 
 .btn-primary:hover {
