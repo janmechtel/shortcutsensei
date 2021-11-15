@@ -22,7 +22,7 @@ export function showPopUp(title: string, message: string, duration: number, them
 		theme = "warning";
 	}
 	window.createNotification({
-		positionClass: 'nfc-bottom-right',
+		positionClass: 'nfc-top-right',
 		theme: theme,
 		closeOnClick: true,
 		displayCloseButton: true,

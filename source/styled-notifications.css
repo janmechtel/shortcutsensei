@@ -20,7 +20,7 @@
 
 .ncf-container.nfc-top-right {
 	top: 2vh;
-	right: 2vw;
+	right: -1vw;
 	margin: 0 2vw 0 auto;
 }
 
@@ -136,7 +136,6 @@
 	float: right;
 	font-weight: 700;
 	color: #141c14;
-	text-shadow: 0 1px 0 #fff;
 	opacity: 80%;
 	line-height: 1;
 	font-size: 16px;
