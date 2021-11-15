@@ -2,14 +2,14 @@ require('styled-notifications');
 
 export function closeAllNotifications() {
 	// find all elements with class "nfc" and remove them
-	const elements = document.getElementsByClassName('ncf');
+	const elements = document.getElementsByClassName('nfc');
 	while (elements.length > 0) {
 		elements[0].remove();
 	}
 }
 
 export const warningNotification = window.createNotification({
-	positionClass: 'nfc-bottom-right',
+	positionClass: 'nfc-top-right',
 	theme: 'warning',
 	closeOnClick: true,
 	displayCloseButton: true,
@@ -22,7 +22,7 @@ export function showPopUp(title: string, message: string, duration: number, them
 		theme = "warning";
 	}
 	window.createNotification({
-		positionClass: 'nfc-bottom-right',
+		positionClass: 'nfc-top-right',
 		theme: theme,
 		closeOnClick: true,
 		displayCloseButton: true,
@@ -35,10 +35,10 @@ export function showPopUp(title: string, message: string, duration: number, them
 
 export function showKeyPopup(key: string, description: string, duration?: number) {
 	if (duration === undefined) {
-		duration = 3000;
+		duration = 4500;
 	}
 	const title = `${key}`;
-	const message = `For "${description}" try pressing "${key}" instead`;
+	const message = `For "${description}", try pressing "${key}" instead.`;
 
 	return showPopUp(title, message, duration, 'warning')
 }
