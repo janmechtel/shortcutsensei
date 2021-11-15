@@ -37,7 +37,7 @@ export function showPopUp(title: string, message: string, duration: number, them
 			theme = "warning";
 		}
 		window.createNotification({
-			positionClass: 'nfc-bottom-right',
+			positionClass: 'nfc-top-right',
 			theme: theme,
 			closeOnClick: true,
 			displayCloseButton: true,
@@ -47,16 +47,6 @@ export function showPopUp(title: string, message: string, duration: number, them
 			message: message,
 		});
 	}
-	window.createNotification({
-		positionClass: 'nfc-top-right',
-		theme: theme,
-		closeOnClick: true,
-		displayCloseButton: true,
-		showDuration: duration,
-	})({
-		title: title,
-		message: message,
-	});
 }
 
 export function showKeyPopup(key: string, description: string, duration?: number) {
