@@ -9,7 +9,7 @@ export function closeAllNotifications() {
 }
 
 export const warningNotification = window.createNotification({
-	positionClass: 'nfc-bottom-right',
+	positionClass: 'nfc-top-right',
 	theme: 'warning',
 	closeOnClick: true,
 	displayCloseButton: true,
@@ -38,7 +38,7 @@ export function showKeyPopup(key: string, description: string, duration?: number
 		duration = 4500;
 	}
 	const title = `${key}`;
-	const message = `For "${description}" try pressing "${key}" instead`;
+	const message = `For "${description}", try pressing "${key}" instead.`;
 
 	return showPopUp(title, message, duration, 'warning')
 }
