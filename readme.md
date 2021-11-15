@@ -5,15 +5,12 @@
 # Shortcut Sensei
 A cross-browser extension teaching keyboard shortcuts for Gmail.com in English (more web-apps are planned).
 
+Install now from [Chrome Web Store](https://chrome.google.com/webstore/detail/shortcut-sensei/ahhliekflgdfbgofmgamanngngnbaibh/related) or [Firefox Add-Ons Store](https://addons.mozilla.org/en-US/firefox/addon/shortcutsensei/).
+
+
 Shortcut Sensei provides instant feedback when an action is performed with the mouse instead of using the associated keyboard shortcut (see example image below).
 
 ![Example](media/gmail_sample_notifcation.png)
-
-# Installation
-
-Add Shortcut Sensei from:
-- [Chrome Web Store](https://chrome.google.com/webstore/detail/shortcut-sensei/ahhliekflgdfbgofmgamanngngnbaibh/related) or
-- [Firefox Add-Ons Store](https://addons.mozilla.org/en-US/firefox/addon/shortcutsensei/).
 
 # Contribute
 
