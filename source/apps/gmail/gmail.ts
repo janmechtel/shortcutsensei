@@ -37,7 +37,9 @@ const gmailShortcuts: Shortcut[] = [
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// )
-	new Shortcut("C", "Compose", "Compose", "class=\"T-I T-I-KE L3"),
+	new Shortcut("Ctrl+K", "Link to", "", "hidden;\">Invalid email address", 10000),
+
+	new Shortcut("C", "Compose", "Compose", "aria-label=\"Compose an email\""),
 	new Shortcut("Z", "Undo last action", "", "aria-label=\"Undo link\">Undo</span>"),
 	new Shortcut("Z", "Undo last action", "", "id=\"link_undo"), // had to add this one twice, because outerHTML is completely different when you undo sending an email
 
@@ -86,6 +88,8 @@ const gmailShortcuts: Shortcut[] = [
 
 	new Shortcut("Ctrl+Shift+C", "Add Cc recipients", "Cc"),
 	new Shortcut("Ctrl+Shift+B", "Add Bcc recipients", "Bcc"),
+
+
 ];
 
 const clickHandler = function (event: MouseEvent) {
@@ -95,29 +99,25 @@ const clickHandler = function (event: MouseEvent) {
 	console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
 
-	//TODO: this should go elsewhere into the normal list from above!
-	if (outerHTML.includes("hidden;\">Invalid email address") && outerHTML.length > 10000) {
-		showKeyPopup(`CTRL+K`, `Link to`);
+	if (outerHTML.length < 10000 && elementsToSkip.some(skip => outerHTML.includes(skip))) {
+		console.debug("Skipped processing the click because it's included in our ignore list something ...");
+		console.debug(elementsToSkip.filter(skip => outerHTML.includes(skip)));
 		return;
 	} else {
-		if (elementsToSkip.some(skip => outerHTML.includes(skip))) {
-			console.debug("Skipped processing the click because it's included in our ignore list something ...");
-			console.debug(elementsToSkip.filter(skip => outerHTML.includes(skip)));
-			return;
-		} else {
-			for (const shortcut of gmailShortcuts) {
-				// console.debug(shortcut);
-				if (innerText === shortcut.innerText && innerText !== "") {
-					console.debug("match found in InnerText");
-					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-					showKeyPopup(shortcut.key, shortcut.description);
-					return;
-				}
+		for (const shortcut of gmailShortcuts) {
+			// console.debug(shortcut);
+			if (innerText === shortcut.innerText && innerText !== "") {
+				console.debug("match found in InnerText");
+				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
+				showKeyPopup(shortcut.key, shortcut.description);
+				return;
 			}
-			for (const shortcut of gmailShortcuts) {
-				//console.debug(shortcut);
-				if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
-					console.debug("match found in outerHTML");
+		}
+		for (const shortcut of gmailShortcuts) {
+			//console.debug(shortcut);
+			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "" ) {
+				if(shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
+					console.debug("match found in outerHTML and minlength respected");
 					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 					showKeyPopup(shortcut.key, shortcut.description);
 					return;
