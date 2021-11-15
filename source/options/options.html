@@ -7,10 +7,18 @@
 <form id="options-form" class="detail-view-container">
 	<h3>Gmail</h3>
 	<div class="gmail-onboarding-inputs">
-		<label class="onboarding-input">
-			<span>Gmail Onboarding completed</span>
-			<input type="checkbox" name="gmailOnboardingCompleted">
-		</label>
+		<div>
+			<label class="onboarding-input">
+				<span>Gmail Onboarding state (delete to reset)</span>
+				<input type="text" name="gmailOnboardingState">
+			</label>
+		</div>
+		<div>
+			<label class="onboarding-input">
+				<span>Gmail Onboarding attempts ('0' to reset)</span>
+				<input type="number" name="gmailOnboardingAttempts">
+			</label>
+		</div>
 	</div>
 </form>
 
