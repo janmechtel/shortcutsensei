@@ -163,7 +163,7 @@ function continueOnboardingAfterSettingsLoaded() {
 	}
 
 	if (language !== "English (US)") {
-		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 500)
+		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
@@ -172,7 +172,7 @@ function continueOnboardingAfterSettingsLoaded() {
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 500)
+		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(continueOnboardingAfterSettingsLoaded, 500);
