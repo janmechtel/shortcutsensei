@@ -28,7 +28,7 @@
 		]
 	},
 	"browser_action": {
-		"default_icon": "icon.png",
+		"default_icon": "icon_browser_action.png",
 		"default_title": "Shortcut Sensei",
 		"default_popup": "popup/popup.html"
 	},
