@@ -12,7 +12,7 @@
 		}
 	},
 	"icons": {
-		"128": "icon.png"
+		"128": "icon128x128.png"
 	},
 	"permissions": [
 		"storage"
