@@ -4,6 +4,7 @@ export default new OptionsSync({
 	defaults: {
 		gmailOnboardingState: "",
 		gmailOnboardingAttempts: 0,
+		snoozeUntil: 0,
 	},
 	migrations: [
 		OptionsSync.migrations.removeUnused,

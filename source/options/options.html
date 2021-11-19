@@ -5,16 +5,25 @@
 <link rel="stylesheet" href="options.css">
 
 <form id="options-form" class="detail-view-container">
-	<h3>Gmail</h3>
-	<div class="gmail-onboarding-inputs">
+	<h3>General</h3>
+	<div>
 		<div>
-			<label class="onboarding-input">
+			<label>
+				<span>Snooze until (timestamp, '0' to reset</span>
+				<input type="text" name="snoozeUntil">
+			</label>
+		</div>
+	</div>
+	<h3>Gmail</h3>
+	<div>
+		<div>
+			<label>
 				<span>Gmail Onboarding state (delete to reset)</span>
 				<input type="text" name="gmailOnboardingState">
 			</label>
 		</div>
 		<div>
-			<label class="onboarding-input">
+			<label>
 				<span>Gmail Onboarding attempts ('0' to reset)</span>
 				<input type="number" name="gmailOnboardingAttempts">
 			</label>

@@ -2,7 +2,6 @@ require('styled-notifications');
 import optionsStorage from '../../options/options-storage';
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
 
-
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
 	"role=\"toolbar\"", // stop popup from appearing when pressing formatting toolbar
@@ -23,6 +22,8 @@ const elementsToSkip = [
 import { Shortcut } from '../../shortcut';
 import { Options } from 'webext-options-sync';
 
+let snoozeUntil = 0;
+console.log(snoozeUntil);
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
@@ -93,6 +94,14 @@ const gmailShortcuts: Shortcut[] = [
 ];
 
 const clickHandler = function (event: MouseEvent) {
+	//convert timestamp to readable date and time
+	const dateString = new Date(snoozeUntil * 1000).toLocaleString();
+	console.log("Snoozing until " + dateString);
+
+	if (snoozeUntil != 0 && new Date().getTime() < snoozeUntil) {
+		console.log("Skipping further processing. Snoozing until " + snoozeUntil);
+		return;
+	}
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
 	const outerHTML: string = event.target.outerHTML;
@@ -115,8 +124,8 @@ const clickHandler = function (event: MouseEvent) {
 		}
 		for (const shortcut of gmailShortcuts) {
 			//console.debug(shortcut);
-			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "" ) {
-				if(shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
+			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
+				if (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
 					console.debug("match found in outerHTML and minlength respected");
 					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 					showKeyPopup(shortcut.key, shortcut.description);
@@ -147,7 +156,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
 	if (languageDropdown === undefined) {
 		console.warn("Could not find the language dropdown, probably Gmail is not done loading yet, waiting 500ms", dropdowns);
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 		return;
 	}
 	console.debug("Gmail is loaded, continuing with onboarding ...");
@@ -177,7 +186,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
@@ -186,7 +195,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
@@ -211,12 +220,14 @@ async function main() {
 
 	const options = await optionsStorage.getAll();
 	console.debug(options);
-
+	if (options.snoozeUntil !== undefined) {
+		snoozeUntil = options.snoozeUntil as number;
+	}
 	const onboardingState = options.gmailOnboardingState as GmailOnboardingState
 	const onboardingAttempts = options.gmailOnboardingAttempts as number;
 	const maxAttempts = 3;
 
-	switch(onboardingState) {
+	switch (onboardingState) {
 		case GmailOnboardingState.SettingsStarted:
 			if (+onboardingAttempts <= +maxAttempts) {
 				continueOnboardingAfterSettingsLoaded(options);
@@ -228,7 +239,7 @@ async function main() {
 			return;
 		case GmailOnboardingState.NotStarted:
 			await optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.SettingsStarted });
-			await optionsStorage.set({ gmailOnboardingAttempts: 1});
+			await optionsStorage.set({ gmailOnboardingAttempts: 1 });
 			continueOnboardingAfterSettingsLoaded(options);
 			return;
 		case GmailOnboardingState.SettingsCompleted:
