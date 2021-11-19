@@ -5,15 +5,23 @@
 <link rel="stylesheet" href="options.css">
 
 <form id="options-form" class="detail-view-container">
-	<h3>General</h3>
+	<h2>General</h2>
+	<h2>Snooze</h2>
 	<div>
 		<div>
 			<label>
-				<span>Snooze until (timestamp, '0' to reset</span>
-				<input type="text" name="snoozeUntil">
+				<span>Pause all notifications for 24 hours</span>
+				<button type="text" id="snooze">Snooze</button>
+			</label>
+		</div>
+		<div>
+			<label>
+				<span>Snooze until (timestamp)</span>
+				<input type="number" name="snoozeUntil" disabled>
 			</label>
 		</div>
 	</div>
+	<h2>Apps</h2>
 	<h3>Gmail</h3>
 	<div>
 		<div>
