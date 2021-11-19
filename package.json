@@ -18,6 +18,7 @@
 		"extends": "stylelint-config-xo"
 	},
 	"dependencies": {
+		"alertifyjs": "^1.13.1",
 		"webext-options-sync": "^2.0.1",
 		"webextension-polyfill": "^0.8.0"
 	},

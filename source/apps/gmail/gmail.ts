@@ -1,4 +1,5 @@
 require('styled-notifications');
+require('alertifyjs');
 import optionsStorage from '../../options/options-storage';
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
 
