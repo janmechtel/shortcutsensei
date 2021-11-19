@@ -97,7 +97,6 @@
 
 .ncf-container .success {
 	background: var(--styled-notifications-success-background, #14c949);
-	
 }
 
 .ncf-container .info,
@@ -114,8 +113,7 @@
 
 .ncf-container .warning {
 	background: var(--styled-notifications-warning-background, #fff);
-	background-image: url('icon.jpg');
-	background-size: 55px;
+	background-image: url('icon_55.png');
 }
 
 .ncf-container .error,
