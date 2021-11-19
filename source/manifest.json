@@ -12,7 +12,7 @@
 		}
 	},
 	"icons": {
-		"128": "icon.png"
+		"128": "icon128x128.png"
 	},
 	"permissions": [
 		"storage"
@@ -28,7 +28,7 @@
 		]
 	},
 	"browser_action": {
-		"default_icon": "icon_browser_action.png",
+		"default_icon": "icon_browser_action128x128.png",
 		"default_title": "Shortcut Sensei",
 		"default_popup": "popup/popup.html"
 	},
