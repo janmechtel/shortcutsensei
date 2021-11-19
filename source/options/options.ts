@@ -18,6 +18,4 @@ function setSnoozeUntil(hours: number) {
 	const snoozeUntilInput = document.querySelectorAll('input[type="number"][name^="snoozeUntil"]').item(0);
 	optionsStorage.set({ snoozeUntil: snoozeUntil });
 	snoozeUntilInput.value = snoozeUntil;
-	alert('Snooze until: ' + new Date(snoozeUntil).toLocaleString() + snoozeUntilInput.value);
 }
-

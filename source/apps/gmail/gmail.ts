@@ -92,6 +92,22 @@ const gmailShortcuts: Shortcut[] = [
 
 ];
 
+async function reloadSnoozeUntil() {
+	const options = await optionsStorage.getAll();
+	console.debug(options);
+	if (options.snoozeUntil !== undefined) {
+		snoozeUntil = options.snoozeUntil as number;
+	}
+}
+
+//listen to chrome storage changes as a proxy to option changes (I couldn't get chrome.runtime.sendMessage to work)
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+	console.log(changes, namespace);
+	if(namespace === 'sync') {
+		reloadSnoozeUntil();
+	}
+});
+
 const clickHandler = function (event: MouseEvent) {
 	//convert timestamp to readable date and time
 
