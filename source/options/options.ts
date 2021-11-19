@@ -4,11 +4,20 @@ import optionsStorage from './options-storage';
 
 optionsStorage.syncForm('#options-form');
 
-// when the snooze button is pressed, save the snooze time and close the options page
 document.getElementById('snooze').addEventListener('click', () => {
-	const snoozeUntil = new Date().getTime() + 24 * 60 * 1000;
-	const snoozeUntilInput = document.querySelectorAll('input[type="number"][name^="snoozeUntil"]').item(0);
-	optionsStorage.set({snoozeUntil: snoozeUntil});
-	snoozeUntilInput.value = snoozeUntil;
-	// alert('Snooze until: ' + new Date(snoozeUntil).toLocaleString() + snoozeUntilInput.value);
+	setSnoozeUntil(24);
 });
+
+document.getElementById('snoozeReset').addEventListener('click', () => {
+	setSnoozeUntil(0);
+});
+
+function setSnoozeUntil(hours: number) {
+	//assign constant to 0 if hours is 0 otherwise assign hours to Date + hours
+	const snoozeUntil = hours === 0 ? 0 : new Date().getTime() + hours * 60 * 1000;
+	const snoozeUntilInput = document.querySelectorAll('input[type="number"][name^="snoozeUntil"]').item(0);
+	optionsStorage.set({ snoozeUntil: snoozeUntil });
+	snoozeUntilInput.value = snoozeUntil;
+	alert('Snooze until: ' + new Date(snoozeUntil).toLocaleString() + snoozeUntilInput.value);
+}
+

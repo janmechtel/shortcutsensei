@@ -23,7 +23,6 @@ import { Shortcut } from '../../shortcut';
 import { Options } from 'webext-options-sync';
 
 let snoozeUntil = 0;
-console.log(snoozeUntil);
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
@@ -95,13 +94,13 @@ const gmailShortcuts: Shortcut[] = [
 
 const clickHandler = function (event: MouseEvent) {
 	//convert timestamp to readable date and time
-	const dateString = new Date(snoozeUntil * 1000).toLocaleString();
-	console.log("Snoozing until " + dateString);
 
 	if (snoozeUntil != 0 && new Date().getTime() < snoozeUntil) {
-		console.log("Skipping further processing. Snoozing until " + snoozeUntil);
+		console.log("Skipping further processing. Snoozing until " + new Date(snoozeUntil).toLocaleString());
+		console.log(snoozeUntil);
 		return;
 	}
+
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
 	const outerHTML: string = event.target.outerHTML;
