@@ -113,7 +113,7 @@
 
 .ncf-container .warning {
 	background: var(--styled-notifications-warning-background, #fff);
-	background-image: url('icon_55.png');
+	background-image: url('icon55x55.png');
 }
 
 .ncf-container .error,
