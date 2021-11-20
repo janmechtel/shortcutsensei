@@ -6,28 +6,25 @@
 
 <form id="options-form" class="detail-view-container">
 	<h2>General</h2>
-	<h2>Snooze</h2>
 	<div>
-		<div>
-			<label>
-				<span>Pause all notifications for 24 hours</span>
-				<button type="text" id="snooze">Snooze</button>
-			</label>
+		<div id="snoozeOnSection">
+			<div>
+				<label>
+					<span>Pause all notifications for 24 hours</span>
+					<button type="text" id="snooze">Snooze</button>
+				</label>
+			</div>
 		</div>
-		<div>
-			<label>
-				<span>Snooze until (timestamp, 0 means snooze is off)</span>
-				<input type="number" name="snoozeUntil" disabled>
-			</label>
-		</div>
-		<div>
-			<label>
-				<button type="text" id="snoozeReset">Turn Snooze off</button>
-			</label>
+		<div id="snoozeOffSection">
+			<div>
+				<label>
+					<span id="snoozeMessage"></span>
+					<button type="text" id="snoozeReset">Turn Snooze off</button>
+				</label>
+			</div>
 		</div>
 	</div>
-	<h2>Apps</h2>
-	<h3>Gmail</h3>
+	<h2>Gmail</h2>
 	<div>
 		<div>
 			<label>
