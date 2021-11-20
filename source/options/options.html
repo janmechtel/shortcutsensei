@@ -4,13 +4,14 @@
 <link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
 <link rel="stylesheet" href="options.css">
 
-<form id="options-form" class="detail-view-container">
-	<h2>General</h2>
+<form id="options-form" class="detail-view-container p-5">
+	<h2 class="text-xl">General</h2>
 	<div>
 		<div id="snoozeOnSection">
 			<div>
 				<label>
-					<span>Pause all notifications for 24 hours</span>
+					<span>Pause all notifications for
+					<input class="w-6" type="number" name="snoozeDuration" id="snoozeDuration"></input> hours </span>
 					<button type="text" id="snooze">Snooze</button>
 				</label>
 			</div>
@@ -24,8 +25,8 @@
 			</div>
 		</div>
 	</div>
-	<h2>Gmail</h2>
-	<div>
+	<h2 class="text-xl">Gmail</h2>
+	<div class="space-y-2">
 		<div>
 			<label>
 				<span>Gmail Onboarding state (delete to reset)</span>

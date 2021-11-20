@@ -10,8 +10,9 @@ async function loadSnoozeUntil() {
 }
 
 document.getElementById('snooze').addEventListener('click', () => {
-	const hours = 24;
-	setSnoozeUntil(new Date().getTime() + hours * 60 * 1000);
+	const snoozeDuration = document.getElementById('snoozeDuration');
+	const hours = snoozeDuration.value as number;
+	setSnoozeUntil(new Date().getTime() + hours * 60 * 60 * 1000);
 });
 
 document.getElementById('snoozeReset').addEventListener('click', () => {
