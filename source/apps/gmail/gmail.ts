@@ -23,6 +23,7 @@ import { Shortcut } from '../../shortcut';
 import { Options } from 'webext-options-sync';
 
 let snoozeUntil = 0;
+let options: Options;
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
@@ -102,8 +103,8 @@ if (gmailShortcutsDuplicateIds.length > 0) {
 	throw new Error("Gmail shortcuts have duplicate ids");
 }
 
-async function reloadSnoozeUntil() {
-	const options = await optionsStorage.getAll();
+async function reloadOptions() {
+	options = await optionsStorage.getAll();
 	console.debug(options);
 	if (options.snoozeUntil !== undefined) {
 		snoozeUntil = options.snoozeUntil as number;
@@ -114,7 +115,7 @@ async function reloadSnoozeUntil() {
 chrome.storage.onChanged.addListener(function (changes, namespace) {
 	console.log(changes, namespace);
 	if(namespace === 'sync') {
-		reloadSnoozeUntil();
+		reloadOptions();
 	}
 });
 
@@ -142,8 +143,7 @@ const clickHandler = function (event: MouseEvent) {
 			// console.debug(shortcut);
 			if (innerText === shortcut.innerText && innerText !== "") {
 				console.debug("match found in InnerText");
-				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-				showKeyPopup(shortcut.key, shortcut.description);
+				triggerNotification(shortcut);
 				return;
 			}
 		}
@@ -152,8 +152,7 @@ const clickHandler = function (event: MouseEvent) {
 			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
 				if (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
 					console.debug("match found in outerHTML and minlength respected");
-					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-					showKeyPopup(shortcut.key, shortcut.description);
+					triggerNotification(shortcut);
 					return;
 				}
 			}
@@ -162,6 +161,13 @@ const clickHandler = function (event: MouseEvent) {
 };
 
 document.addEventListener('click', clickHandler, true);
+
+function triggerNotification(shortcut: Shortcut) {
+	if (options.gmailOnboardingState as GmailOnboardingState != GmailOnboardingState.Completed) {
+		optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
+	}
+	showKeyPopup(shortcut.key, shortcut.description);
+}
 
 async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	const onboardingAttempts = options.gmailOnboardingAttempts as number;
@@ -285,6 +291,7 @@ async function main() {
 }
 
 main();
+reloadOptions();
 
 //call function when url is changing without page reload
 window.addEventListener('popstate', function () {
