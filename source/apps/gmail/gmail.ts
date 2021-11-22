@@ -87,10 +87,6 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut(40, "Ctrl+Shift+D", "Discard draft", "", "<div class=\"og T-I-J3"),
 
 	new Shortcut(41, "G+K", "Go to tasks", "", '<div class="aT5-aOt-I-JX-Jw"'),
-
-	new Shortcut(42, "Ctrl+Shift+C", "Add Cc recipients", "Cc"),
-	new Shortcut(43, "Ctrl+Shift+B", "Add Bcc recipients", "Bcc"),
-
 ];
 
 // check if gmailShortcuts contains duplicate ids
