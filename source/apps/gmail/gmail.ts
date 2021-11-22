@@ -166,7 +166,15 @@ function triggerNotification(shortcut: Shortcut) {
 	if (options.gmailOnboardingState as GmailOnboardingState != GmailOnboardingState.Completed) {
 		optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 	}
-	showKeyPopup(shortcut.key, shortcut.description);
+
+	const ignoredShortcutsString = options.ignoredShortcuts as string;
+	const ignoredShortcuts = ignoredShortcutsString.split(",").map(Number);
+	console.debug(`Is Shortcut ${shortcut.id} contained in ${ignoredShortcuts}`);
+	if (!ignoredShortcuts.includes(shortcut.id)) {
+		showKeyPopup(shortcut.key, shortcut.description);
+	} else {
+		console.debug(`Shortcut ${shortcut.key} is ignored because it's contained in ${ignoredShortcuts}`);
+	}
 }
 
 async function continueOnboardingAfterSettingsLoaded(options: Options) {

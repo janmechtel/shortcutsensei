@@ -6,6 +6,7 @@ export default new OptionsSync({
 		gmailOnboardingAttempts: 0,
 		snoozeUntil: 0,
 		snoozeDuration: 24,
+		ignoredShortcuts: "",
 	},
 	migrations: [
 		OptionsSync.migrations.removeUnused,
