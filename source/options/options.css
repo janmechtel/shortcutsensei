@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 html {
 	min-width: 550px;
 	overflow-x: hidden; /* Required to hide horizontal scroll on Firefox */
@@ -21,7 +25,7 @@ input[type='number'] {
 
 input[type='number'],
 input[type='text'] {
-	padding: 0.25rem 0.375rem;
+	@apply p-1;
 }
 
 /* Firefox only */
