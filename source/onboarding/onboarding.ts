@@ -39,7 +39,8 @@ new TypeIt("#typeit", {
 //listen for keyboard shortcut `?`
 document.addEventListener('keydown', (e) => {
 	if (e.key === '?') {
-		showPopUp(`Well done!`, `Now let's configure Gmail`, 0, 'success');
+		//showPopUp(`Well done!`, `Now let's configure Gmail`, 0, 'success');
+		alertify.notify("Well done! Now let's configure Gmail");
 		setInterval(redirectToGmail, 3000);
 	}
 });

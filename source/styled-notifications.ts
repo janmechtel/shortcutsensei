@@ -1,4 +1,5 @@
 require('styled-notifications');
+require('alertifyjs');
 
 export function closeAllNotificationsExceptSelf(skipTitle?: string) {
 	let foundSelf = false;
@@ -55,6 +56,5 @@ export function showKeyPopup(key: string, description: string, duration?: number
 	}
 	const title = `${key}`;
 	const message = `For "${description}", try pressing "${key}" instead.`;
-
 	return showPopUp(title, message, duration, 'warning')
 }
