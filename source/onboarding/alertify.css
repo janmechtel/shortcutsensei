@@ -26,14 +26,17 @@
   z-index: 1981;
 }
 .alertify .ajs-dialog {
+  top: 50%;
+  transform: translateY(-90%);
+  margin: auto;
   position: relative;
-  margin: 5% auto;
   min-height: 110px;
   max-width: 500px;
   padding: 24px 24px 0 24px;
   outline: 0;
-  background-color: #fff;
+  background-color: #111111;
 }
+
 .alertify .ajs-dialog.ajs-capture:before {
   content: '';
   position: absolute;

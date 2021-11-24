@@ -1,5 +1,26 @@
 import { showPopUp } from "../styled-notifications";
 
+alertify.dialog('showShortcut',function(){
+	return{
+	main:function(message){
+		this.message = message;
+	},
+	setup:function(){
+		return { 
+			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
+			options:{
+				title: 'Press "?"',
+				modal: false,
+				maximizable: false,
+				closableByDimmer: true,
+			}
+		};
+	},
+	prepare:function(){
+		this.setContent(this.message);
+	}
+}});
+
 function redirectToGmail() {
 	const url = 'https://mail.google.com/mail/#settings/general';
 	window.location.href = url;
@@ -9,7 +30,7 @@ function listenForClicks() {
 	document.addEventListener("click", (e) => {
 		console.debug(e.target);
 		if (e.target.id === 'trapButton') {
-			alertify.notify(`Haha, you used the mouse! Press "?" instead!`);
+			alertify.showShortcut(`Haha, you used the mouse! Press "?" instead.`);
 		}
 	});
 }
