@@ -843,6 +843,8 @@
 	transform: translate3d(0, 0, 0);
 }
 .alertify-notifier .ajs-message {
+	color: #14c949;
+	background-color: #fff;
 	position: relative;
 	width: 260px;
 	max-height: 0;
