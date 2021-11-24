@@ -1,7 +1,5 @@
 //alertify.defaults.theme.ok = "btn btn-primary";
 
-alertify.notify("For Bold, try CTRL+B");
-
 /*
 if(!alertify.myAlert){
   alertify.dialog('myAlert',function(){

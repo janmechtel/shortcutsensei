@@ -1,8 +1,6 @@
 require('styled-notifications');
-require('alertifyjs');
 import optionsStorage from '../../options/options-storage';
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
-
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
