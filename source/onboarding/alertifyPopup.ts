@@ -1,24 +1,25 @@
-alertify.defaults.theme.ok = "btn btn-primary";
+//alertify.defaults.theme.ok = "btn btn-primary";
 
+alertify.notify("For Bold, try CTRL+B");
+
+/*
 if(!alertify.myAlert){
-    //define a new dialog
-    alertify.dialog('myAlert',function(){
-      return{
-        main:function(message){
-          this.message = message;
-        },
-        setup:function(){
-            return { 
-              buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
-              focus: { element:0 }
-            };
-        },
-        prepare:function(){
-          this.setContent(this.message);
-        }
-    }});
-  }
+  alertify.dialog('myAlert',function(){
+    return{
+      main:function(message){
+        this.message = message;
+      },
+      setup:function(){
+          return { 
+            buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
+            focus: { element:0 }
+          };
+      },
+      prepare:function(){
+        this.setContent(this.message);
+      }
+  }});
+}
 
 alertify.myAlert("For bold, try CTRL+B instead.");
-
-alertify.notify("Try CTRL+B");
+*/
