@@ -9,10 +9,11 @@ alertify.dialog('showShortcut',function(){
 		return { 
 			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
 			options:{
-				title: 'Press "?"',
+				title: 'Press ?',
 				modal: false,
 				maximizable: false,
 				closableByDimmer: true,
+				pinnable: false,
 			}
 		};
 	},
@@ -29,8 +30,9 @@ function redirectToGmail() {
 function listenForClicks() {
 	document.addEventListener("click", (e) => {
 		console.debug(e.target);
-		if (e.target.id === 'trapButton') {
-			alertify.showShortcut(`Haha, you used the mouse! Press "?" instead.`);
+		if (e.target.id !== '') { //set to === 'trapButton'
+			//alertify.showShortcut(`Press "?" instead.`).set({title:`Haha, you used the mouse!`});
+			alertify.showShortcut(`Press "?" instead.`);
 		}
 	});
 }

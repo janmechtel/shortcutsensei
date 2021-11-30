@@ -27,9 +27,11 @@
 }
 .alertify .ajs-dialog {
 	position: relative;
-	margin: 5% auto;
+	bottom: 0px;
+	right: 0px;
 	min-height: 110px;
-	max-width: 500px;
+	min-width: 100px;
+	max-width: 100px;
 	padding: 24px 24px 0 24px;
 	outline: 0;
 	background-color: #fff;
@@ -79,13 +81,13 @@
 	margin: -24px;
 	margin-bottom: 0;
 	padding: 16px 24px;
-	background-color: #fff;
+	background-color: #dadada;
 }
 .alertify .ajs-body {
 	min-height: 56px;
 }
 .alertify .ajs-body .ajs-content {
-	padding: 16px 24px 16px 16px;
+	padding: 25px 0px 0px 0px;
 }
 .alertify .ajs-footer {
 	padding: 4px;
@@ -115,8 +117,8 @@
 .alertify .ajs-handle {
 	position: absolute;
 	display: none;
-	width: 10px;
-	height: 10px;
+	width: 0px;
+	height: 0px;
 	right: 0;
 	bottom: 0;
 	z-index: 1;
@@ -150,6 +152,8 @@
 }
 .alertify.ajs-closable .ajs-commands button.ajs-close {
 	display: inline-block;
+	padding: 10px 10px 10px 10px;
+	margin: 0px 0px 20px 0px;
 }
 .alertify.ajs-maximized .ajs-dialog {
 	width: 100% !important;
@@ -174,7 +178,8 @@
 }
 .alertify.ajs-maximized .ajs-commands,
 .alertify.ajs-resizable .ajs-commands {
-	margin: 14px 24px 0 0;
+	margin: 0px 0px 0px 0;
+	padding: 15px 15px 15px 15px;
 }
 .alertify.ajs-maximized .ajs-header,
 .alertify.ajs-resizable .ajs-header {
@@ -208,7 +213,7 @@
 	margin: 0;
 }
 .alertify.ajs-resizable:not(.ajs-maximized) .ajs-dialog {
-	min-width: 548px;
+	min-width: 200px;
 }
 .alertify.ajs-resizable:not(.ajs-maximized) .ajs-handle {
 	display: block;
