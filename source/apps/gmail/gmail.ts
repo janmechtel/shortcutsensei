@@ -39,7 +39,7 @@ const gmailShortcuts: Shortcut[] = [
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// )
-	new Shortcut(1, "Ctrl+K", "Link to", "", "hidden;\">Invalid email address", 10000),
+	new Shortcut(1, "Ctrl+K", "Link to", "", "hidden;\">Invalid email address", 0, 10000),
 
 	new Shortcut(2, "C", "Compose", "Compose", "aria-label=\"Compose an email\""),
 	new Shortcut(3, "Z", "Undo last action", "", "aria-label=\"Undo link\">Undo</span>"),
@@ -50,30 +50,30 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut(7, "!", "Mark as spam", "", "class=\"asl T-I-J3 J-J5-Ji"),
 	new Shortcut(8, "Shift+I", "Mark as read", "", "bAO T-I-J3 J-J5-Ji"),
 	new Shortcut(9, "Shift+U", "Mark as unread", "", "bAP T-I-J3 J-J5-Ji"),
-	new Shortcut(10, "=", "Mark as important", "Mark as important"),
-	new Shortcut(11, "-", "Mark as not important", "Mark as not important"),
+	new Shortcut(10, "=", "Mark as important", "Mark as important", ""),
+	new Shortcut(11, "-", "Mark as not important", "Mark as not important", ""),
 	new Shortcut(12, "L", "Label as", "", "class=\"asb T-I-J3 J-J5-Ji"),
 	new Shortcut(13, "Shift+T", "Add to tasks", "", "class=\"Vj T-I-J3 J-J5-Ji"),
-	new Shortcut(14, "M", "Mute conversation", "Mute"),
+	new Shortcut(14, "M", "Mute conversation", "Mute", ""),
 
 	new Shortcut(15, "K", "Jump to newer email", "", "data-tooltip=\"Newer\""),
 	new Shortcut(16, "J", "Jump to older email", "", "data-tooltip=\"Older\""),
 	new Shortcut(17, "A", "Reply all", "", ">Reply all</span>"),
 	new Shortcut(18, "R", "Reply", "Reply", "data-tooltip=\"Reply\""),
 	new Shortcut(19, "S", "Star/unstar", "", "class=\"f T-KT-JX\" src=\"images/cleardot.gif"),
-	new Shortcut(20, "F", "Forward", "Forward"),
+	new Shortcut(20, "F", "Forward", "Forward", ""),
 	new Shortcut(21, "U", "Go back to inbox", "", "class=\"ar6 T-I-J3 J-J5-Ji"),
 
-	new Shortcut(22, "CTRL+Shift+C", "Add Cc recipients", "Cc"),
-	new Shortcut(23, "CTRL+Shift+B", "Add Bcc recipients", "Bcc"),
+	new Shortcut(22, "CTRL+Shift+C", "Add Cc recipients", "Cc", ""),
+	new Shortcut(23, "CTRL+Shift+B", "Add Bcc recipients", "Bcc", ""),
 
-	new Shortcut(24, "Ctrl+Z", "Undo", "", "<div class=\"te  aaA aaB"),
-	new Shortcut(25, "Ctrl+Y", "Redo", "", "<div class=\"sV  aaA aaB"),
-	new Shortcut(26, "Ctrl+B", "Bold", "", "<div class=\"eN  aaA aaB\""),
-	new Shortcut(27, "Ctrl+I", "Italics", "", "<div class=\"e3  aaA aaB\""),
-	new Shortcut(28, "Ctrl+U", "Underline", "", "<div class=\"fu  aaA aaB\""),
-	new Shortcut(29, "Ctrl+Shift+7", "Numbered list", "", "<div class=\"e6  aaA aaB\""),
-	new Shortcut(30, "Ctrl+Shift+8", "Bulleted list", "", "<div class=\"eO  aaA aaB\""),
+	new Shortcut(24, "Ctrl+Z", "Undo", "", "<div class=\"te  aaA aaB", 200),
+	new Shortcut(25, "Ctrl+Y", "Redo", "", "<div class=\"sV  aaA aaB", 200),
+	new Shortcut(26, "Ctrl+B", "Bold", "", "<div class=\"eN  aaA aaB\"", 200),
+	new Shortcut(27, "Ctrl+I", "Italics", "", "<div class=\"e3  aaA aaB\"", 200),
+	new Shortcut(28, "Ctrl+U", "Underline", "", "<div class=\"fu  aaA aaB\"", 200),
+	new Shortcut(29, "Ctrl+Shift+7", "Numbered list", "", "<div class=\"e6  aaA aaB\"", 200),
+	new Shortcut(30, "Ctrl+Shift+8", "Bulleted list", "", "<div class=\"eO  aaA aaB\"", 200),
 	new Shortcut(31, "Ctrl+Shift+9", "Quote", "", '<div class="fa  aaA aaB"'),
 	new Shortcut(32, "Ctrl+[", "Indent less", "", '<div class="e8  aaA aaB"'),
 	new Shortcut(33, "Ctrl+]", "Indent more", "", '<div class="e2  aaA aaB"'),
@@ -83,8 +83,8 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut(37, "Ctrl+Shift+E", "Align center", "", '<div class="eP aaA aaB"'),
 	new Shortcut(38, "Ctrl+Shift+R", "Align right", "", '<div class="fc aaA aaB"'),
 
-	new Shortcut(39, "Ctrl+Enter", "Send", "Send"),
-	new Shortcut(40, "Ctrl+Shift+D", "Discard draft", "", "<div class=\"og T-I-J3"),
+	new Shortcut(39, "Ctrl+Enter", "Send", "Send", ""),
+	new Shortcut(40, "Ctrl+Shift+D", "Discard draft", "", "<div class=\"og T-I-J3", 200),
 
 	new Shortcut(41, "G+K", "Go to tasks", "", '<div class="aT5-aOt-I-JX-Jw"'),
 ];
@@ -145,8 +145,8 @@ const clickHandler = function (event: MouseEvent) {
 		}
 		for (const shortcut of gmailShortcuts) {
 			//console.debug(shortcut);
-			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "") {
-				if (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
+			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "" && shortcut.outerHTMLPart !== "") {
+				if ((shortcut.outerHTMLMaxLength === undefined || outerHTML.length < shortcut.outerHTMLMaxLength) && (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength)) {
 					console.debug("match found in outerHTML and minlength respected");
 					triggerNotification(shortcut);
 					return;

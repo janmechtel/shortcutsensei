@@ -4,14 +4,16 @@ export class Shortcut {
 	description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	innerText: string; // the text content, eg. 'Compose'
 	outerHTMLPart: string; // a word that will be matched with the OuterHTML, eg. 'xy' will be matched within "<div class='xy'>Compose</div>"
+	outerHTMLMaxLength: number;
 	outerHTMLMinLength: number; // the minimum length of the outerHTML, for example '10000' if the match should only apply for really long outerHTML. This is done for the Linkto shortcut in Gmail.
 
-	constructor(id: number, shortcut: string, description: string, innerText?: string, outerHTMLPart?: string, outerHTMLMinLength?: number) {
+	constructor(id: number, shortcut: string, description: string, innerText?: string, outerHTMLPart?: string, outerHTMLMaxLength?: number, outerHTMLMinLength?: number) {
 		this.id = id;
 		this.key = shortcut;
 		this.description = description;
 		this.innerText = innerText;
 		this.outerHTMLPart = outerHTMLPart;
+		this.outerHTMLMaxLength = outerHTMLMaxLength;
 		this.outerHTMLMinLength = outerHTMLMinLength;
 	}
 }
