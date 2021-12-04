@@ -1,5 +1,4 @@
 require('styled-notifications');
-require('alertifyjs');
 
 export function closeAllNotificationsExceptSelf(skipTitle?: string) {
 	let foundSelf = false;

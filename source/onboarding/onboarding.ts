@@ -9,7 +9,7 @@ alertify.dialog('showShortcut',function(){
 		return { 
 			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
 			options:{
-				title: 'Press ?',
+				title: '?',
 				modal: false,
 				maximizable: false,
 				closableByDimmer: true,
