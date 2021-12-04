@@ -14,7 +14,7 @@ alertify.dialog('showShortcut',function(){
 				maximizable: false,
 				closableByDimmer: true,
 				pinnable: false,
-			}
+			},
 		};
 	},
 	prepare:function(){
@@ -32,7 +32,8 @@ function listenForClicks() {
 		console.debug(e.target);
 		if (e.target.id !== '') { //set to === 'trapButton'
 			//alertify.showShortcut(`Press "?" instead.`).set({title:`Haha, you used the mouse!`});
-			alertify.showShortcut(`Press "?" instead.`);
+			alertify.showShortcut(`For Gmail onboarding, press "?" instead.`);
+			setInterval(function(){document.getElementsByClassName("alertify  ajs-modeless ajs-movable ajs-resizable ajs-closable ajs-pulse")[0].style.display = "none";}, 4000);
 		}
 	});
 }
@@ -67,3 +68,4 @@ document.addEventListener('keydown', (e) => {
 		setInterval(redirectToGmail, 3000);
 	}
 });
+
