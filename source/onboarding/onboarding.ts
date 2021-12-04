@@ -1,5 +1,9 @@
 import { showPopUp } from "../styled-notifications";
 
+function closePopup(){
+	document.getElementsByClassName("alertify  ajs-modeless ajs-movable ajs-resizable ajs-closable ajs-pulse")[0].style.display = "none";
+}
+
 alertify.dialog('showShortcut',function(){
 	return{
 	main:function(message){
@@ -33,7 +37,7 @@ function listenForClicks() {
 		if (e.target.id !== '') { //set to === 'trapButton'
 			//alertify.showShortcut(`Press "?" instead.`).set({title:`Haha, you used the mouse!`});
 			alertify.showShortcut(`For Gmail onboarding, press "?" instead.`);
-			setInterval(function(){document.getElementsByClassName("alertify  ajs-modeless ajs-movable ajs-resizable ajs-closable ajs-pulse")[0].style.display = "none";}, 4000);
+			setTimeout(closePopup, 4000);
 		}
 	});
 }
