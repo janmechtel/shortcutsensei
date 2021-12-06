@@ -3,20 +3,49 @@ var alertify = require('../../onboarding/alertify.min.js');
 import optionsStorage from '../../options/options-storage';
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
 
-var cssId = "../../onboarding/alertify.min.css";  
-if (!document.getElementById(cssId))
-{
-    var head  = document.getElementsByTagName('head')[0];
-    var link  = document.createElement('link');
-    link.id   = cssId;
-    link.rel  = 'stylesheet';
-    link.type = 'text/css';
-    link.href = "../../onboarding/alertify.min.css";
-    link.media = 'all';
-    head.appendChild(link);
-} 
+var head = document.getElementsByTagName('head')[0]; 
+	// Create new link Element
+	var link = document.createElement('link');
+	// set the attributes for link element 
+	link.rel = 'stylesheet';  
+	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/onboarding/alertify.min.css'; 
+	head.appendChild(link);
+	var link = document.createElement('link');
+	// set the attributes for link element 
+	link.rel = 'stylesheet';  
+	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/onboarding/styles.css'; 
+	head.appendChild(link);
 
-alertify.notify("Well done! Now let's configure Gmail");
+console.log(head.contains(link));
+
+alertify.dialog('showShortcut',function(){
+	return{
+	main:function(message){
+		this.message = message;
+	},
+	setup:function(){
+		return { 
+			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
+			options:{
+				title: '?',
+				modal: false,
+				maximizable: false,
+				closableByDimmer: true,
+				pinnable: false,
+			},
+		};
+	},
+	prepare:function(){
+		this.setContent(this.message);
+	}
+}});
+
+alertify.showShortcut(`For Gmail onboarding, press "?" instead.`);
+
+var element = document.getElementsByClassName('alertify');
+console.log(element);
+
+//alertify.notify("Well done! Now let's configure Gmail");
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -110,6 +139,7 @@ const gmailShortcuts: Shortcut[] = [
 ];
 
 const clickHandler = function (event: MouseEvent) {
+	
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
 	const outerHTML: string = event.target.outerHTML;
