@@ -10,11 +10,6 @@ var head = document.getElementsByTagName('head')[0];
 	link.rel = 'stylesheet';  
 	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/onboarding/alertify.min.css'; 
 	head.appendChild(link);
-	var link = document.createElement('link');
-	// set the attributes for link element 
-	link.rel = 'stylesheet';  
-	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/onboarding/styles.css'; 
-	head.appendChild(link);
 
 console.log(head.contains(link));
 
