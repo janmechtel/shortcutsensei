@@ -1,6 +1,22 @@
 require('styled-notifications');
+var alertify = require('../../onboarding/alertify.min.js');
 import optionsStorage from '../../options/options-storage';
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
+
+var cssId = "../../onboarding/alertify.min.css";  
+if (!document.getElementById(cssId))
+{
+    var head  = document.getElementsByTagName('head')[0];
+    var link  = document.createElement('link');
+    link.id   = cssId;
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = "../../onboarding/alertify.min.css";
+    link.media = 'all';
+    head.appendChild(link);
+} 
+
+alertify.notify("Well done! Now let's configure Gmail");
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -24,6 +40,8 @@ import { Options } from 'webext-options-sync';
 
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
+
+console.log(document.styleSheets);
 
 // open a new url in the current window
 function openUrl(url: string) {
