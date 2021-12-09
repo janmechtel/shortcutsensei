@@ -3,12 +3,12 @@ var alertify = require('../../onboarding/alertify.min.js');
 import optionsStorage from '../../options/options-storage';
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
 
-var head = document.getElementsByTagName('head')[0]; 
+var head = document.getElementsByTagName('head')[0];
 	// Create new link Element
 	var link = document.createElement('link');
-	// set the attributes for link element 
-	link.rel = 'stylesheet';  
-	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/apps/gmail/alertify.min.css'; 
+	// set the attributes for link element
+	link.rel = 'stylesheet';
+	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/apps/gmail/alertify.min.css';
 	head.appendChild(link);
 
 alertify.dialog('showShortcut',function(){
@@ -18,7 +18,7 @@ alertify.dialog('showShortcut',function(){
 		this.title = title;
 	},
 	setup:function(){
-		return { 
+		return {
 			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
 			options:{
 				modal: false,
@@ -61,6 +61,8 @@ const elementsToSkip = [
 import { Shortcut } from '../../shortcut';
 import { Options } from 'webext-options-sync';
 
+let snoozeUntil = 0;
+let options: Options;
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
@@ -73,66 +75,96 @@ function openUrl(url: string) {
 
 const gmailShortcuts: Shortcut[] = [
 	// new Shortcut(
+	// id: number; // the unique id of the shortcut (unique per application)
 	// key: string; // the shortcut key sequence, eg. 'Shift+C'
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
 	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
 	// )
-	new Shortcut("Ctrl+K", "Link to", "", "hidden;\">Invalid email address", 10000),
+	new Shortcut(1, "Ctrl+K", "Link to", "", "hidden;\">Invalid email address", 0, 10000),
 
-	new Shortcut("C", "Compose", "Compose", "aria-label=\"Compose an email\""),
-	new Shortcut("Z", "Undo last action", "", "aria-label=\"Undo link\">Undo</span>"),
-	new Shortcut("Z", "Undo last action", "", "id=\"link_undo"), // had to add this one twice, because outerHTML is completely different when you undo sending an email
+	new Shortcut(2, "C", "Compose", "Compose", "aria-label=\"Compose an email\""),
+	new Shortcut(3, "Z", "Undo last action", "", "aria-label=\"Undo link\">Undo</span>"),
+	new Shortcut(4, "Z", "Undo last action", "", "id=\"link_undo"), // had to add this one twice, because outerHTML is completely different when you undo sending an email
 
-	new Shortcut("E", "Archive", "", "class=\"ar8 T-I-J3 J-J5-Ji"),
-	new Shortcut("#", "Delete", "", "class=\"ar9 T-I-J3 J-J5-Ji"),
-	new Shortcut("!", "Mark as spam", "", "class=\"asl T-I-J3 J-J5-Ji"),
-	new Shortcut("Shift+I", "Mark as read", "", "bAO T-I-J3 J-J5-Ji"),
-	new Shortcut("Shift+U", "Mark as unread", "", "bAP T-I-J3 J-J5-Ji"),
-	new Shortcut("=", "Mark as important", "Mark as important"),
-	new Shortcut("-", "Mark as not important", "Mark as not important"),
-	new Shortcut("L", "Label as", "", "class=\"asb T-I-J3 J-J5-Ji"),
-	new Shortcut("Shift+T", "Add to tasks", "", "class=\"Vj T-I-J3 J-J5-Ji"),
-	new Shortcut("M", "Mute conversation", "Mute"),
+	new Shortcut(5, "E", "Archive", "", "class=\"ar8 T-I-J3 J-J5-Ji"),
+	new Shortcut(6, "#", "Delete", "", "class=\"ar9 T-I-J3 J-J5-Ji"),
+	new Shortcut(7, "!", "Mark as spam", "", "class=\"asl T-I-J3 J-J5-Ji"),
+	new Shortcut(8, "Shift+I", "Mark as read", "", "bAO T-I-J3 J-J5-Ji"),
+	new Shortcut(9, "Shift+U", "Mark as unread", "", "bAP T-I-J3 J-J5-Ji"),
+	new Shortcut(10, "=", "Mark as important", "Mark as important", ""),
+	new Shortcut(11, "-", "Mark as not important", "Mark as not important", ""),
+	new Shortcut(12, "L", "Label as", "", "class=\"asb T-I-J3 J-J5-Ji"),
+	new Shortcut(13, "Shift+T", "Add to tasks", "", "class=\"Vj T-I-J3 J-J5-Ji"),
+	new Shortcut(14, "M", "Mute conversation", "Mute", ""),
 
-	new Shortcut("K", "Jump to newer email", "", "data-tooltip=\"Newer\""),
-	new Shortcut("J", "Jump to older email", "", "data-tooltip=\"Older\""),
-	new Shortcut("A", "Reply all", "", ">Reply all</span>"),
-	new Shortcut("R", "Reply", "Reply", "data-tooltip=\"Reply\""),
-	new Shortcut("S", "Star/unstar", "", "class=\"f T-KT-JX\" src=\"images/cleardot.gif"),
-	new Shortcut("F", "Forward", "Forward"),
-	new Shortcut("U", "Go back to inbox", "", "class=\"ar6 T-I-J3 J-J5-Ji"),
+	new Shortcut(15, "K", "Jump to newer email", "", "data-tooltip=\"Newer\""),
+	new Shortcut(16, "J", "Jump to older email", "", "data-tooltip=\"Older\""),
+	new Shortcut(17, "A", "Reply all", "", ">Reply all</span>"),
+	new Shortcut(18, "R", "Reply", "Reply", "data-tooltip=\"Reply\""),
+	new Shortcut(19, "S", "Star/unstar", "", "class=\"f T-KT-JX\" src=\"images/cleardot.gif"),
+	new Shortcut(20, "F", "Forward", "Forward", ""),
+	new Shortcut(21, "U", "Go back to inbox", "", "class=\"ar6 T-I-J3 J-J5-Ji"),
 
-	new Shortcut("CTRL+Shift+C", "Add Cc recipients", "Cc"),
-	new Shortcut("CTRL+Shift+B", "Add Bcc recipients", "Bcc"),
+	new Shortcut(22, "CTRL+Shift+C", "Add Cc recipients", "Cc", ""),
+	new Shortcut(23, "CTRL+Shift+B", "Add Bcc recipients", "Bcc", ""),
 
-	new Shortcut("Ctrl+Z", "Undo", "", "<div class=\"te  aaA aaB"),
-	new Shortcut("Ctrl+Y", "Redo", "", "<div class=\"sV  aaA aaB"),
-	new Shortcut("Ctrl+B", "Bold", "", "<div class=\"eN  aaA aaB\""),
-	new Shortcut("Ctrl+I", "Italics", "", "<div class=\"e3  aaA aaB\""),
-	new Shortcut("Ctrl+U", "Underline", "", "<div class=\"fu  aaA aaB\""),
-	new Shortcut("Ctrl+Shift+7", "Numbered list", "", "<div class=\"e6  aaA aaB\""),
-	new Shortcut("Ctrl+Shift+8", "Bulleted list", "", "<div class=\"eO  aaA aaB\""),
-	new Shortcut("Ctrl+Shift+9", "Quote", "", '<div class="fa  aaA aaB"'),
-	new Shortcut("Ctrl+[", "Indent less", "", '<div class="e8  aaA aaB"'),
-	new Shortcut("Ctrl+]", "Indent more", "", '<div class="e2  aaA aaB"'),
-	new Shortcut("Alt+Shift+5", "Strikethrough", "", '<div class="td  aaA aaB"'),
-	new Shortcut("Ctrl+\\", "Remove formatting", "", '<div class="fb  aaA aaB"'),
-	new Shortcut("Ctrl+Shift+L", "Align left", "", '<div class="e4 aaA aaB"'),
-	new Shortcut("Ctrl+Shift+E", "Align center", "", '<div class="eP aaA aaB"'),
-	new Shortcut("Ctrl+Shift+R", "Align right", "", '<div class="fc aaA aaB"'),
+	new Shortcut(24, "Ctrl+Z", "Undo", "", "<div class=\"te  aaA aaB", 200),
+	new Shortcut(25, "Ctrl+Y", "Redo", "", "<div class=\"sV  aaA aaB", 200),
+	new Shortcut(26, "Ctrl+B", "Bold", "", "<div class=\"eN  aaA aaB\"", 200),
+	new Shortcut(27, "Ctrl+I", "Italics", "", "<div class=\"e3  aaA aaB\"", 200),
+	new Shortcut(28, "Ctrl+U", "Underline", "", "<div class=\"fu  aaA aaB\"", 200),
+	new Shortcut(29, "Ctrl+Shift+7", "Numbered list", "", "<div class=\"e6  aaA aaB\"", 200),
+	new Shortcut(30, "Ctrl+Shift+8", "Bulleted list", "", "<div class=\"eO  aaA aaB\"", 200),
+	new Shortcut(31, "Ctrl+Shift+9", "Quote", "", '<div class="fa  aaA aaB"'),
+	new Shortcut(32, "Ctrl+[", "Indent less", "", '<div class="e8  aaA aaB"'),
+	new Shortcut(33, "Ctrl+]", "Indent more", "", '<div class="e2  aaA aaB"'),
+	new Shortcut(34, "Alt+Shift+5", "Strikethrough", "", '<div class="td  aaA aaB"'),
+	new Shortcut(35, "Ctrl+\\", "Remove formatting", "", '<div class="fb  aaA aaB"'),
+	new Shortcut(36, "Ctrl+Shift+L", "Align left", "", '<div class="e4 aaA aaB"'),
+	new Shortcut(37, "Ctrl+Shift+E", "Align center", "", '<div class="eP aaA aaB"'),
+	new Shortcut(38, "Ctrl+Shift+R", "Align right", "", '<div class="fc aaA aaB"'),
 
-	new Shortcut("Ctrl+Enter", "Send", "Send"),
-	new Shortcut("Ctrl+Shift+D", "Discard draft", "", "<div class=\"og T-I-J3"),
+	new Shortcut(39, "Ctrl+Enter", "Send", "Send", ""),
+	new Shortcut(40, "Ctrl+Shift+D", "Discard draft", "", "<div class=\"og T-I-J3", 200),
 
-	new Shortcut("G+K", "Go to tasks", "", '<div class="aT5-aOt-I-JX-Jw"'),
-
-	new Shortcut("Ctrl+Shift+C", "Add Cc recipients", "Cc"),
-	new Shortcut("Ctrl+Shift+B", "Add Bcc recipients", "Bcc"),
-
-
+	new Shortcut(41, "G+K", "Go to tasks", "", '<div class="aT5-aOt-I-JX-Jw"'),
 ];
 
+// check if gmailShortcuts contains duplicate ids
+const gmailShortcutsDuplicateIds: Shortcut[] = gmailShortcuts.filter(
+	(shortcut: Shortcut) => gmailShortcuts.filter((shortcut2: Shortcut) => shortcut.id === shortcut2.id).length > 1
+);
+
+if (gmailShortcutsDuplicateIds.length > 0) {
+	console.error("Gmail shortcuts have duplicate ids:", gmailShortcutsDuplicateIds);
+	throw new Error("Gmail shortcuts have duplicate ids");
+}
+
+async function reloadOptions() {
+	options = await optionsStorage.getAll();
+	console.debug(options);
+	if (options.snoozeUntil !== undefined) {
+		snoozeUntil = options.snoozeUntil as number;
+	}
+}
+
+//listen to chrome storage changes as a proxy to option changes (I couldn't get chrome.runtime.sendMessage to work)
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+	console.log(changes, namespace);
+	if(namespace === 'sync') {
+		reloadOptions();
+	}
+});
+
 const clickHandler = function (event: MouseEvent) {
+
+	//convert timestamp to readable date and time
+
+	if (snoozeUntil != 0 && new Date().getTime() < snoozeUntil) {
+		console.log("Skipping further processing. Snoozing until " + new Date(snoozeUntil).toLocaleString());
+		console.log(snoozeUntil);
+		return;
+	}
 
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
@@ -150,18 +182,16 @@ const clickHandler = function (event: MouseEvent) {
 			// console.debug(shortcut);
 			if (innerText === shortcut.innerText && innerText !== "") {
 				console.debug("match found in InnerText");
-				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-				alertify.showShortcut(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
+				triggerNotification(shortcut);
 				return;
 			}
 		}
 		for (const shortcut of gmailShortcuts) {
 			//console.debug(shortcut);
-			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "" ) {
-				if(shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
+			if (outerHTML.includes(shortcut.outerHTMLPart) && outerHTML !== "" && shortcut.outerHTMLPart !== "") {
+				if ((shortcut.outerHTMLMaxLength === undefined || outerHTML.length < shortcut.outerHTMLMaxLength) && (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength)) {
 					console.debug("match found in outerHTML and minlength respected");
-					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-					alertify.showShortcut(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
+					triggerNotification(shortcut);
 					return;
 				}
 			}
@@ -170,6 +200,22 @@ const clickHandler = function (event: MouseEvent) {
 };
 
 document.addEventListener('click', clickHandler, true);
+
+function triggerNotification(shortcut: Shortcut) {
+	if (options.gmailOnboardingState as GmailOnboardingState != GmailOnboardingState.Completed) {
+		optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
+	}
+
+	const ignoredShortcutsString = options.ignoredShortcuts as string;
+	const ignoredShortcuts = ignoredShortcutsString.split(",").map(Number);
+	console.debug(`Is Shortcut ${shortcut.id} contained in ${ignoredShortcuts}`);
+	if (!ignoredShortcuts.includes(shortcut.id)) {
+		showKeyPopup(shortcut.key, shortcut.description);
+		alertify.showShortcut(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
+	} else {
+		console.debug(`Shortcut ${shortcut.key} is ignored because it's contained in ${ignoredShortcuts}`);
+	}
+}
 
 async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	const onboardingAttempts = options.gmailOnboardingAttempts as number;
@@ -189,7 +235,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
 	if (languageDropdown === undefined) {
 		console.warn("Could not find the language dropdown, probably Gmail is not done loading yet, waiting 500ms", dropdowns);
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 		return;
 	}
 	console.debug("Gmail is loaded, continuing with onboarding ...");
@@ -219,7 +265,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
@@ -228,7 +274,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
@@ -253,12 +299,14 @@ async function main() {
 
 	const options = await optionsStorage.getAll();
 	console.debug(options);
-
+	if (options.snoozeUntil !== undefined) {
+		snoozeUntil = options.snoozeUntil as number;
+	}
 	const onboardingState = options.gmailOnboardingState as GmailOnboardingState
 	const onboardingAttempts = options.gmailOnboardingAttempts as number;
 	const maxAttempts = 3;
 
-	switch(onboardingState) {
+	switch (onboardingState) {
 		case GmailOnboardingState.SettingsStarted:
 			if (+onboardingAttempts <= +maxAttempts) {
 				continueOnboardingAfterSettingsLoaded(options);
@@ -270,7 +318,7 @@ async function main() {
 			return;
 		case GmailOnboardingState.NotStarted:
 			await optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.SettingsStarted });
-			await optionsStorage.set({ gmailOnboardingAttempts: 1});
+			await optionsStorage.set({ gmailOnboardingAttempts: 1 });
 			continueOnboardingAfterSettingsLoaded(options);
 			return;
 		case GmailOnboardingState.SettingsCompleted:
@@ -291,6 +339,7 @@ async function main() {
 }
 
 main();
+reloadOptions();
 
 //call function when url is changing without page reload
 window.addEventListener('popstate', function () {

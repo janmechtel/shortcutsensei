@@ -4,17 +4,45 @@
 <link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
 <link rel="stylesheet" href="options.css">
 
-<form id="options-form" class="detail-view-container">
-	<h3>Gmail</h3>
-	<div class="gmail-onboarding-inputs">
+<form id="options-form" class="detail-view-container p-5">
+	<h2 class="text-xl">General</h2>
+	<div>
+		<div id="snoozeOnSection">
+			<div>
+				<label>
+					<span>Pause all notifications for
+					<input class="w-6" type="number" name="snoozeDuration" id="snoozeDuration"></input> hours </span>
+					<button type="text" id="snooze">Snooze</button>
+				</label>
+			</div>
+		</div>
+		<div id="snoozeOffSection">
+			<div>
+				<label>
+					<span id="snoozeMessage"></span>
+					<button type="text" id="snoozeReset">Turn Snooze off</button>
+				</label>
+			</div>
+		</div>
+		<div >
+			<div>
+				<label>
+					<span>Shortcuts that should not be shown (leave empty to reset)</span>
+					<input type="text" name="ignoredShortcuts"></input>
+				</label>
+			</div>
+		</div>
+	</div>
+	<h2 class="text-xl">Gmail</h2>
+	<div class="space-y-2">
 		<div>
-			<label class="onboarding-input">
+			<label>
 				<span>Gmail Onboarding state (delete to reset)</span>
 				<input type="text" name="gmailOnboardingState">
 			</label>
 		</div>
 		<div>
-			<label class="onboarding-input">
+			<label>
 				<span>Gmail Onboarding attempts ('0' to reset)</span>
 				<input type="number" name="gmailOnboardingAttempts">
 			</label>
