@@ -12,8 +12,8 @@ import { showPopUp, showKeyPopup } from '../../styled-notifications';
 alertify.dialog('showShortcut',function(){
 	return{
 	main:function(message, title){
-		this.message = message;
-		this.title = title;
+		this.setContent(message);
+		this.setHeader(title);
 	},
 	setup:function(){
 		return {
@@ -25,19 +25,8 @@ alertify.dialog('showShortcut',function(){
 				pinnable: false,
 			},
 		};
-	},
-	prepare:function(){
-		this.setContent(this.message);
-		this.setHeader(this.title);
 	}
 }});
-
-alertify.showShortcut("Title", "Message");
-
-// var element = document.getElementsByClassName('alertify');
-console.log(element);
-
-//alertify.notify("Well done! Now let's configure Gmail");
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -175,7 +164,6 @@ const clickHandler = function (event: MouseEvent) {
 		console.debug(elementsToSkip.filter(skip => outerHTML.includes(skip)));
 		return;
 	} else {
-		alertify.showShortcut(`Test`, `Title`);
 		for (const shortcut of gmailShortcuts) {
 			// console.debug(shortcut);
 			if (innerText === shortcut.innerText && innerText !== "") {
