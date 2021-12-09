@@ -8,21 +8,19 @@ var head = document.getElementsByTagName('head')[0];
 	var link = document.createElement('link');
 	// set the attributes for link element 
 	link.rel = 'stylesheet';  
-	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/onboarding/alertify.min.css'; 
+	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/apps/gmail/alertify.min.css'; 
 	head.appendChild(link);
-
-console.log(head.contains(link));
 
 alertify.dialog('showShortcut',function(){
 	return{
-	main:function(message){
+	main:function(message, title){
 		this.message = message;
+		this.title = title;
 	},
 	setup:function(){
 		return { 
 			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
 			options:{
-				title: '?',
 				modal: false,
 				maximizable: false,
 				closableByDimmer: true,
@@ -32,10 +30,11 @@ alertify.dialog('showShortcut',function(){
 	},
 	prepare:function(){
 		this.setContent(this.message);
+		this.setHeader(this.title);
 	}
 }});
 
-alertify.showShortcut(`For Gmail onboarding, press "?" instead.`);
+alertify.showShortcut("Title", "Message");
 
 var element = document.getElementsByClassName('alertify');
 console.log(element);
@@ -134,7 +133,7 @@ const gmailShortcuts: Shortcut[] = [
 ];
 
 const clickHandler = function (event: MouseEvent) {
-	
+
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
 	const outerHTML: string = event.target.outerHTML;
@@ -146,12 +145,13 @@ const clickHandler = function (event: MouseEvent) {
 		console.debug(elementsToSkip.filter(skip => outerHTML.includes(skip)));
 		return;
 	} else {
+		alertify.showShortcut(`Test`, `Title`);
 		for (const shortcut of gmailShortcuts) {
 			// console.debug(shortcut);
 			if (innerText === shortcut.innerText && innerText !== "") {
 				console.debug("match found in InnerText");
 				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-				showKeyPopup(shortcut.key, shortcut.description);
+				alertify.showShortcut(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
 				return;
 			}
 		}
@@ -161,7 +161,7 @@ const clickHandler = function (event: MouseEvent) {
 				if(shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength) {
 					console.debug("match found in outerHTML and minlength respected");
 					optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
-					showKeyPopup(shortcut.key, shortcut.description);
+					alertify.showShortcut(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
 					return;
 				}
 			}
@@ -221,11 +221,11 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		languageDropdown.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 0)
+		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options);}, 500);
