@@ -1,28 +1,20 @@
-import { showPopUp } from "../styled-notifications";
-
-function closePopup(){
-	document.getElementsByClassName("alertify  ajs-modeless ajs-movable ajs-resizable ajs-closable ajs-pulse")[0].style.display = "none";
-}
+import alertify = require('alertifyjs');
 
 alertify.dialog('showShortcut',function(){
 	return{
-	main:function(message){
-		this.message = message;
+	main:function(title, message){
+		this.setHeader(title);
+		this.setContent(message);
 	},
 	setup:function(){
-		return { 
-			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
+		return {
 			options:{
-				title: '?',
 				modal: false,
 				maximizable: false,
 				closableByDimmer: true,
 				pinnable: false,
 			},
 		};
-	},
-	prepare:function(){
-		this.setContent(this.message);
 	}
 }});
 
@@ -37,7 +29,10 @@ function listenForClicks() {
 		if (e.target.id !== '') { //set to === 'trapButton'
 			//alertify.showShortcut(`Press "?" instead.`).set({title:`Haha, you used the mouse!`});
 			alertify.showShortcut(`For Gmail onboarding, press "?" instead.`);
-			setTimeout(closePopup, 4000);
+
+			setTimeout(() => {
+				alertify.showShortcut().close();
+			}, 4000);
 		}
 	});
 }

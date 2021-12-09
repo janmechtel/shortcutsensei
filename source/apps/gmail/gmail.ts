@@ -1,32 +1,10 @@
-require('styled-notifications');
 import alertify = require('alertifyjs');
 
 import optionsStorage from '../../options/options-storage';
 
-import { showPopUp, showKeyPopup } from '../../styled-notifications';
-
+//TODO: check that onboarding is still working
 //TODO: align design
-//TODO: take out styled notification
 //TODO: hookup buttons
-
-alertify.dialog('showShortcut',function(){
-	return{
-	main:function(message, title){
-		this.setContent(message);
-		this.setHeader(title);
-	},
-	setup:function(){
-		return {
-			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
-			options:{
-				modal: false,
-				maximizable: false,
-				closableByDimmer: true,
-				pinnable: false,
-			},
-		};
-	}
-}});
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -196,8 +174,7 @@ function triggerNotification(shortcut: Shortcut) {
 	const ignoredShortcuts = ignoredShortcutsString.split(",").map(Number);
 	console.debug(`Is Shortcut ${shortcut.id} contained in ${ignoredShortcuts}`);
 	if (!ignoredShortcuts.includes(shortcut.id)) {
-		showKeyPopup(shortcut.key, shortcut.description);
-		alertify.showShortcut(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
+		showKeyPopup(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
 	} else {
 		console.debug(`Shortcut ${shortcut.key} is ignored because it's contained in ${ignoredShortcuts}`);
 	}
@@ -331,3 +308,37 @@ reloadOptions();
 window.addEventListener('popstate', function () {
 	main();
 })
+
+alertify.dialog('showShortcut',function(){
+	return{
+	main:function(message, title){
+		this.setContent(message);
+		this.setHeader(title);
+	},
+	setup:function(){
+		return {
+			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
+			options:{
+				modal: false,
+				maximizable: false,
+				closableByDimmer: true,
+				pinnable: false,
+			},
+		};
+	}
+}});
+
+function showPopUp(title: string, message: string, duration: number) {
+	showKeyPopup(title, message, duration);
+}
+
+function showKeyPopup(title: string, message: string, duration = 4000) {
+	alertify.showShortcut(title, message, duration);
+	if (duration != 0) {
+		setTimeout(() => {
+			alertify.showShortcut().close();
+		}, duration);
+	}
+}
+
+
