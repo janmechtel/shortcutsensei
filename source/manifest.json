@@ -36,7 +36,7 @@
         {
             "matches": ["*://mail.google.com/*"],
             "js": ["apps/gmail/gmail.ts"],
-			"css": ["styled-notifications.css"]
+			"css": ["styled-notifications.css", "alertify.css"]
         }
     ],
 	"web_accessible_resources": ["onboarding/*"]

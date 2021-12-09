@@ -1,15 +1,13 @@
 require('styled-notifications');
-var alertify = require('../../onboarding/alertify.min.js');
+import alertify = require('alertifyjs');
+
 import optionsStorage from '../../options/options-storage';
+
 import { showPopUp, showKeyPopup } from '../../styled-notifications';
 
-var head = document.getElementsByTagName('head')[0];
-	// Create new link Element
-	var link = document.createElement('link');
-	// set the attributes for link element
-	link.rel = 'stylesheet';
-	link.href = 'https://github.com/janmechtel/shortcutsensei/blob/alertify_notifier/source/apps/gmail/alertify.min.css';
-	head.appendChild(link);
+//TODO: align design
+//TODO: take out styled notification
+//TODO: hookup buttons
 
 alertify.dialog('showShortcut',function(){
 	return{
@@ -36,7 +34,7 @@ alertify.dialog('showShortcut',function(){
 
 alertify.showShortcut("Title", "Message");
 
-var element = document.getElementsByClassName('alertify');
+// var element = document.getElementsByClassName('alertify');
 console.log(element);
 
 //alertify.notify("Well done! Now let's configure Gmail");
