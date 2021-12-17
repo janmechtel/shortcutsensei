@@ -6,6 +6,18 @@ import optionsStorage from '../../options/options-storage';
 //TODO: align design
 //TODO: hookup buttons
 
+/* 
+https://heroicons.com/
+
+Don't show again (eye-off): <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+</svg>
+
+Snooze all for 24 hours (clock): <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg> 
+*/
+
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
 	"role=\"toolbar\"", // stop popup from appearing when pressing formatting toolbar
@@ -225,27 +237,27 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	}
 
 	if (language !== "English (US)") {
-		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 0)
+		showPopUp(`Please set your display language to English`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
+		showPopUp(`Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
+		showPopUp(`Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
+		showPopUp(`Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else {
 		optionsStorage.set({ gmailOnboardingCompleted: true });
 		optionsStorage.set({ gmailOnboardingState: "SettingsCompleted" });
-		showPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
+		showPopUp(`Onboarding completed! Redirecting to Inbox ...`, 0, `success`);
 		setTimeout(function () { openUrl("https://mail.google.com/mail") }, 5000);
 	}
 }
@@ -275,7 +287,7 @@ async function main() {
 				continueOnboardingAfterSettingsLoaded(options);
 			} else {
 				console.debug(`Onboarding disabled, showing 'what now' notification`);
-				showPopUp(`Onboarding failed`, `We forwarded you ${maxAttempts} times to settings already. We are stopping now.`, 0, `warning`);
+				showPopUp(`Onboarding failed: we sent you to settings ${maxAttempts} times.`);
 				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Disabled });
 			}
 			return;
@@ -286,7 +298,7 @@ async function main() {
 			return;
 		case GmailOnboardingState.SettingsCompleted:
 			console.debug(`Settings completed, showing 'what now' notification`);
-			showPopUp(`Click 'Compose'`, `Try the extension, click 'Compose' to create a new message and see a notification.`, 15000, `warning`);
+			showPopUp(`Try Shortcut Sensei: click 'Compose' to create a new message and see what happens!`, 15000, `warning`);
 			return;
 		case GmailOnboardingState.Completed:
 			console.debug("Onboarding completed, skipping Onboarding");
@@ -311,9 +323,9 @@ window.addEventListener('popstate', function () {
 
 alertify.dialog('showShortcut',function(){
 	return{
-	main:function(message, title){
-		this.setContent(message);
+	main:function(title, message){
 		this.setHeader(title);
+		this.setContent(message);
 	},
 	setup:function(){
 		return {
@@ -328,8 +340,29 @@ alertify.dialog('showShortcut',function(){
 	}
 }});
 
-function showPopUp(title: string, message: string, duration: number) {
-	showKeyPopup(title, message, duration);
+alertify.dialog('showPopUp',function(){
+	return{
+	main:function(message, title){
+		this.setContent(message);
+		this.setHeader(title);
+	},
+	setup:function(){
+		return {
+			options:{
+				modal: false,
+				maximizable: false,
+				closableByDimmer: true,
+				pinnable: false,
+			},
+		};
+	}
+}});
+
+function showPopUp(message: string) {
+	console.log(document.getElementsByClassName("ajs-message"));
+	if (document.getElementsByClassName("ajs-message").length === 0){
+	alertify.notify(message);
+	}
 }
 
 function showKeyPopup(title: string, message: string, duration = 4000) {
@@ -340,5 +373,3 @@ function showKeyPopup(title: string, message: string, duration = 4000) {
 		}, duration);
 	}
 }
-
-
