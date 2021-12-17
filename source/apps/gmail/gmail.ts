@@ -237,27 +237,27 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	}
 
 	if (language !== "English (US)") {
-		showPopUp(`Please set your display language to English`, 0)
+		showPopUp(`English (US) Language`, `Please choose "English (US)" as your Display Language`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 5000);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Click "Save Changes"`, 0)
+		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Click "Keyboard shortcuts on"`, 0)
+		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
 	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Click "Save Changes"`, 0)
+		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else {
 		optionsStorage.set({ gmailOnboardingCompleted: true });
 		optionsStorage.set({ gmailOnboardingState: "SettingsCompleted" });
-		showPopUp(`Onboarding completed! Redirecting to Inbox ...`, 0, `success`);
+		showPopUp(`Onboarding completed`, `Onboarding completed! Redirecting to Inbox ...`, 0);
 		setTimeout(function () { openUrl("https://mail.google.com/mail") }, 5000);
 	}
 }
@@ -287,7 +287,7 @@ async function main() {
 				continueOnboardingAfterSettingsLoaded(options);
 			} else {
 				console.debug(`Onboarding disabled, showing 'what now' notification`);
-				showPopUp(`Onboarding failed: we sent you to settings ${maxAttempts} times.`);
+				showPopUp(`Onboarding failed`, `Onboarding failed: we forwarded you to settings ${maxAttempts} times. We are stopping now.`, 0);
 				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Disabled });
 			}
 			return;
@@ -298,7 +298,8 @@ async function main() {
 			return;
 		case GmailOnboardingState.SettingsCompleted:
 			console.debug(`Settings completed, showing 'what now' notification`);
-			showPopUp(`Try Shortcut Sensei: click 'Compose' to create a new message and see what happens!`, 15000, `warning`);
+			showPopUp(`Click 'Compose'`, `Try Shortcut Sensei: click 'Compose' to create a new message and see what happens!`, 5000);
+			optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 			return;
 		case GmailOnboardingState.Completed:
 			console.debug("Onboarding completed, skipping Onboarding");
@@ -342,27 +343,24 @@ alertify.dialog('showShortcut',function(){
 
 alertify.dialog('showPopUp',function(){
 	return{
-	main:function(message, title){
-		this.setContent(message);
+	main:function(title, message){
 		this.setHeader(title);
+		this.setContent(message);
 	},
 	setup:function(){
 		return {
 			options:{
 				modal: false,
 				maximizable: false,
-				closableByDimmer: true,
+				closableByDimmFer: true,
 				pinnable: false,
 			},
 		};
 	}
 }});
 
-function showPopUp(message: string) {
-	console.log(document.getElementsByClassName("ajs-message"));
-	if (document.getElementsByClassName("ajs-message").length === 0){
+function showPopUp(title: string, message: string, duration: number) {
 	alertify.notify(message);
-	}
 }
 
 function showKeyPopup(title: string, message: string, duration = 4000) {

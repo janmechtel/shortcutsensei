@@ -90,7 +90,7 @@ button {
 	background-image: url(../media/iconFullSize.png);
 	background-repeat: no-repeat;
 	background-size: 52px;
-	background-position: calc(100% - 20px) center;
+	background-position: calc(100% - 10px) center;
 	background-color: #dadada;
 	font-weight: bold;
 }
