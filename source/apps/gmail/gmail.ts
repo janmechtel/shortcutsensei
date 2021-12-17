@@ -365,7 +365,13 @@ function showPopUp(title: string, message: string, duration: number) {
 
 function showKeyPopup(title: string, message: string, duration = 4000) {
 	alertify.showShortcut(title, message, duration);
-	if (duration != 0) {
+	// prevents popup from closing too quickly due to setTimeout()
+	const highestId = window.setTimeout(() => {
+		for (let i = highestId; i >= 0; i--) {
+		  window.clearInterval(i);
+		}
+	  }, 0);
+	if (duration !== 0) {
 		setTimeout(() => {
 			alertify.showShortcut().close();
 		}, duration);
