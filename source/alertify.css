@@ -4,11 +4,15 @@
  * Copyright 2019 Mohammad Younes <Mohammad@alertifyjs.com> (http://alertifyjs.com)
  * Licensed under GPL 3 <https://opensource.org/licenses/gpl-3.0>*/
 
+/*
+
 button {
 	background-color: #bcffd1;
 	border-radius: 8px;
 	font-size: 80%;
 }
+
+*/
 
 .alertify .ajs-dimmer {
 	position: fixed;
@@ -124,12 +128,15 @@ button {
 .alertify .ajs-footer .ajs-buttons.ajs-auxiliary .ajs-button {
 	margin: 4px;
 }
+
 .alertify .ajs-footer .ajs-buttons .ajs-button {
-	min-width: 180px;
+	background: url("../media/dont_show_again.svg");
+	min-width: 40px;
 	min-height: 40px;
-	max-width: 180px;
+	max-width: 40px;
 	max-height: 40px;
 }
+
 .alertify .ajs-handle {
 	position: absolute;
 	display: none;

@@ -330,7 +330,8 @@ alertify.dialog('showShortcut',function(){
 	},
 	setup:function(){
 		return {
-			buttons:[{text: "Snooze notifications for 24 hours"}, {text: "Don't show this popup again"}],
+			buttons:[{text: "", className: alertify.defaults.theme.button.cancel}, 
+			{text: "", className: alertify.ok}],
 			options:{
 				modal: false,
 				maximizable: false,
@@ -338,7 +339,15 @@ alertify.dialog('showShortcut',function(){
 				pinnable: false,
 			},
 		};
-	}
+	},
+	callback:function(closeEvent){
+		
+		//The closeEvent has the following properties
+		//
+		// index: The index of the button triggering the event.
+		// button: The button definition object.
+		// cancel: When set true, prevent the dialog from closing.
+	 }
 }});
 
 alertify.dialog('showPopUp',function(){
