@@ -142,9 +142,11 @@ const clickHandler = function (event: MouseEvent) {
 		/*
 		Snooze all notifications for 24 hours
 		*/
+		optionsStorage.set({ snoozeUntil: new Date().getTime() + 60 * 60 * 24 * 1000 });
 		return;
 	} if (outerHTML === "<button class=\"ajs-button ajs-cancel\"></button>"){
-		optionsStorage.set({ ignoredShortcuts: options.ignoredShortcuts + `,${currentShortcut.id}` });
+		// don't show this shortcut again
+		optionsStorage.set({ ignoredShortcuts: options.ignoredShortcuts + `,${currentShortcut.id}` }); 
 	}
 
 	if (outerHTML.length < 10000 && elementsToSkip.some(skip => outerHTML.includes(skip))) {
