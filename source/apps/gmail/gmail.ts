@@ -330,8 +330,8 @@ alertify.dialog('showShortcut',function(){
 	},
 	setup:function(){
 		return {
-			buttons:[{text: "", className: alertify.defaults.theme.button.cancel}, 
-			{text: "", className: alertify.ok}],
+			buttons:[{text: "", className: alertify.defaults.theme.ok }, // snooze for 24 hours
+			{text: "", className: alertify.defaults.theme.cancel}], // don't show again
 			options:{
 				modal: false,
 				maximizable: false,
