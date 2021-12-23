@@ -6,18 +6,6 @@ import optionsStorage from '../../options/options-storage';
 //TODO: align design
 //TODO: hookup buttons
 
-/* 
-https://heroicons.com/
-
-Don't show again (eye-off): <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-</svg>
-
-Snooze all for 24 hours (clock): <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg> 
-*/
-
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
 	"role=\"toolbar\"", // stop popup from appearing when pressing formatting toolbar
@@ -40,10 +28,9 @@ import { Options } from 'webext-options-sync';
 
 let snoozeUntil = 0;
 let options: Options;
+
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
-
-console.log(document.styleSheets);
 
 // open a new url in the current window
 function openUrl(url: string) {
@@ -133,6 +120,8 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 	}
 });
 
+let currentShortcut;
+
 const clickHandler = function (event: MouseEvent) {
 
 	//convert timestamp to readable date and time
@@ -149,6 +138,15 @@ const clickHandler = function (event: MouseEvent) {
 	console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
 
+	if (outerHTML === "<button class=\"ajs-button ajs-ok\"></button>"){
+		/*
+		Snooze all notifications for 24 hours
+		*/
+		return;
+	} if (outerHTML === "<button class=\"ajs-button ajs-cancel\"></button>"){
+		optionsStorage.set({ ignoredShortcuts: options.ignoredShortcuts + `,${currentShortcut.id}` });
+	}
+
 	if (outerHTML.length < 10000 && elementsToSkip.some(skip => outerHTML.includes(skip))) {
 		console.debug("Skipped processing the click because it's included in our ignore list something ...");
 		console.debug(elementsToSkip.filter(skip => outerHTML.includes(skip)));
@@ -159,6 +157,7 @@ const clickHandler = function (event: MouseEvent) {
 			if (innerText === shortcut.innerText && innerText !== "") {
 				console.debug("match found in InnerText");
 				triggerNotification(shortcut);
+				currentShortcut = shortcut;
 				return;
 			}
 		}
@@ -168,6 +167,7 @@ const clickHandler = function (event: MouseEvent) {
 				if ((shortcut.outerHTMLMaxLength === undefined || outerHTML.length < shortcut.outerHTMLMaxLength) && (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength)) {
 					console.debug("match found in outerHTML and minlength respected");
 					triggerNotification(shortcut);
+					currentShortcut = shortcut;
 					return;
 				}
 			}
