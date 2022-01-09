@@ -391,7 +391,6 @@ function showKeyPopup(title: string, message: string, duration = 4000) {
 
 // .ajs-close
 document.addEventListener("keydown", function(event){
-	console.log(event.code);
 	if (event.shiftKey && event.altKey && event.code === "Comma"){
 		console.log("Shift-Alt-,: Close popup");
 		for(let i = 0; i < document.querySelectorAll(".ajs-close").length; i++){
