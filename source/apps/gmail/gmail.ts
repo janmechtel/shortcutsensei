@@ -135,7 +135,7 @@ const clickHandler = function (event: MouseEvent) {
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
 	const outerHTML: string = event.target.outerHTML;
-	console.log(`You clicked on: '${innerText}' (innerText)`);
+	// console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
 
 	if (outerHTML === "<button class=\"ajs-button ajs-ok\"></button>"){
@@ -388,3 +388,24 @@ function showKeyPopup(title: string, message: string, duration = 4000) {
 		}, duration);
 	}
 }
+
+// .ajs-close
+document.addEventListener("keydown", function(event){
+	console.log(event.code);
+	if (event.shiftKey && event.altKey && event.code === "Comma"){
+		console.log("Shift-Alt-,: Close popup");
+		for(let i = 0; i < document.querySelectorAll(".ajs-close").length; i++){
+			document.querySelectorAll(".ajs-close")[i].click();
+		}
+	} else if (event.shiftKey === true && event.code === "Period"){
+		console.log("Shift-Alt-.: Snooze for 24 hours");
+		for(let i = 0; i < document.querySelectorAll(".ajs-ok").length; i++){
+			document.querySelectorAll(".ajs-ok")[i].click();
+		}
+	} else if (event.shiftKey === true && event.code === "Quote"){
+		console.log("Shift-Alt-': Don't show again");
+		for(let i = 0; i < document.querySelectorAll(".ajs-cancel").length; i++){
+			document.querySelectorAll(".ajs-cancel")[i].click();
+		}
+	}
+})

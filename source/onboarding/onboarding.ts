@@ -30,7 +30,7 @@ function listenForClicks() {
 		if (e.target.id === "trapButton") {
 			alertify.showShortcut(
 				`Press "?"`,
-				`To continue to Gmail onboarding, press "?" instead.`
+				`For Gmail onboarding, press "?"`
 			);
 
 			setTimeout(() => {
