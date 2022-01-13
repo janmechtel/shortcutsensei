@@ -349,7 +349,7 @@ alertify.dialog('showShortcut',function(){
 		// index: The index of the button triggering the event.
 		// button: The button definition object.
 		// cancel: When set true, prevent the dialog from closing.
-	 }
+		}
 }});
 
 alertify.dialog('showPopUp',function(){
@@ -379,9 +379,9 @@ function showKeyPopup(title: string, message: string, duration = 4000) {
 	// prevents popup from closing too quickly due to setTimeout()
 	const highestId = window.setTimeout(() => {
 		for (let i = highestId; i >= 0; i--) {
-		  window.clearInterval(i);
+				window.clearInterval(i);
 		}
-	  }, 0);
+		}, 0);
 	if (duration !== 0) {
 		setTimeout(() => {
 			alertify.showShortcut().close();
