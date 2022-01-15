@@ -1,6 +1,10 @@
-require('styled-notifications');
+import alertify = require('alertifyjs');
+
 import optionsStorage from '../../options/options-storage';
-import { showPopUp, showKeyPopup } from '../../styled-notifications';
+
+//TODO: check that onboarding is still working
+//TODO: align design
+//TODO: hookup buttons
 
 // contains part of the outerHTML properties of elements that should NOT display a popup when pressed (i.e. elements that are not buttons)
 const elementsToSkip = [
@@ -24,6 +28,7 @@ import { Options } from 'webext-options-sync';
 
 let snoozeUntil = 0;
 let options: Options;
+
 //helpful for debugging, change the color to check if you most recent code is loaded
 //document.body.style.border = '5px solid red';
 
@@ -115,7 +120,10 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 	}
 });
 
+let currentShortcut;
+
 const clickHandler = function (event: MouseEvent) {
+
 	//convert timestamp to readable date and time
 
 	if (snoozeUntil != 0 && new Date().getTime() < snoozeUntil) {
@@ -127,8 +135,19 @@ const clickHandler = function (event: MouseEvent) {
 	console.debug('Click event:', event);
 	const innerText: string = event.target.innerText;
 	const outerHTML: string = event.target.outerHTML;
-	console.log(`You clicked on: '${innerText}' (innerText)`);
+	// console.log(`You clicked on: '${innerText}' (innerText)`);
 	console.log(`You clicked on: '${outerHTML}' (outerHTML)`);
+
+	if (outerHTML === "<button class=\"ajs-button ajs-ok\"></button>"){
+		/*
+		Snooze all notifications for 24 hours
+		*/
+		optionsStorage.set({ snoozeUntil: new Date().getTime() + 60 * 60 * 24 * 1000 });
+		return;
+	} if (outerHTML === "<button class=\"ajs-button ajs-cancel\"></button>"){
+		// don't show this shortcut again
+		optionsStorage.set({ ignoredShortcuts: options.ignoredShortcuts + `,${currentShortcut.id}` }); 
+	}
 
 	if (outerHTML.length < 10000 && elementsToSkip.some(skip => outerHTML.includes(skip))) {
 		console.debug("Skipped processing the click because it's included in our ignore list something ...");
@@ -140,6 +159,7 @@ const clickHandler = function (event: MouseEvent) {
 			if (innerText === shortcut.innerText && innerText !== "") {
 				console.debug("match found in InnerText");
 				triggerNotification(shortcut);
+				currentShortcut = shortcut;
 				return;
 			}
 		}
@@ -149,6 +169,7 @@ const clickHandler = function (event: MouseEvent) {
 				if ((shortcut.outerHTMLMaxLength === undefined || outerHTML.length < shortcut.outerHTMLMaxLength) && (shortcut.outerHTMLMinLength === undefined || outerHTML.length > shortcut.outerHTMLMinLength)) {
 					console.debug("match found in outerHTML and minlength respected");
 					triggerNotification(shortcut);
+					currentShortcut = shortcut;
 					return;
 				}
 			}
@@ -167,7 +188,7 @@ function triggerNotification(shortcut: Shortcut) {
 	const ignoredShortcuts = ignoredShortcutsString.split(",").map(Number);
 	console.debug(`Is Shortcut ${shortcut.id} contained in ${ignoredShortcuts}`);
 	if (!ignoredShortcuts.includes(shortcut.id)) {
-		showKeyPopup(shortcut.key, shortcut.description);
+		showKeyPopup(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
 	} else {
 		console.debug(`Shortcut ${shortcut.key} is ignored because it's contained in ${ignoredShortcuts}`);
 	}
@@ -218,16 +239,16 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	}
 
 	if (language !== "English (US)") {
-		showPopUp(`English (US) Language`, `Choose "English (US)" as Display Language please.`, 0)
+		showPopUp(`English (US) Language`, `Please choose "English (US)" as your Display Language`, 0)
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
+		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 5000);
 	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Press Save`, `CLick "Save Changes"`, 0)
+		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
 	} else if (!keyboardShortcutsOnInput?.checked) {
-		showPopUp(`Set Keyboard Shortcuts to On`, `CLick "Keyboard shortcuts on"`, 0)
+		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
@@ -238,7 +259,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	} else {
 		optionsStorage.set({ gmailOnboardingCompleted: true });
 		optionsStorage.set({ gmailOnboardingState: "SettingsCompleted" });
-		showPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0, `success`);
+		showPopUp(`Onboarding completed`, `Onboarding completed! Redirecting to Inbox ...`, 0);
 		setTimeout(function () { openUrl("https://mail.google.com/mail") }, 5000);
 	}
 }
@@ -268,7 +289,7 @@ async function main() {
 				continueOnboardingAfterSettingsLoaded(options);
 			} else {
 				console.debug(`Onboarding disabled, showing 'what now' notification`);
-				showPopUp(`Onboarding failed`, `We forwarded you ${maxAttempts} times to settings already. We are stopping now.`, 0, `warning`);
+				showPopUp(`Onboarding failed`, `Onboarding failed: we forwarded you to settings ${maxAttempts} times. We are stopping now.`, 0);
 				optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Disabled });
 			}
 			return;
@@ -279,7 +300,8 @@ async function main() {
 			return;
 		case GmailOnboardingState.SettingsCompleted:
 			console.debug(`Settings completed, showing 'what now' notification`);
-			showPopUp(`Click 'Compose'`, `Try the extension, click 'Compose' to create a new message and see a notification.`, 15000, `warning`);
+			showPopUp(`Click 'Compose'`, `Try Shortcut Sensei: click 'Compose' to create a new message and see what happens!`, 5000);
+			optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 			return;
 		case GmailOnboardingState.Completed:
 			console.debug("Onboarding completed, skipping Onboarding");
@@ -300,4 +322,89 @@ reloadOptions();
 //call function when url is changing without page reload
 window.addEventListener('popstate', function () {
 	main();
+})
+
+alertify.dialog('showShortcut',function(){
+	return{
+	main:function(title, message){
+		this.setHeader(title);
+		this.setContent(message);
+	},
+	setup:function(){
+		return {
+			buttons:[{text: "", className: alertify.defaults.theme.ok }, // snooze for 24 hours
+			{text: "", className: alertify.defaults.theme.cancel}], // don't show again
+			options:{
+				modal: false,
+				maximizable: false,
+				closableByDimmer: true,
+				pinnable: false,
+			},
+		};
+	},
+	callback:function(closeEvent){
+		
+		//The closeEvent has the following properties
+		//
+		// index: The index of the button triggering the event.
+		// button: The button definition object.
+		// cancel: When set true, prevent the dialog from closing.
+		}
+}});
+
+alertify.dialog('showPopUp',function(){
+	return{
+	main:function(title, message){
+		this.setHeader(title);
+		this.setContent(message);
+	},
+	setup:function(){
+		return {
+			options:{
+				modal: false,
+				maximizable: false,
+				closableByDimmFer: true,
+				pinnable: false,
+			},
+		};
+	}
+}});
+
+function showPopUp(title: string, message: string, duration: number) {
+	alertify.notify(message);
+}
+
+function showKeyPopup(title: string, message: string, duration = 4000) {
+	alertify.showShortcut(title, message, duration);
+	// prevents popup from closing too quickly due to setTimeout()
+	const highestId = window.setTimeout(() => {
+		for (let i = highestId; i >= 0; i--) {
+				window.clearInterval(i);
+		}
+		}, 0);
+	if (duration !== 0) {
+		setTimeout(() => {
+			alertify.showShortcut().close();
+		}, duration);
+	}
+}
+
+// .ajs-close
+document.addEventListener("keydown", function(event){
+	if (event.shiftKey && event.altKey && event.code === "Comma"){
+		console.log("Shift-Alt-,: Close popup");
+		for(let i = 0; i < document.querySelectorAll(".ajs-close").length; i++){
+			document.querySelectorAll(".ajs-close")[i].click();
+		}
+	} else if (event.shiftKey === true && event.code === "Period"){
+		console.log("Shift-Alt-.: Snooze for 24 hours");
+		for(let i = 0; i < document.querySelectorAll(".ajs-ok").length; i++){
+			document.querySelectorAll(".ajs-ok")[i].click();
+		}
+	} else if (event.shiftKey === true && event.code === "Quote"){
+		console.log("Shift-Alt-': Don't show again");
+		for(let i = 0; i < document.querySelectorAll(".ajs-cancel").length; i++){
+			document.querySelectorAll(".ajs-cancel")[i].click();
+		}
+	}
 })

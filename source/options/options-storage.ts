@@ -1,4 +1,4 @@
-import OptionsSync from 'webext-options-sync';
+import OptionsSync from "webext-options-sync";
 
 export default new OptionsSync({
 	defaults: {
@@ -6,10 +6,8 @@ export default new OptionsSync({
 		gmailOnboardingAttempts: 0,
 		snoozeUntil: 0,
 		snoozeDuration: 24,
-		ignoredShortcuts: "",
+		ignoredShortcuts: ""
 	},
-	migrations: [
-		OptionsSync.migrations.removeUnused,
-	],
-	logging: true,
+	migrations: [OptionsSync.migrations.removeUnused],
+	logging: true
 });
