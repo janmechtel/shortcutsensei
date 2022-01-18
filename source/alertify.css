@@ -42,10 +42,10 @@ button {
 	position: relative;
 	bottom: 0;
 	right: 0;
-	min-height: 110px;
-	max-height: 150px;
-	min-width: 100px;
-	max-width: 100px;
+	min-height: 0px;
+	max-height: 0px;
+	min-width: 0px;
+	max-width: 0px;
 	padding: 0;
 	outline: 0;
 	background-color: #fff;
@@ -101,7 +101,6 @@ button {
 .alertify .ajs-header {
 	margin-bottom: 0;
 	padding: 16px 20px;
-	background-image: url(../media/iconFullSize.png);
 	background-repeat: no-repeat;
 	background-size: 52px;
 	background-position: calc(100% - 10px) center;
@@ -115,6 +114,7 @@ button {
 
 .alertify .ajs-body .ajs-content {
 	padding: 10px 5px 0;
+	display: none;
 	background-repeat: no-repeat;
 	background-position: calc(100% - 50px) center;
 	background-size: 56px;
@@ -125,11 +125,14 @@ button {
 	margin-left: -24px;
 	margin-right: -24px;
 	min-height: 0;
-	background-color: #fff;
+	max-height: 0;
 }
 
 .alertify .ajs-footer .ajs-buttons.ajs-primary {
 	text-align: right;
+	position: relative;
+	bottom: 0px;
+	right: 20px;
 }
 
 .alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
@@ -146,20 +149,20 @@ button {
 	margin: 4px;
 }
 
+.alertify .ajs-footer .ajs-buttons .ajs-button {
+	border: none;
+	min-width: 15px;
+	min-height: 15px;
+	max-width: 15px;
+	max-height: 15px;
+}
+
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
 	background: url('../media/snooze.svg');
-	min-width: 30px;
-	min-height: 30px;
-	max-width: 30px;
-	max-height: 30px;
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-cancel {
 	background: url('../media/dont_show_again.svg');
-	min-width: 30px;
-	min-height: 30px;
-	max-width: 30px;
-	max-height: 30px;
 }
 
 .alertify .ajs-handle {
@@ -345,6 +348,7 @@ button {
 }
 
 .alertify.ajs-frameless .ajs-body .ajs-content {
+	display: none;
 	position: absolute;
 	top: 0;
 	right: 0;
