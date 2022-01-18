@@ -188,7 +188,7 @@ function triggerNotification(shortcut: Shortcut) {
 	const ignoredShortcuts = ignoredShortcutsString.split(",").map(Number);
 	console.debug(`Is Shortcut ${shortcut.id} contained in ${ignoredShortcuts}`);
 	if (!ignoredShortcuts.includes(shortcut.id)) {
-		showKeyPopup(shortcut.key, `For ${shortcut.description}, press ${shortcut.key}`);
+		showKeyPopup(`For ${shortcut.description}, press ${shortcut.key}`, "");
 	} else {
 		console.debug(`Shortcut ${shortcut.key} is ignored because it's contained in ${ignoredShortcuts}`);
 	}

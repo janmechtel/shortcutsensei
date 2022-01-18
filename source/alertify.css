@@ -44,7 +44,6 @@ button {
 	right: 0;
 	min-height: 0px;
 	max-height: 0px;
-	min-width: 0px;
 	max-width: 0px;
 	padding: 0;
 	outline: 0;
@@ -100,12 +99,14 @@ button {
 
 .alertify .ajs-header {
 	margin-bottom: 0;
-	padding: 16px 20px;
+	padding-top: 20px;
+	padding-left: 10px;
+	padding-bottom: 10px;
 	background-repeat: no-repeat;
 	background-size: 52px;
 	background-position: calc(100% - 10px) center;
-	background-color: #dadada;
-	font-weight: bold;
+	background-color: #85ff91;
+	font-size: 14px;
 }
 
 .alertify .ajs-body {
@@ -250,6 +251,7 @@ button {
 
 .alertify.ajs-maximized .ajs-header,
 .alertify.ajs-resizable .ajs-header {
+	border-radius: 5px;
 	position: absolute;
 	top: 0;
 	left: 0;
