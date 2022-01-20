@@ -78,8 +78,7 @@ button {
 
 .alertify .ajs-commands button {
 	display: none;
-	width: 10px;
-	height: 10px;
+	width: 5px;
 	margin-left: 10px;
 	padding: 10px;
 	border: 0;
@@ -90,11 +89,7 @@ button {
 }
 
 .alertify .ajs-commands button.ajs-close {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNy8xMy8xNOrZqugAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAh0lEQVQYlY2QsQ0EIQwEB9cBAR1CJUaI/gigDnwR6NBL/7/xWLNrZ2b8EwGotVpr7eOitWa1VjugiNB7R1UPrKrWe0dEAHBbXUqxMQbeewDmnHjvyTm7C3zDwAUd9c63YQdUVdu6EAJzzquz7HXvTiklt+H9DQFYaxFjvDqllFyMkbXWvfpXHjJrWFgdBq/hAAAAAElFTkSuQmCC);
-}
-
-.alertify .ajs-commands button.ajs-maximize {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNy8xMy8xNOrZqugAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAOUlEQVQYlWP8//8/AzGAhYGBgaG4uBiv6t7eXkYmooxjYGAgWiELsvHYFMCcRX2rSXcjoSBiJDbAAeD+EGu+8BZcAAAAAElFTkSuQmCC);
+	background-image: url("../media/close.svg");
 }
 
 .alertify .ajs-header {
@@ -152,10 +147,10 @@ button {
 
 .alertify .ajs-footer .ajs-buttons .ajs-button {
 	border: none;
-	min-width: 15px;
-	min-height: 15px;
-	max-width: 15px;
-	max-height: 15px;
+	min-width: 16px;
+	min-height: 16px;
+	max-width: 16px;
+	max-height: 16px;
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
@@ -211,10 +206,11 @@ button {
 
 .alertify.ajs-closable .ajs-commands button.ajs-close {
 	position: absolute;
-	top: 0;
-	right: 0;
+	width: 5px;
+	top: 3px;
+	right: 2px;
 	display: inline-block;
-	padding: 10px;
+	padding: 8px 8px 8px 8px;
 	margin: 0;
 }
 
@@ -256,7 +252,7 @@ button {
 	top: 0;
 	left: 0;
 	right: 0;
-	margin: 0;
+	margin-right: 5px;
 }
 
 .alertify.ajs-maximized .ajs-body,
@@ -1087,8 +1083,6 @@ button {
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 16px;
-	height: 16px;
 	cursor: pointer;
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAAFBJREFUGBl1j0EKADEIA+ve/P9f9bh1hEihNBfjVCO1v7RKVqJK4h8gM5cAPR42AkQEpSXPwMTyoi13n5N9YqJehm3Fnr7nL1D0ZEbD5OubGyC7a9gx+9eNAAAAAElFTkSuQmCC);
 	background-repeat: no-repeat;
