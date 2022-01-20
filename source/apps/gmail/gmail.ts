@@ -339,6 +339,7 @@ alertify.dialog('showShortcut',function(){
 				maximizable: false,
 				closableByDimmer: true,
 				pinnable: false,
+				transition: "flipx",
 			},
 		};
 	},

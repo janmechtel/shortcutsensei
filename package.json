@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"alertifyjs": "^1.13.1",
+		"web-ext": "^6.6.0",
 		"webext-options-sync": "^2.0.1",
 		"webextension-polyfill": "^0.8.0"
 	},
