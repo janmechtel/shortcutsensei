@@ -104,6 +104,11 @@ button {
 	font-size: 14px;
 }
 
+.alertify .ajs-header:hover {
+	background-color: #15d44f;
+	transition: all 0.75s;
+}
+
 .alertify .ajs-body {
 	min-height: 56px;
 }
@@ -118,6 +123,8 @@ button {
 
 .alertify .ajs-footer {
 	padding: 4px;
+	padding-left: 145px;
+	width: 50px;
 	margin-left: -24px;
 	margin-right: -24px;
 	min-height: 0;
@@ -130,6 +137,7 @@ button {
 	bottom: 0px;
 	right: 20px;
 }
+
 
 .alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
 	margin: 4px;
@@ -208,7 +216,7 @@ button {
 	position: absolute;
 	width: 5px;
 	top: 3px;
-	right: 2px;
+	right: 3px;
 	display: inline-block;
 	padding: 8px 8px 8px 8px;
 	margin: 0;
