@@ -27,8 +27,9 @@ Thank you!
 
 # How to run
 1. `npm install`
-2. `npm run watch`
-3. `web-ext run` for Firefox and `web-ext run -t chromium` for Chrome
+2. `npm install --global web-ext`
+3. `npm run watch`
+4. `web-ext run` for Firefox and `web-ext run -t chromium` for Chrome
 
 # How to build
 1. `npm install`
