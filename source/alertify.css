@@ -29,27 +29,24 @@ button {
 
 .alertify .ajs-modal {
 	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
 	padding: 0;
 	overflow-y: auto;
 	z-index: 1981;
+
+	bottom: 115px;
+	right: 400px;
+	margin: 0 15px 0 auto;
 }
 
 .alertify .ajs-dialog {
-	position: relative;
-		bottom: 2vh;
-	right: 2vw;
-	min-height: 15vh;
-	max-height: 15vh;
-	min-width: 25vw;
-	max-width: 25vw;
+	position: fixed;
+	min-height: 100px;
+	max-height: 100px;
+	min-width: 400px;
+	max-width: 400px;
 	padding: 0;
 	outline: 0;
 	background-color: #fff;
-	margin: 85vh 0 0 auto;
 }
 
 .alertify .ajs-dialog.ajs-capture::before {
@@ -101,13 +98,15 @@ button {
 
 .alertify .ajs-header {
 	margin-bottom: 0;
-	padding: 16px 20px;
+	padding: 16px 16px 100px 100px;
 	background-image: url(../media/iconFullSize.png);
 	background-repeat: no-repeat;
-	background-size: 52px;
-	background-position: calc(100% - 10px) center;
-	background-color: #dadada;
+	background-size: 80px;
+	background-position: left 10px top 10px;
 	font-weight: bold;
+	color: #14c949;
+	font-size: 1.2em;
+
 }
 
 .alertify .ajs-body {
@@ -115,7 +114,7 @@ button {
 }
 
 .alertify .ajs-body .ajs-content {
-	padding: 10px 5px 0;
+	padding: 45px 0px 0px 100px;
 	background-repeat: no-repeat;
 	background-position: calc(100% - 50px) center;
 	background-size: 56px;
@@ -263,12 +262,8 @@ button {
 
 .alertify.ajs-maximized .ajs-body .ajs-content,
 .alertify.ajs-resizable .ajs-body .ajs-content {
-	position: absolute;
-	top: 50px;
-	right: 10px;
-	bottom: 50px;
-	left: 10px;
-	overflow: auto;
+	color: #14c949;
+	font-size: 1.2em;
 }
 
 .alertify.ajs-maximized .ajs-footer,
@@ -281,7 +276,7 @@ button {
 }
 
 .alertify.ajs-resizable:not(.ajs-maximized) .ajs-dialog {
-	min-width: 200px;
+	min-width: 400px;
 }
 
 .alertify.ajs-resizable:not(.ajs-maximized) .ajs-handle {
