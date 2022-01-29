@@ -93,7 +93,7 @@ button {
 
 .alertify .ajs-header {
 	margin-bottom: 0;
-	padding: 16px 16px 100px 100px;
+	padding: 16px 16px 55px 100px;
 	background-image: url(../media/iconFullSize.png);
 	background-repeat: no-repeat;
 	background-size: 80px;
@@ -104,7 +104,7 @@ button {
 }
 
 .alertify .ajs-header:hover {
-	background-color: #15d44f;
+	background-color: #bcffd1;
 	transition: all 0.75s;
 }
 
@@ -117,6 +117,7 @@ button {
 	background-repeat: no-repeat;
 	background-position: calc(100% - 50px) center;
 	background-size: 56px;
+	position: relative;
 }
 
 .alertify .ajs-footer {
@@ -213,8 +214,8 @@ button {
 .alertify.ajs-closable .ajs-commands button.ajs-close {
 	position: absolute;
 	width: 5px;
-	top: 3px;
-	right: 3px;
+	top: 5px;
+	right: 6px;
 	display: inline-block;
 	padding: 8px 8px 8px 8px;
 	margin: 0;
