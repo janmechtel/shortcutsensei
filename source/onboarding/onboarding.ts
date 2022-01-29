@@ -33,9 +33,9 @@ function listenForClicks() {
 				`For Gmail onboarding, press "?"`
 			);
 
-			// setTimeout(() => {
-			// 	alertify.showShortcut().close();
-			// }, 4000);
+			setTimeout(() => {
+				alertify.showShortcut().close();
+			}, 4000);
 		}
 	});
 }
@@ -47,23 +47,23 @@ new TypeIt("#typeit", {
 	speed: 30
 })
 
-	// .type("Greetings, my new apprentice... ")
-	// .pause(500)
-	// .break()
-	// .type("I've been expecting you.")
-	// .break()
-	// .break()
-	// .pause(500)
-	// .type("I am Kei, your Shortcut Sensei.")
-	// .break()
-	// .break()
-	// .pause(500)
-	// .type("When you use the mouse")
-	// .break()
-	// .type("instead of the mighty keyboard...")
-	// .pause(500)
-	// .break()
-	// .type("I shall guide you with a notification.")
+	.type("Greetings, my new apprentice... ")
+	.pause(500)
+	.break()
+	.type("I've been expecting you.")
+	.break()
+	.break()
+	.pause(500)
+	.type("I am Kei, your Shortcut Sensei.")
+	.break()
+	.break()
+	.pause(500)
+	.type("When you use the mouse")
+	.break()
+	.type("instead of the mighty keyboard...")
+	.pause(500)
+	.break()
+	.type("I shall guide you with a notification.")
 
 	.exec(async () => {
 		document.getElementById("trapButton").style.display = "block";

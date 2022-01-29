@@ -77,8 +77,7 @@ button {
 
 .alertify .ajs-commands button {
 	display: none;
-	width: 10px;
-	height: 10px;
+	width: 5px;
 	margin-left: 10px;
 	padding: 10px;
 	border: 0;
@@ -89,11 +88,7 @@ button {
 }
 
 .alertify .ajs-commands button.ajs-close {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNy8xMy8xNOrZqugAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAh0lEQVQYlY2QsQ0EIQwEB9cBAR1CJUaI/gigDnwR6NBL/7/xWLNrZ2b8EwGotVpr7eOitWa1VjugiNB7R1UPrKrWe0dEAHBbXUqxMQbeewDmnHjvyTm7C3zDwAUd9c63YQdUVdu6EAJzzquz7HXvTiklt+H9DQFYaxFjvDqllFyMkbXWvfpXHjJrWFgdBq/hAAAAAElFTkSuQmCC);
-}
-
-.alertify .ajs-commands button.ajs-maximize {
-	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNy8xMy8xNOrZqugAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAOUlEQVQYlWP8//8/AzGAhYGBgaG4uBiv6t7eXkYmooxjYGAgWiELsvHYFMCcRX2rSXcjoSBiJDbAAeD+EGu+8BZcAAAAAElFTkSuQmCC);
+	background-image: url("../media/close.svg");
 }
 
 .alertify .ajs-header {
@@ -106,7 +101,11 @@ button {
 	font-weight: bold;
 	color: #14c949;
 	font-size: 1.2em;
+}
 
+.alertify .ajs-header:hover {
+	background-color: #15d44f;
+	transition: all 0.75s;
 }
 
 .alertify .ajs-body {
@@ -122,15 +121,21 @@ button {
 
 .alertify .ajs-footer {
 	padding: 4px;
+	padding-left: 145px;
+	width: 50px;
 	margin-left: -24px;
 	margin-right: -24px;
 	min-height: 0;
-	background-color: #fff;
+	max-height: 0;
 }
 
 .alertify .ajs-footer .ajs-buttons.ajs-primary {
 	text-align: right;
+	position: relative;
+	bottom: 0px;
+	right: 20px;
 }
+
 
 .alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
 	margin: 4px;
@@ -146,20 +151,20 @@ button {
 	margin: 4px;
 }
 
+.alertify .ajs-footer .ajs-buttons .ajs-button {
+	border: none;
+	min-width: 16px;
+	min-height: 16px;
+	max-width: 16px;
+	max-height: 16px;
+}
+
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
 	background: url('../media/snooze.svg');
-	min-width: 30px;
-	min-height: 30px;
-	max-width: 30px;
-	max-height: 30px;
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-cancel {
 	background: url('../media/dont_show_again.svg');
-	min-width: 30px;
-	min-height: 30px;
-	max-width: 30px;
-	max-height: 30px;
 }
 
 .alertify .ajs-handle {
@@ -207,10 +212,11 @@ button {
 
 .alertify.ajs-closable .ajs-commands button.ajs-close {
 	position: absolute;
-	top: 0;
-	right: 0;
+	width: 5px;
+	top: 3px;
+	right: 3px;
 	display: inline-block;
-	padding: 10px;
+	padding: 8px 8px 8px 8px;
 	margin: 0;
 }
 
@@ -247,11 +253,12 @@ button {
 
 .alertify.ajs-maximized .ajs-header,
 .alertify.ajs-resizable .ajs-header {
+	border-radius: 5px;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	margin: 0;
+	margin-right: 5px;
 }
 
 .alertify.ajs-maximized .ajs-body,
@@ -341,6 +348,7 @@ button {
 }
 
 .alertify.ajs-frameless .ajs-body .ajs-content {
+	display: none;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -430,8 +438,8 @@ button {
 .alertify .ajs-dialog.ajs-shake {
 	animation-name: ajs-shake;
 	animation-name: ajs-shake;
-	animation-duration: 0.1s;
-	animation-duration: 0.1s;
+	animation-duration: 0.0s;
+	animation-duration: 0.0s;
 	animation-fill-mode: both;
 	animation-fill-mode: both;
 }
@@ -778,29 +786,29 @@ button {
 
 @keyframes ajs-flipInX {
 	0% {
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
 		transition-timing-function: ease-in;
 		transition-timing-function: ease-in;
 		opacity: 0%;
 	}
 
 	40% {
-		transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -13deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -13deg);
 		transition-timing-function: ease-in;
 		transition-timing-function: ease-in;
 	}
 
 	60% {
-		transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 7deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 7deg);
 		opacity: 100%;
 	}
 
 	80% {
-		transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -3deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -3deg);
 	}
 
 	100% {
@@ -811,29 +819,29 @@ button {
 
 @keyframes ajs-flipInX {
 	0% {
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
 		transition-timing-function: ease-in;
 		transition-timing-function: ease-in;
 		opacity: 0%;
 	}
 
 	40% {
-		transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -13deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -13deg);
 		transition-timing-function: ease-in;
 		transition-timing-function: ease-in;
 	}
 
 	60% {
-		transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 7deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 7deg);
 		opacity: 100%;
 	}
 
 	80% {
-		transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -3deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, -3deg);
 	}
 
 	100% {
@@ -855,8 +863,8 @@ button {
 	}
 
 	100% {
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
 		opacity: 0%;
 	}
 }
@@ -874,8 +882,8 @@ button {
 	}
 
 	100% {
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-		transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+		transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
 		opacity: 0%;
 	}
 }
@@ -1077,8 +1085,6 @@ button {
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 16px;
-	height: 16px;
 	cursor: pointer;
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAAFBJREFUGBl1j0EKADEIA+ve/P9f9bh1hEihNBfjVCO1v7RKVqJK4h8gM5cAPR42AkQEpSXPwMTyoi13n5N9YqJehm3Fnr7nL1D0ZEbD5OubGyC7a9gx+9eNAAAAAElFTkSuQmCC);
 	background-repeat: no-repeat;
