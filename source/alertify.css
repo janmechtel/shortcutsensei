@@ -92,6 +92,7 @@ button {
 }
 
 .alertify .ajs-header {
+	min-height: 49px;
 	margin-bottom: 0;
 	padding: 16px 36px 35px 100px;
 	background-image: url(../media/iconFullSize.png);
