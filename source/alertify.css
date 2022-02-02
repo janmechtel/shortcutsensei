@@ -88,7 +88,7 @@ button {
 }
 
 .alertify .ajs-commands button.ajs-close {
-	background-image: url("../media/close.svg");
+	background-image: url('../media/close.svg');
 }
 
 .alertify .ajs-header {
@@ -105,7 +105,7 @@ button {
 
 .alertify .ajs-header:hover {
 	background-color: #bcffd1;
-	transition: all 0.75s;
+	transition: all 0.5s;
 }
 
 .alertify .ajs-body {
@@ -130,7 +130,6 @@ button {
 	bottom: 0px;
 	right: 20px;
 }
-
 
 .alertify .ajs-footer .ajs-buttons.ajs-primary .ajs-button {
 	margin: 3px;
@@ -433,8 +432,8 @@ button {
 .alertify .ajs-dialog.ajs-shake {
 	animation-name: ajs-shake;
 	animation-name: ajs-shake;
-	animation-duration: 0.0s;
-	animation-duration: 0.0s;
+	animation-duration: 0s;
+	animation-duration: 0s;
 	animation-fill-mode: both;
 	animation-fill-mode: both;
 }
