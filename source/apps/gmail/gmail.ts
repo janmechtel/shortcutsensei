@@ -247,12 +247,12 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
-	} else if (!keyboardShortcutsOnInput?.checked) {
+	} else if (!keyboardShortcutsOnInput.checked) {
 		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 5000);
-	} else if (keyboardShortcutsOnInput?.checked) {
+		//setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 5000);
+	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
