@@ -369,7 +369,9 @@ alertify.dialog('showPopUp',function(){
 			},
 		};
 	}
-}});
+}}); 
+
+alertify.set('notifier','position', 'bottom-left');
 
 function showPopUp(title: string, message: string, duration: number) {
 	alertify.notify(message);
