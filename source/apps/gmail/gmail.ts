@@ -62,7 +62,7 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut(14, "M", "Mute conversation", "Mute", ""),
 
 	new Shortcut(15, "K", "Jump to newer email", "", "data-tooltip=\"Newer\""),
-	new Shortcut(16, "J", "Jump to older email", "", "data-tooltip=\"Older\""),
+	new Shortcut(16, "J", "Jump to older email", "", "class=\"T-I J-J5-Ji adg"),
 	new Shortcut(17, "A", "Reply all", "", ">Reply all</span>"),
 	new Shortcut(18, "R", "Reply", "Reply", "data-tooltip=\"Reply\""),
 	new Shortcut(19, "S", "Star/unstar", "", "class=\"f T-KT-JX\" src=\"images/cleardot.gif"),
