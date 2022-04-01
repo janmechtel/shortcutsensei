@@ -259,7 +259,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	} else {
 		optionsStorage.set({ gmailOnboardingCompleted: true });
 		optionsStorage.set({ gmailOnboardingState: "SettingsCompleted" });
-		showPopUp(`Onboarding completed`, `Onboarding completed! Redirecting to Inbox ...`, 0);
+		showPopUp(`Onboarding completed`, `Redirecting to Inbox ...`, 0);
 		setTimeout(function () { openUrl("https://mail.google.com/mail") }, 5000);
 	}
 }
@@ -300,7 +300,7 @@ async function main() {
 			return;
 		case GmailOnboardingState.SettingsCompleted:
 			console.debug(`Settings completed, showing 'what now' notification`);
-			showPopUp(`Click 'Compose'`, `Try Shortcut Sensei: click 'Compose' to create a new message and see what happens!`, 5000);
+			showPopUp(`Click 'Compose Message'`, `Try and see what happens!`, 5000);
 			optionsStorage.set({ gmailOnboardingState: GmailOnboardingState.Completed });
 			return;
 		case GmailOnboardingState.Completed:
@@ -327,6 +327,7 @@ window.addEventListener('popstate', function () {
 alertify.dialog('showShortcut',function(){
 	return{
 	main:function(title, message){
+		alertify.showPopUp().close();
 		this.setHeader(title);
 		this.setContent(message);
 	},
