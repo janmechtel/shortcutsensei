@@ -146,7 +146,7 @@ const clickHandler = function (event: MouseEvent) {
 		return;
 	} if (outerHTML === "<button class=\"ajs-button ajs-cancel\"></button>"){
 		// don't show this shortcut again
-		optionsStorage.set({ ignoredShortcuts: options.ignoredShortcuts + `,${currentShortcut.id}` }); 
+		optionsStorage.set({ ignoredShortcuts: options.ignoredShortcuts + `,${currentShortcut.id}` });
 	}
 
 	if (outerHTML.length < 10000 && elementsToSkip.some(skip => outerHTML.includes(skip))) {
@@ -209,7 +209,7 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 
 
 	//find the dropdowns that have a certain display text option
-	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerText.includes("English (US)"));
+	const languageDropdown = dropdowns?.find(dropdown => dropdown.innerHTML.includes("English (US)"));
 	if (languageDropdown === undefined) {
 		console.warn("Could not find the language dropdown, probably Gmail is not done loading yet, waiting 500ms", dropdowns);
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
@@ -344,7 +344,7 @@ alertify.dialog('showShortcut',function(){
 		};
 	},
 	callback:function(closeEvent){
-		
+
 		//The closeEvent has the following properties
 		//
 		// index: The index of the button triggering the event.
@@ -369,7 +369,7 @@ alertify.dialog('showPopUp',function(){
 			},
 		};
 	}
-}}); 
+}});
 
 alertify.set('notifier','position', 'bottom-left');
 
