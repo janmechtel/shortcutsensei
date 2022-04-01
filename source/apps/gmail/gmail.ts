@@ -62,7 +62,7 @@ const gmailShortcuts: Shortcut[] = [
 	new Shortcut(14, "M", "Mute conversation", "Mute", ""),
 
 	new Shortcut(15, "K", "Jump to newer email", "", "data-tooltip=\"Newer\""),
-	new Shortcut(16, "J", "Jump to older email", "", "data-tooltip=\"Older\""),
+	new Shortcut(16, "J", "Jump to older email", "", "class=\"T-I J-J5-Ji adg"),
 	new Shortcut(17, "A", "Reply all", "", ">Reply all</span>"),
 	new Shortcut(18, "R", "Reply", "Reply", "data-tooltip=\"Reply\""),
 	new Shortcut(19, "S", "Star/unstar", "", "class=\"f T-KT-JX\" src=\"images/cleardot.gif"),
@@ -243,15 +243,15 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 		languageDropdown.style.backgroundColor = "yellow";
 		languageDropdown.scrollIntoView();
 		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 5000);
-	} else if (!saveButton.disabled && !keyboardShortcutsOnInput?.checked) {
+	} else if (!saveButton.disabled && !keyboardShortcutsOnInput.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
 		saveButton.scrollIntoView();
-	} else if (!keyboardShortcutsOnInput?.checked) {
+	} else if (!keyboardShortcutsOnInput.checked) {
 		showPopUp(`Set Keyboard Shortcuts to On`, `Click "Keyboard shortcuts on"`, 0)
 		keyboardShortcutsOnLabel.closest("tr").style.backgroundColor = "yellow";
 		keyboardShortcutsOnLabel.scrollIntoView();
-		setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 500);
+		//setTimeout(() => { continueOnboardingAfterSettingsLoaded(options); }, 5000);
 	} else if (!saveButton.disabled && keyboardShortcutsOnInput?.checked) {
 		showPopUp(`Press Save`, `Click "Save Changes"`, 0)
 		saveButton.closest("tr").style.backgroundColor = "yellow";
@@ -369,7 +369,9 @@ alertify.dialog('showPopUp',function(){
 			},
 		};
 	}
-}});
+}}); 
+
+alertify.set('notifier','position', 'bottom-left');
 
 function showPopUp(title: string, message: string, duration: number) {
 	alertify.notify(message);
