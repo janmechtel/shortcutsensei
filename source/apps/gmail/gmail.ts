@@ -42,7 +42,10 @@ const gmailShortcuts: Shortcut[] = [
 	// id: number; // the unique id of the shortcut (unique per application)
 	// key: string; // the shortcut key sequence, eg. 'Shift+C'
 	// description: string; // what does this shortcut do? The description for the cheatsheet, eg 'Compose a new message'
-	// button: string; // the content ont the Text or OuterHTML, eg. 'Compose'
+	// innerText: string; // the text content, eg. 'Compose'
+	// outerHTMLPart: string; // a word that will be matched with the OuterHTML, eg. 'xy' will be matched within "<div class='xy'>Compose</div>"
+	// outerHTMLMaxLength: number;
+	// outerHTMLMinLength: number; // the minimum length of the outerHTML, for example '10000' if the match should only apply for really long outerHTML. This is done for the Linkto shortcut in Gmail.
 	// )
 	new Shortcut(1, "Ctrl+K", "Link to", "", "hidden;\">Invalid email address", 0, 10000),
 
