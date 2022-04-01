@@ -374,7 +374,7 @@ alertify.dialog('showPopUp',function(){
 alertify.set('notifier','position', 'bottom-left');
 
 function showPopUp(title: string, message: string, duration: number) {
-	alertify.notify(message);
+	alertify.showPopUp(title, message, duration);
 }
 
 function showKeyPopup(title: string, message: string, duration = 4000) {
