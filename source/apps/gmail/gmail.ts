@@ -203,7 +203,19 @@ async function continueOnboardingAfterSettingsLoaded(options: Options) {
 	//redirect to settings if not there already
 	if (!window.location.href.includes("settings/general")) {
 		await optionsStorage.set({ gmailOnboardingAttempts: (+onboardingAttempts + 1) as number });
-		openUrl("https://mail.google.com/mail/#settings/general");
+
+		if (!window.location.href.includes("#")) {
+			// split the url with #
+			const urlParts = window.location.href.split("#");
+			// add the settings part to the url
+			urlParts[1] = "settings/general";
+			// join the url parts
+			const newUrl = urlParts.join("#");
+			// redirect to the new url
+			openUrl(newUrl);
+		} else {
+			openUrl("https://mail.google.com/mail/#settings/general");
+		}
 		return;
 	}
 
