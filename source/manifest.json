@@ -37,6 +37,11 @@
             "matches": ["*://mail.google.com/*"],
             "js": ["apps/gmail/gmail.ts"],
 			"css": ["alertify.css"]
+        },
+		{
+            "matches": ["*://colab.research.google.com/*"],
+            "js": ["apps/colab/colab.ts"],
+			"css": ["alertify.css"]
         }
     ],
 	"web_accessible_resources": ["onboarding/*"]
